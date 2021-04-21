@@ -15,7 +15,7 @@ const getAllFoods = async (req, res) => {
 // find one food by their id
 const getOneFood = async (req, res) => {
 try {
-	console.log(req.params.foodId)
+	// console.log(req.params.foodId)
 const oneFood = await Food.findOne( {"foodId": req.params.foodId})
         if (oneFood === null) {   // no food found in database
             res.status(404)

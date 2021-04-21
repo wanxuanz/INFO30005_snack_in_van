@@ -19,3 +19,4 @@ console.log("Mongo connection started on " + db.host + ":" + db.port)
 }) 
 
 require("./food.js")
+require("./customer.js")
