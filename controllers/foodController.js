@@ -1,10 +1,9 @@
 const mongoose = require("mongoose")
-// const { Customer } = require("../models/customer")
 
 // import food model
 const Food = mongoose.model("Food")
 const Customer = mongoose.model("Customer")
-const Order =  mongoose.model("Order")
+const Cart =  mongoose.model("Cart")
 
 // get all foods
 const getAllFoods = async (req, res) => {
@@ -32,6 +31,8 @@ const oneFood = await Food.findOne( {"foodId": req.params.foodId})
         return res.send("Database query failed")
     }
 }
+
+// add food to customer cart
 const addFood = async (req, res) => {
 
   // assume the login customer with customerid 1001
@@ -40,13 +41,13 @@ const addFood = async (req, res) => {
   let addFood = await Food.findOne( {foodId: req.params.foodId})
 
   // add food to customer's order list
-  orderRecord = new Order({foodId: addFood._id})
-  thisCustomer.currentOrder.push(orderRecord)
+  orderRecord = new Cart({foodId: addFood._id})
+  thisCustomer.cart.push(orderRecord)
 
   await thisCustomer.save()
 
   // show the new customer record
-  result = await Customer.findOne({customerId: '1001'})
+  result = await Customer.findOne({customerId: '1001'}).populate('cart.foodId','name')
   res.send(result)
   }
 

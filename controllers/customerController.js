@@ -4,7 +4,7 @@ const Customer = mongoose.model("Customer")
 
 const getAllCustomers = async (req, res) => {
     try {
-      const customers = await Customer.find({},{firstName: true, customerId: true}).populate('currentOrder.foodId','name')
+      const customers = await Customer.find({},{firstName: true, customerId: true}).populate('cart.foodId','name')
       return res.send(customers)
     } catch (err) {
       res.status(400)
