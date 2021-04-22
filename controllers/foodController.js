@@ -1,10 +1,15 @@
 const mongoose = require("mongoose")
+// const { Customer } = require("../models/customer")
+
 // import food model
 const Food = mongoose.model("Food")
+const Customer = mongoose.model("Customer")
+const Order =  mongoose.model("Order")
+
 // get all foods
 const getAllFoods = async (req, res) => {
   try {
-    const foods = await Food.find({},{name: true, foodId: true, _id: false,description: true, price: true})
+    const foods = await Food.find({})
     return res.send(foods)
   } catch (err) {
     res.status(400)
@@ -27,9 +32,28 @@ const oneFood = await Food.findOne( {"foodId": req.params.foodId})
         return res.send("Database query failed")
     }
 }
+const addFood = async (req, res) => {
+
+  // assume the login customer with customerid 1001
+  let thisCustomer = await Customer.findOne( {customerId: '1001'})
+
+  let addFood = await Food.findOne( {foodId: req.params.foodId})
+
+  // add food to customer's order list
+  orderRecord = new Order({foodId: addFood._id})
+  thisCustomer.currentOrder.push(orderRecord)
+
+  await thisCustomer.save()
+
+  // show the new customer record
+  result = await Customer.findOne({customerId: '1001'})
+  res.send(result)
+  }
+
 
 // remember to export the functions
 module.exports = {
   getAllFoods,
-  getOneFood
+  getOneFood,
+  addFood
 }

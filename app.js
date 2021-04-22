@@ -1,6 +1,7 @@
 const express = require('express');
 const Food = require('./models/food.js');
 const app = express();
+app.use(express.json())
 
 require('./models');
 // set up food routes
@@ -11,16 +12,14 @@ const customerRouter = require('./routes/customerRouter')
 app.get('/', (req, res) => {
     res.send('<h1>Snack in a Van</h1>')
 })
-// app.get('/menu', async (req,res) =>{
-//     result = await Food.find()
-//     res.send(result)
-// })
-// handler for menu requests
-// food routes are added onto the end of '/menu'
 
+// here goes the customer server
 app.use('/customer', customerRouter)
 
 app.use('/customer/menu', foodRouter)
+
+// here goes the vendor server
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('The snack app is running')

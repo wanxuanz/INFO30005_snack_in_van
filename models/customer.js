@@ -1,11 +1,19 @@
 const mongoose = require("mongoose")
 
-const customerSchema = new mongoose.Schema({ 
-firstName: {type: String, required: true},
-lastName: String,
-customerId: Number,
+const orderSchema = new mongoose.Schema({
+    foodId: {type: mongoose.Schema.Types.ObjectId, ref: 'Food'}
 })
 
-const Customer = mongoose.model("Customer", customerSchema) 
+const customerSchema = new mongoose.Schema({ 
+firstName: String,
+lastName: String,
+customerId: String,
+currentOrder: [orderSchema]
+})
 
-module.exports = Customer
+// compile the Schemas into Models
+const Customer = mongoose.model("Customer", customerSchema) 
+const Order = mongoose.model("Order", orderSchema)
+
+// export  schema
+module.exports = {Customer, Order}
