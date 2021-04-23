@@ -38,7 +38,7 @@ Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be f
 
 _The following inclues other features which are not part of the **Deliverable 2 - Mockup App Server**_
 
-* When you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then in the body you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
+* When you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
 
 
 ## Instructions of Using code
@@ -86,7 +86,10 @@ eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add<br />
 * (1a) vendor sends location:
 type the vanId you want to login after this link  https://snacks-in-a-van-webg100.herokuapp.com/vender/vans <br />
 eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001 <br />
-when you are at page https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001, you can input the location at body(postman), the location of this van will change.
+then if you want to send the location in the database(assuming the vendor doesn't change it location), you can type send_location like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. <br />
+If the logined van changes its selling location, they need to change it current location in the database and send its current new location by typing send_location like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. 
+but this time, it will be a **POST** request. 
+you need to use postman to run this.  you can type `{"location": xxxxxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you will be able to see this change in the database(collection name is **`vans`**). Also, a text will be displayed in postman like: `Van locatioin: "xxxxxx" has been updated and sent successfully`. 
 
 * (1b) marks van as ready-for-orders<br />
 input the ":vanId/update_status" behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/, after that, you can change the status of this van(close to open. open to close)<br />
