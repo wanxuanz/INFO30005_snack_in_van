@@ -33,8 +33,10 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 | Chloe    | manage the vender app    |  Done |
 
 ## General info
-This is project is about creating an vendor app and customer app from scratch. The home page of our website is [link](https://snacks-in-a-van-webg100.herokuapp.com/).
-
+This is project is about creating an vendor app and customer app from scratch. 
+The home page of our website is https://snacks-in-a-van-webg100.herokuapp.com. 
+The customer side application can be accessed by https://snacks-in-a-van-webg100.herokuapp.com/customer.
+The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
 
 ## Technologies
 Project is created with:
@@ -42,63 +44,18 @@ Project is created with:
 * Ipsum version: 2.33
 * Ament library version: 999
 
-## Code Implementation
-
-You can include a code snippet here.
-
-```HTML
-<!--
-Example code from: https://www.w3schools.com/jsref/met_win_alert.asp
-__>
-
-<!DOCTYPE html>
-<html>
-<body>
-
-<p>Click the button to display an alert box.</p>
-
-<button onclick="myFunction()">Try it</button>
-
-<script>
-function myFunction() {
-  alert("Hello! I am an alert box!");
-}
-</script>
-
-</body>
-</html>
-```
-
-## Adding Images
-
-You can use images/gif hosted online:
-
-<p align="center">
-  <img src="https://github.com/Martin-Reinoso/sandpit-Profile/raw/main/Images_Readme/01.gif"  width="300" >
-</p>
-
-Or you can add your own images from a folder in your repo with the following code. The example has a folder `Gifs` with an image file `Q1-1.gif`:
-```HTML
-<p align="center">
-  <img src="Gifs/Q1-1.gif"  width="300" >
-</p>
-```
-
-To create a gif from a video you can follow this [link](https://ezgif.com/video-to-gif/ezgif-6-55f4b3b086d4.mov).
-
-You can use emojis :+1: but do not over use it, we are looking for professional work. If you would not add them in your job, do not use them here! :shipit:
 
 **Now Get ready to complete all the tasks:**
 
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
-- [ ] App server mockup
+- [x] App server mockup
 - [ ] Front-end + back-end (one feature)
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)
 
 
-App server mockup instruction:
+**App server mockup instruction:**
 
 customer features:
 1) View menu of snacks (including pictures and prices)
