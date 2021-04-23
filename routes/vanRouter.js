@@ -3,7 +3,7 @@ const express = require('express')
 // add van router 
 const vanRouter = express.Router()
 
-// add the van controller
+// add the van controller and order router
 const vanController = require('../controllers/vanController.js')
 const orderRouter = require('./orderRouter.js')
 

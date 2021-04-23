@@ -15,7 +15,7 @@ orderRouter.get('/:vanId/orders/outstanding', (req,res) => orderController.getOu
 // handle the GET request to get one order
 orderRouter.get('/:vanId/orders/:orderId', (req,res) => orderController.getOneOrder(req,res))
 
-// handle the POST request to update order status as fulfilled
+// handle the get request to update order status as fulfilled
 orderRouter.get('/:vanId/orders/:orderId/update_status', (req,res) => orderController.updateOrderStatus(req,res))
 
 // export the router
