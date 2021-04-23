@@ -83,11 +83,11 @@ eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add<br />
 
 * (1) `Setting van status (vendor sends location, marks van as ready-for-orders)`<br />
 
--- a) vendor sends location:
+*- a) vendor sends location:
 input the vanId you want to log in behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans /<br />
 when you are at page https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001, you can input the location at body(postman), the location of this van will change.
 
--- b) marks van as ready-for-orders<br />
+*- b) marks van as ready-for-orders<br />
 input the ":vanId/update_status" behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/, after that, you can change the status of this van(close to open. open to close)<br />
 eg:https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/
 
