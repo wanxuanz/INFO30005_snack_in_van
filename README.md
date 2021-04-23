@@ -3,14 +3,13 @@
 
 # Group Project Repository
 
-**Welcome to webg100 Group Repository!**
+**Welcome to webg100 Group Repository !**
 
-Remember that _"this document"_ can use `different formats` to **highlight** important information. This is just an example of different formating tools available for you. For help with the format you can find a guide [here](https://docs.github.com/en/github/writing-on-github).
 
 ## Table of contents
 * [Team Members](#team-members)
 * [General Info](#general-info)
-* [Detail Info](#detail-info)
+* [Detailed Info](#detailed-info)
 * [Instructions of Using code](#instructions-of-Using-code)
 * [Technologies](#technologies)
 * [App server mockup instruction](#app-server-mockup-instruction)
@@ -26,15 +25,18 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 | Claire    | manage the vender app    |  Done |
 | Chloe    | manage the vender app    |  Done |
 
-## General info
+## General infomation
 This is project is about creating an vendor app and customer app from scratch. 
 * The home page of our website is https://snacks-in-a-van-webg100.herokuapp.com. 
 * The customer side application can be accessed by https://snacks-in-a-van-webg100.herokuapp.com/customer.
 * The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
 
-## Detail info
-* hahah
+## Detailed infomation
+Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be found here [App server mockup instruction](#app-server-mockup-instruction). 
+* you can view all the customers in the database in the following link: https://snacks-in-a-van-webg100.herokuapp.com/customer
 * 
+
+
 ## Instructions of Using code
 clone this repository and install all the dependencies in **package.json** and type **npm start** to run the code. However, you may not be able to run these codes because you cannot access our database. Further information will be posted here soon or you can email the following: **yuwenmichael@student.unimelb.edu.au** to ask for authentication.
 
