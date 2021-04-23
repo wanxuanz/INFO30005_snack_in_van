@@ -66,15 +66,15 @@ Project is created with:
 
 **customer features:**
 
-* 1) `View menu of snacks (including pictures and prices)`
+* (1) `View menu of snacks (including pictures and prices)`<br />
 type this url below<br />
 https://snacks-in-a-van-webg100.herokuapp.com/customer/menu
 
-* 2) View details of a snack
+* (2) `View details of a snack`<br />
 type the foodid after menu, you will be able to see the snack detail of this foodid.<br />
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004
 
-* 3) Customer starts a new order by requesting a snack
+* (3) `Customer starts a new order by requesting a snack`<br />
 input "add" after the foodid that you want to order, after that this food will be shown at cart array of this customer(assume we have logged in as Michael)<br /> 
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add
 
