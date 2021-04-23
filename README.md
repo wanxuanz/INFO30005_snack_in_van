@@ -52,8 +52,8 @@ For example, Cappuccino has photo String: **6o2Dk5Op8VI**, if you want to view t
 
 
 ## How to access our database
-Here is one of the username and password that allow you to access our database:
-**`MONGO_USERNAME=Michael
+Here is one of the username and password that allow you to access our database:<br />
+**`MONGO_USERNAME=Michael<br />
 MONGO_PASSWORD=1234`**
 
 ## Technologies
