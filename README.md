@@ -84,16 +84,16 @@ eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add<br />
 * (1) `Setting van status (vendor sends location, marks van as ready-for-orders)`<br />
   In the following link you will be able to see all the vans we currently have in our database: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans 
 * (1a) vendor sends location:
-type the vanId you want to login after this link  https://snacks-in-a-van-webg100.herokuapp.com/vender/vans <br />
+type the **vanId** you want to login after this link  https://snacks-in-a-van-webg100.herokuapp.com/vender/vans <br />
 eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001 <br />
-then if you want to send the location in the database(assuming the vendor doesn't change it location), you can type send_location like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. <br />
-If the logined van changes its selling location, they need to change it current location in the database and send its current new location by typing send_location like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. 
-but this time, it will be a **POST** request. 
-you need to use postman to run this.  you can type `{"location": xxxxxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you will be able to see this change in the database(collection name is **`vans`**). Also, a text will be displayed in postman like: `Van locatioin: "xxxxxx" has been updated and sent successfully`. 
+then if you want to send the location in the database(assuming the vendor doesn't change it location), you can type **send_location** like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. <br />
+If the logined van changes its selling location, they need to change it current location in the database and send its current new location by typing **send_location** like the following: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/send_location. <br />
+but this time, it will be a **POST** request. <br />
+you need to use postman to run this.  you can type `{"location": xxxxxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you will be able to see this change in the database(collection name is **`vans`**). Also, a text will be displayed in postman like: `Van locatioin: "xxxxxx" has been updated and sent successfully`. <br />
 
 * (1b) marks van as ready-for-orders<br />
-input the ":vanId/update_status" behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/, after that, you can change the status of this van(close to open. open to close)<br />
-eg:https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/
+type **update_status** after the current vanId like: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001, after that, you can change the status of this van(from close to open, or from open to close)<br />
+eg:https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/update_status
 
 * (2) `Show list of all outstanding orders` <br />
 input "orders/outstanding" after vanId to show list of all outstanding orders of this van <br />
