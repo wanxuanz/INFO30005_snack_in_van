@@ -66,22 +66,22 @@ Project is created with:
 
 **customer features:**
 
-* (1) `View menu of snacks (including pictures and prices)`<br />
+* (1) **`View menu of snacks (including pictures and prices)`**<br />
 type this url below<br />
 https://snacks-in-a-van-webg100.herokuapp.com/customer/menu
 
-* (2) `View details of a snack`<br />
+* (2) **`View details of a snack`**<br />
 type the foodid after menu, you will be able to see the snack detail of this foodid.<br />
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004
 
-* (3) `Customer starts a new order by requesting a snack`<br />
+* (3) **`Customer starts a new order by requesting a snack`**<br />
 type "add" after the foodid that you want to order, after that this food will be shown at cart array of the current customer (assume the login customer is Michael)<br /> 
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add<br />
 
 
 **vendor features:**
 
-* (1) `Setting van status (vendor sends location, marks van as ready-for-orders)`<br />
+* (1) **`Setting van status (vendor sends location, marks van as ready-for-orders)`**<br />
   In the following link you will be able to see all the vans we currently have in our database: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans 
 * (1a) vendor sends location:
 type the **vanId** you want to login after this link  https://snacks-in-a-van-webg100.herokuapp.com/vender/vans <br />
@@ -93,12 +93,13 @@ you need to use postman to run this.  you can type `{"location": xxxxxxx}` in th
 
 * (1b) marks van as ready-for-orders<br />
 type **update_status** after the current vanId like: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001, after that, you can change the status of this van(from close to open, or from open to close)<br />
-eg:https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/update_status
+eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/update_status
 
-* (2) `Show list of all outstanding orders` <br />
-input "orders/outstanding" after vanId to show list of all outstanding orders of this van <br />
-eg https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/outstanding
+* (2) **`Show list of all outstanding orders`** <br />
+type "orders/outstanding" after vanId to show list of all outstanding orders of the current van <br />
+eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/outstanding
 
-* (3) `Mark an order as "fulfilled" (ready to be picked up by customer)` <br />
-input orderid which is shown at previous feature(Show list of all outstanding orders) behind orders, after that input update_status, the status of this order would change to fullfilled.<br />
-eg https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status
+* (3) **`Mark an order as "fulfilled" (ready to be picked up by customer)`** <br />
+type orderid which is shown at previous feature(Show list of all outstanding orders) behind orders, after that type **update_status**, the status of this order would change to fullfilled.<br />
+eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status <br />
+This will change the status from outstanding to fullfilled of order 10005 in vans 0001.
