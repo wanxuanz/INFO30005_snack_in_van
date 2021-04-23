@@ -38,11 +38,12 @@ Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be f
 
 _The following inclues other features which are not part of the **Deliverable 2 - Mockup App Server**_
 
-* when you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then in the body you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as **`raw`** and **`JSON(application/javascript)`** above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
+* When you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then in the body you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
 
 
 ## Instructions of Using code
-clone this repository and install all the dependencies in **package.json** and type **npm start** to run the code. However, you may not be able to run these codes because you cannot access our database. Further information will be posted here soon or you can email the following: **yuwenmichael@student.unimelb.edu.au** to ask for authentication.
+clone this repository and install all the dependencies in **package.json** and type **npm start** in terminal to run the code. However, you may not be able to run these codes because you cannot access our database. Further information will be posted here soon or you can email the following: **yuwenmichael@student.unimelb.edu.au** to ask for authentication.
+
 
 ## Technologies
 Project is created with:
@@ -64,27 +65,23 @@ Project is created with:
 ## App server mockup instruction:
 
 **customer features:**
-1) View menu of snacks (including pictures and prices)
-input this url below
+
+* 1) View menu of snacks (including pictures and prices)
+type this url below
 https://snacks-in-a-van-webg100.herokuapp.com/customer/menu
 
-2) View details of a snack
-input the foodid after menu, the page would change to the snack detail of this id.
+* 2) View details of a snack
+type the foodid after menu, you will be able to see the snack detail of this foodid.
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004
 
-3) Customer starts a new order by requesting a snack
+* 3) Customer starts a new order by requesting a snack
 input "add" after the foodid that you want to order, 
 after that this food will be shown at cart array of this customer(assume we have logged in as Michael)   
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add
 
-at our customer app, we have also achieved the following function
-1) Add new customer to our database
-when you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you can input the new customer detail at body(postman),
-the input format is {"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}
-after that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
 
+**vendor features:**
 
-vendor features:
 1) Setting van status (vendor sends location, marks van as ready-for-orders)
 
 a)vendor sends location:
