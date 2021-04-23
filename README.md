@@ -12,6 +12,7 @@
 * [Detailed Info](#detailed-info)
 * [Instructions of Using code](#instructions-of-Using-code)
 * [Handling images](#handling-images)
+* [How to access our database](#how to access our database)
 * [Technologies](#technologies)
 * [App server mockup instruction](#app-server-mockup-instruction)
 
@@ -48,6 +49,13 @@ clone this repository and install all the dependencies in **package.json** and t
 ## Handling images
 the photos for each food are stored as **String** in database (in **Collections: foods**). The photo is retrieved from https://unsplash.com/photos/. If you want to see the photo, simply append the string found in database to this URL: https://unsplash.com/photos. <br />
 For example, Cappuccino has photo String: **6o2Dk5Op8VI**, if you want to view the photo, you can go to this URL and view it.https://unsplash.com/photos/6o2Dk5Op8VI.
+
+
+## How to access our database
+Here is one of the username and password that allow you to access our database:
+**`MONGO_USERNAME=Michael
+MONGO_PASSWORD=1234`**
+
 ## Technologies
 Project is created with:
 * NodeJs 14.16.X
