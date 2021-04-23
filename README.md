@@ -26,13 +26,15 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 
 | Name | Task | State |
 | :---         |     :---:      |          ---: |
-| Student Name 1  | Back End     |  Done |
-| Student Name 2    | Front End      |  Testing |
-| Student Name 3    | README Format      |  Amazing! |
+| Yu-Wen Michael Zhang  | manage the customer app     |  Done |
+| Ming Zhang   | README Format and manage the customer app      |  Done |
+| Yifei Wang    | manage the customer app    |  Done |
+| Claire    | manage the vender app    |  Done |
+| Chloe    | manage the vender app    |  Done |
 
 ## General info
-This is project ...
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+This is project is about creating an vendor app and customer app from scratch. The home page of our website is [link](https://snacks-in-a-van-webg100.herokuapp.com/).
+
 
 ## Technologies
 Project is created with:
