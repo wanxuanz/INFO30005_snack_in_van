@@ -95,3 +95,46 @@ You can use emojis :+1: but do not over use it, we are looking for professional 
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)
 
+
+App server mockup instruction:
+
+customer features:
+1) View menu of snacks (including pictures and prices)
+input this url below
+https://snacks-in-a-van-webg100.herokuapp.com/customer/menu
+
+2) View details of a snack
+input the foodid after menu, the page would change to the snack detail of this id.
+eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004
+
+3) Customer starts a new order by requesting a snack
+input "add" after the foodid that you want to order, 
+after that this food will be shown at cart array of this customer(assume we have logged in as Michael)   
+eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1004/add
+
+at our customer app, we have also achieved the following function
+1) Add new customer to our database
+when you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you can input the new customer detail at body(postman),
+the input format is {"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}
+after that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
+
+
+vendor features:
+1) Setting van status (vendor sends location, marks van as ready-for-orders)
+
+a)vendor sends location:
+input the vanId you want to log in behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/
+when you are at page https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001, you can input the location at body(postman), the location of this van will change.
+
+b)marks van as ready-for-orders
+input the ":vanId/update_status" behind https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/, 
+after that, you can change the status of this van(close to open. open to close)
+eg:https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/
+
+2) Show list of all outstanding orders
+input "orders/outstanding" after vanId to show list of all outstanding orders of this van
+eg https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/outstanding
+
+3) Mark an order as "fulfilled" (ready to be picked up by customer)
+input orderid which is shown at previous feature(Show list of all outstanding orders) behind orders, after that input update_status, the status of this order would change to fullfilled.
+eg https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status
