@@ -5,10 +5,6 @@
 
 Welcome!
 
-We have added to this repository a `README.md`, `.gitignore`, and `.gitattributes`.
-
-* **README.md**: is the document you are currently reading. It should be replaced with information about your project, and instructions on how to use your code in someone else's local computer.
-
 * **.gitignore**: lets you filter out files that should not be added to git. For example, Windows 10 and Mac OS create hidden system files (e.g., .DS_Store) that are local to your computer and should not be part of the repository. This files should be filtered by the `.gitignore` file. This initial `.gitignore` has  been created to filter local files when using MacOS and Node. Depending on your project make sure you update the `.gitignore` file.  More information about this can be found in this [link](https://www.atlassian.com/git/tutorials/saving-changes/gitignore).
 
 * **.gitattributes**: configures the line ending of files, to ensure consistency across development environments. More information can be found in this [link](https://git-scm.com/docs/gitattributes).
@@ -18,9 +14,11 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 ## Table of contents
 * [Team Members](#team-members)
 * [General Info](#general-info)
+* [Detail Info](#detail-info)
+* [Instructions of Using code](#instructions-of-Using-code)
 * [Technologies](#technologies)
-* [Code Implementation](#code-implementation)
-* [Adding Images](#adding-images)
+* [App server mockup instruction](#app-server-mockup-instruction)
+
 
 ## Team Members
 
@@ -34,9 +32,15 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 
 ## General info
 This is project is about creating an vendor app and customer app from scratch. 
-The home page of our website is https://snacks-in-a-van-webg100.herokuapp.com. 
-The customer side application can be accessed by https://snacks-in-a-van-webg100.herokuapp.com/customer.
-The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
+* The home page of our website is https://snacks-in-a-van-webg100.herokuapp.com. 
+* The customer side application can be accessed by https://snacks-in-a-van-webg100.herokuapp.com/customer.
+* The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
+
+## Detail info
+* hahah
+* 
+## Instructions of Using code
+clone this repository and install all the dependencies in **package.json** and type **npm start** to run the code. However, you may not be able to run these codes because you cannot access our database. Further information will be posted here soon or you can email the following: **yuwenmichael@student.unimelb.edu.au** to ask for authentication.
 
 ## Technologies
 Project is created with:
