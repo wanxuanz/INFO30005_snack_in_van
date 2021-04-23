@@ -19,5 +19,11 @@ vanRouter.use('/', orderRouter)
 // handle the GET request to get all orders
 vanRouter.get('/:vanId/update_status', (req,res) => vanController.updateVanStatus(req,res))
 
+//handle send locations
+vanRouter.get('/:vanId/send_location', (req,res) => vanController.sendLocation(req,res))
+
+//handle change and send locations
+vanRouter.post('/:vanId/send_location', (req,res) => vanController.changeAndSendLocation(req,res))
+
 // export the router
 module.exports = vanRouter

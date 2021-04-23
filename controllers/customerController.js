@@ -14,10 +14,9 @@ const getAllCustomers = async (req, res) => {
 
   // catch a POST request and we can add more customer in our database
 const addCustomer = async (req, res) => {
-  const customer = new Customer(req.body)   // construct a new Author object from body of POST
-  console.log(req.body)
+  const customer = new Customer(req.body)   // construct a new customer object from body of POST
   try {
-      let result = await customer.save()  // save new author object to database
+      let result = await customer.save()  // save new customer object to database
       return res.send(result)           // return saved object to sender
   } catch (err) {   // error detected
       res.status(400)
