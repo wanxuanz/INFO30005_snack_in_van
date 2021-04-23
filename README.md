@@ -37,11 +37,8 @@ In detailed info, we will explain the usage of all the links in our server.
 Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be found here [App server mockup instruction](#app-server-mockup-instruction). 
 
 _The following inclues other features which are not part of the **Deliverable 2 - Mockup App Server**_
-* when you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then in the body you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as **`raw`** and **`JSON(application/javascript)`** above the text box.
-the input format is {"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}
-after that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
-* you can view all the customers in the database in the following link: https://snacks-in-a-van-webg100.herokuapp.com/customer
-* 
+
+* when you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then in the body you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as **`raw`** and **`JSON(application/javascript)`** above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
 
 
 ## Instructions of Using code
