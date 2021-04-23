@@ -55,9 +55,9 @@ Project is created with:
 - [ ] Report on your work(+ test1 feature)
 
 
-**App server mockup instruction:**
+## App server mockup instruction:
 
-customer features:
+**customer features:**
 1) View menu of snacks (including pictures and prices)
 input this url below
 https://snacks-in-a-van-webg100.herokuapp.com/customer/menu
