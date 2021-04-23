@@ -19,9 +19,9 @@
 
 | Name | Student ID| Task | State |
 | :---         |     :---:      |     :---:      |          ---: |
-| Yu-Wen Michael Zhang  |1089117| manage the customer app     |  Done |
+| Yu-Wen Michael Zhang  |1089117| README Format manage the customer app     |  Done |
 | Ming Zhang   |1068302| README Format and manage the customer app      |  Done |
-| Yifei Wang    |1001686| manage the customer app    |  Done |
+| Yifei Wang    |1001686| manage Postman testing and the customer app    |  Done |
 | Claire    |1080915| manage the vender app    |  Done |
 | Chloe    |1079686| manage the vender app    |  Done |
 
