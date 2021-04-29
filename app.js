@@ -2,6 +2,17 @@ const express = require('express');
 const app = express();
 app.use(express.json())
 
+// handle bar
+app.use(express.static('public'))	// define where static assets live
+const exphbs = require("express-handlebars")
+
+app.engine('hbs',exphbs({
+  defaultLayout: 'main',
+  extname: 'hbs'
+}))
+app.set('view engine','hbs')
+
+
 require('./models');
 
 // set up food routes
@@ -13,7 +24,8 @@ const vanRouter = require('./routes/vanRouter')
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    res.send('<h1>Snack in a Van</h1>')
+    // res.send('<h1>Snack in a Van</h1>')
+    res.render('index');
 })
 
 // here goes the customer server

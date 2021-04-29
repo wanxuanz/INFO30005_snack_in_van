@@ -8,8 +8,9 @@ const Cart =  mongoose.model("Cart")
 // get all foods
 const getAllFoods = async (req, res) => {
   try {
-    const foods = await Food.find({})
-    return res.send(foods)
+    const foods = await Food.find().lean()
+    // return res.send(foods)
+    res.render('foodlist',{"foods": foods})
   } catch (err) {
     res.status(400)
     return res.send("Database query failed")
@@ -20,12 +21,12 @@ const getAllFoods = async (req, res) => {
 const getOneFood = async (req, res) => {
 try {
 	// console.log(req.params.foodId)
-const oneFood = await Food.findOne( {"foodId": req.params.foodId})
+const oneFood = await Food.findOne( {"foodId": req.params.foodId}).lean()
         if (oneFood === null) {   // no food found in database
             res.status(404)
             return res.send("Food not found.")
         }
-        return res.send(oneFood)  // food was found
+        res.render('showFood',{"thisfood": oneFood})
     } catch (err) {     // error occurred
         res.status(400)
         return res.send("Database query failed")
