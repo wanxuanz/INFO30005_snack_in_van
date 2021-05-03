@@ -55,8 +55,6 @@ const findCart = async(req, res) => {
 
 const removeOneFood = async(req, res) => {
     try {
-        //var oneFood = await Customer.findOne({ "customerId": '1001' }, { cart: { $elemMatch: { "_id": req.body.item_id } } }).lean()
-        console.log(req.body.item_id)
 
         await Customer.updateOne({ "customerId": "1001" }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
 
