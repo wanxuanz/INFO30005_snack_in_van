@@ -10,7 +10,11 @@ const customerController = require('../controllers/customerController.js')
 customerRouter.get('/', customerController.getAllCustomers)
 
 // handle POST requests to add one customer into our database
-customerRouter.post('/',customerController.addCustomer)
+customerRouter.post('/', customerController.addCustomer)
 
-// export the router
+//handle the GET request to get the Shopping Cart
+customerRouter.get('/shopping-cart', customerController.findCart)
+
+customerRouter.post('/shopping-cart', (req, res) => customerController.removeOneFood(req, res))
+    // export the router
 module.exports = customerRouter

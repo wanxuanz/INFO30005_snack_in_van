@@ -1,16 +1,20 @@
 const express = require('express');
 const app = express();
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.json())
 
 // handle bar
-app.use(express.static('public'))	// define where static assets live
+app.use(express.static('public')) // define where static assets live
 const exphbs = require("express-handlebars")
 
-app.engine('hbs',exphbs({
-  defaultLayout: 'main',
-  extname: 'hbs'
+app.engine('hbs', exphbs({
+    defaultLayout: 'main',
+    extname: 'hbs'
 }))
-app.set('view engine','hbs')
+app.set('view engine', 'hbs')
 
 
 require('./models');
