@@ -1,0 +1,39 @@
+<section id = "shopping-cart">
+    <h1 style="text-align: left;">Shopping Cart</h1>
+    <h1 style="text-align: left;"> {{customer.firstName}}'s order:</h1>
+    
+    <script src="/abc.js"></script>
+    <ul>
+        <li>
+            <p>Items</p>  
+            <p>Name</p>        
+            <p>Price/Unit</p>        
+            <p>Quantity</p>              
+        </li>
+        {{#each cartFood}}
+         <li>
+            <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
+            <p>
+                {{this.name}}
+            </p>
+            <p>
+                ${{this.price}}
+            </p>
+            {{#if this.quantity}}
+            
+            <p id = "shopping-cart-quantity">
+                <button class="plus-minus-btn" onclick = "substraction('{{this.cartId}}')"><i class="fas fa-minus" ></i></button>
+                <p1 id = "{{this.cartId}}">
+                {{this.quantity}}
+                </p1>
+                <button class="plus-minus-btn" onclick = "addition('{{this.cartId}}')"><i class="fas fa-plus"></i></button>
+                <button id="edit-btn">Edit</button>
+            </p>
+            {{/if}}
+
+        </li>
+        {{/each}}
+    </ul>
+    <p style="text-align: right;">Total price: ${{total_price}}</p>
+
+</section>

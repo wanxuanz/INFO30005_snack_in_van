@@ -4,7 +4,8 @@
     --text-medium: 22px;
     --text-small: 16px;
     /* --font-body: 'Lexend Mega', sans-serif; */
-    --font-body: 'Goudy Bookletter 1911', serif;
+    /* --font-body: 'Goudy Bookletter 1911', serif; */
+    --font-body: 'Roboto', sans-serif;
     --font-heading: 'Rammetto One', cursive;
     /* --font-heading:'Goudy Bookletter 1911', serif; */
     --color-dark: #7A280A;
@@ -48,9 +49,13 @@ a {
     text-decoration: none;  /* switch off underlining of anchors */
 }
 
-a:hover {                   /* instead, get anchors to expand when hovered over */
-    font-size: larger;
-  }
+/* a:hover {                   /* instead, get anchors to expand when hovered over */
+    /* font-size: larger; */
+  /* } */
+nav {
+    font-weight: bold;
+    font-size: 24px;
+}
 
 header h1 a {
     color: var(--color-dark);
@@ -92,13 +97,65 @@ hr {
     width:  140px;
     height: 80px;
     padding: 10px;
-    object-fit:cover;
+    object-fit: scale-down;
 
 }
 
 #foodList a {   /* the food names */
     color: var(--color-dark);
 }
+
+#shopping-cart img{
+    /* width:  200px;
+    height: 100px;*/
+    height: 100px;
+    padding: 10px 20px 10px 20px;
+    width: 21.8%;
+    object-fit:scale-down;
+}
+
+.plus-minus-btn{
+    width: fit-content;
+    border-style:solid;
+    text-align:  center;
+    font-size: var(--text-medium);
+    padding: 0px 10px;
+    transition: background-color 0.3s; 
+}
+#edit-btn{
+    width: fit-content;
+    /* margin: auto;  not include */
+    /* display: flex;  not include*/
+    border-style:solid;
+    text-align:  center;
+    font-size: var(--text-medium);
+    padding: 0px 10px;
+    transition: background-color 0.3s; 
+}
+
+#shopping-cart button:hover{
+    background-color: #CC9E22;
+}
+
+#shopping-cart p {   /* the words at the top of the page */
+    text-align: center;
+    flex-basis: 25%;
+}
+
+
+#shopping-cart ul {  /* the list of foods */
+    padding: 0;
+
+}
+
+#shopping-cart li {  /* each individual food listing */
+    list-style-type: none;          /* switch off bullet-points */    
+    display: flex;
+    flex-direction: row;  
+    /* justify-content:space-evenly;   */
+    align-items: center;            /* and vertically aligns to center */
+}
+
        
 form {        /* centre the form */
     display: flex;
@@ -194,12 +251,36 @@ a#favourite:hover {
   }
 
 /* Responsive Design */
-@media screen and (max-width: 768px){
+@media screen and (max-width: 620px){
     body{
         background-color: var(--color-grey);
+        font-size: var(--text-small);
     }
+    #shopping-cart h1{
+        font-size: var(--text-medium);
+    }
+    /* #shopping-cart button{
+        font-size: var(--text-small);
+
+    } */
+    #edit-btn{
+        font-size: var(--text-small);
+    }
+    [class='plus-minus-btn']{
+        display: none;
+    }
+    #menu-bar{
+        font-size: var(--text-medium);
+    }
+    #shopping-cart img{
+    height: 50px;
+    padding: 10px 20px 10px 20px;
+    width: 21.8%;
+    object-fit:scale-down;
+    }
+    
 }
-@media screen and (min-width: 768px) {	/* for tablet-sized screens */
+@media screen and (min-width: 621px){	/* for tablet-sized screens */
 
     /* body{
         background-color: var(--color-grey); 
@@ -209,6 +290,13 @@ a#favourite:hover {
         column-count: 2;
     }
 
+    #edit-btn{
+        display: none;
+        
+    }
+    [class='plus-minus-btn']{
+        font-size: var(--text-small);
+    }
     #oneFood-details {
         flex-direction: row; /* now picture and text are side-by-side */
     }

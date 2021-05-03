@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Food = require("../models/food")
 // import customer model
 const Customer = mongoose.model("Customer")
 
@@ -24,7 +25,64 @@ const addCustomer = async (req, res) => {
   }
 }
 
+const findCart = async (req, res) => {
+  try {
+    const customer = await Customer.findOne({"customerId": '1001'}).lean()
+    const cart = customer.cart; // array
+    const cartFood = [];
+    var total_price = 0;
+    for(var i = 0;i < cart.length; i++){
+      var oneFood = await Food.findOne({"_id": cart[i].foodId}).lean()
+      
+      // get the quantity and store it in oneFood
+      oneFood["quantity"] = cart[i].quantity
+      oneFood["cartId"] = cart[i]._id
+      cartFood.push(oneFood)
+      
+      total_price = total_price + Number(oneFood.price);
+    }
+    console.log(cartFood)
+    if(customer === null){
+      res.status(404)
+      return res.send('Food not found')
+    }
+    res.render('shoppingCart',{"customer": customer,"cartFood": cartFood, "total_price": total_price})
+
+  } catch (err) {
+    res.status(400)
+    return res.send("Database query failed")
+  } 
+}
+
+// const cartAdd = async (req, res) => {
+//   try {
+//     const customer = await Customer.findOne({"customerId": '1001'}).lean()
+//     const cart = customer.cart; // array
+//     const cartFood = [];
+//     var total_price = 0;
+//     for(var i = 0;i < cart.length; i++){
+//       var oneFood = await Food.findOne({"_id": cart[i].foodId}).lean()
+
+//       // get the quantity and store it in oneFood
+//       oneFood["quantity"] = cart[i].quantity
+
+//       cartFood.push(oneFood)
+      
+//       total_price = total_price + Number(oneFood.price);
+//     }
+//     if(customer === null){
+//       res.status(404)
+//       return res.send('Food not found')
+//     }
+//     res.render('shoppingCart',{"customer": customer,"cartFood": cartFood, "total_price": total_price})
+
+//   } catch (err) {
+//     res.status(400)
+//     return res.send("Database query failed")
+//   } 
+// }
+
   // remember to export the functions
 module.exports = {
-  getAllCustomers, addCustomer
+  getAllCustomers, addCustomer, findCart
   }
