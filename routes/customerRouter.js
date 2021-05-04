@@ -1,20 +1,23 @@
-const express = require('express')
+ // routes/index.js
+ var express = require('express');
+ var customerRouter = express.Router();
 
-// add our router 
-const customerRouter = express.Router()
+ const customerController = require('../controllers/customerController.js')
+ /* /根路径 跳转至login.html */
+ customerRouter.get('/', function(req, res, next) {
+   res.render('login')
+    //res.sendfile('./views/login.html'); 
+ });
 
-// add the customer controller
-const customerController = require('../controllers/customerController.js')
+  
+ customerRouter.post('/login', (req, res) => customerController.getOneCustomer(req, res))
+ 
 
-// handle the GET request to go to the detail of a customer
-customerRouter.get('/', customerController.getAllCustomers)
+ customerRouter.get('/register', function (req, res) {
+     res.render('register');
+ });
 
-// handle POST requests to add one customer into our database
-customerRouter.post('/', customerController.addCustomer)
+customerRouter.post('/register', (req, res) => customerController.addOneCustomer(req, res))
 
-//handle the GET request to get the Shopping Cart
-customerRouter.get('/shopping-cart', customerController.findCart)
-
-customerRouter.post('/shopping-cart', (req, res) => customerController.removeOneFood(req, res))
-    // export the router
-module.exports = customerRouter
+  
+ module.exports = customerRouter;

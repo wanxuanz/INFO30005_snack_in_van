@@ -1,90 +1,84 @@
 const mongoose = require("mongoose")
-const { db } = require("../models/food")
-const Food = require("../models/food")
-    // import customer model
-const Customer = mongoose.model("Customer")
 
-const getAllCustomers = async(req, res) => {
-    try {
-        const customers = await Customer.find({}, { firstName: true, customerId: true }).populate('cart.foodId', 'name')
-        return res.send(customers)
-    } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+// import author model
+const Customer = mongoose.model("customers")
+
+// const getOneUser = async (req, res) => {    
+//     var postData = {
+//          username: req.body.username,
+//          password: req.body.password
+//      };
+//      const user = await User.findOne( {"username": postData.username, "password":postData.password} ).lean()
+//      console.log(user)
+//      if (user === null) {   // no author found in database
+//         res.status(404)
+//         return res.send("user not found").lean()
+//     }
+//     return res.send("登陆成功")
+// };    
+
+
+// const getOneUser = async (req, res) => {  
+//     var postData = {
+//         username: req.body.username,
+//         password: req.body.password
+//     };
+//     try {
+//         const oneUser = await User.findOne({"username": postData.username, "password":postData.password})
+//         console.log(postData.username)
+//         if (oneUser === null) {   // no author found in database
+//             res.status(404)
+//             return res.send("User not found").lean()
+//         }
+//         return res.send(oneAuthor)  // author was found
+//     } catch (err) {     // error occurred
+//         res.status(400)
+//         return res.send("Database query failed")
+//     }
+// };
+     
+
+
+
+const getOneCustomer = async (req, res) => {    
+    
+     const oneCustomer = await Customer.findOne({"email":req.body.email, "password":req.body.password})
+     console.log(Customer.findOne({"email":req.body.email,"password":req.body.password}))
+     if (oneCustomer === null) {   // no author found in database
+        res.status(404)
+        return res.send("Customer not found")
     }
-}
+    
+    return res.render('customer',{"thiscustomer": oneCustomer.toJSON()})
+};
+   
 
-// catch a POST request and we can add more customer in our database
-const addCustomer = async(req, res) => {
-    const customer = new Customer(req.body) // construct a new customer object from body of POST
+const addOneCustomer = async (req, res) => {
+     var postData = {
+         email: req.body.email,
+         password: req.body.password,
+         firstName: req.body.first_name,
+         lastName:req.body.last_name
+     };
+    const customer = new Customer(postData) // construct a new customer object from body of POST
     try {
         let result = await customer.save() // save new customer object to database
-        return res.send(result) // return saved object to sender
+        console.log(result)
+        return res.render('customer',{"thiscustomer": customer.toJSON()}) // return saved object to sender
+    
     } catch (err) { // error detected
         res.status(400)
         return res.send("Database insert failed")
     }
 }
+  
+//  userRouter.get('/userList', function (req, res) {
+//     var userList = User.find({}, function (err, data) {
+//         if (err) throw  err;
+//         res.send(data)
+//     });
+// });
 
-const findCart = async(req, res) => {
-    try {
-        const customer = await Customer.findOne({ "customerId": '1001' }).lean()
-        const cart = customer.cart // array
-        const cartFood = []
-        var total_price = 0
-        for (var i = 0; i < cart.length; i++) {
-            // console.log(cart[i].foodId)
-            var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-            oneFood["cartId"] = cart[i]._id
-                //console.log(oneFood["cartId"])
-            cartFood.push(oneFood)
-
-            total_price = total_price + Number(oneFood.price);
-        }
-        if (customer === null) {
-            res.status(404)
-            return res.send('Food not found')
-        }
-        res.render('shoppingCart', { "customer": customer, "cartFood": cartFood, "total_price": total_price })
-            // res.render('shoppingCart',{"cartFood": cartFood})
-    } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
-
-const removeOneFood = async(req, res) => {
-    try {
-
-        await Customer.updateOne({ "customerId": "1001" }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
-
-        const customer = await Customer.findOne({ "customerId": '1001' }).lean()
-        const cart = customer.cart // array
-        const cartFood = []
-        var total_price = 0
-        for (var i = 0; i < cart.length; i++) {
-            // console.log(cart[i].foodId)
-            var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-            oneFood["cartId"] = cart[i]._id
-            cartFood.push(oneFood)
-
-            total_price = total_price + Number(oneFood.price);
-        }
-        if (customer === null) {
-            res.status(404)
-            return res.send('Food not found')
-        }
-        res.render('shoppingCart', { "customer": customer, "cartFood": cartFood, "total_price": total_price })
-    } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
-
-// remember to export the functions
 module.exports = {
-    getAllCustomers,
-    addCustomer,
-    findCart,
-    removeOneFood
-}
+  getOneCustomer,addOneCustomer
+  }
