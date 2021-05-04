@@ -4,7 +4,7 @@
 
  const customerController = require('../controllers/customerController.js')
  /* /根路径 跳转至login.html */
- customerRouter.get('/', function(req, res, next) {
+ customerRouter.get('/login', function(req, res, next) {
    res.render('login')
     //res.sendfile('./views/login.html'); 
  });

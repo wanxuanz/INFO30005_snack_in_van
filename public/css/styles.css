@@ -175,9 +175,9 @@ form input[type$=submit] {  /* submit button - note use of attribute selector */
     text-decoration: none;
     display: inline-block;
     font-size: 25px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 2px
+    height:63px
+    
+
 }
 
 form span.bigScreen {   /* on small screens, hide some of the wording */
@@ -348,7 +348,7 @@ a#favourite:hover {
 }
 
 .button {
-    background-color:  #BF863F;
+    background-color:var(--color-brown); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -356,8 +356,6 @@ a#favourite:hover {
     text-decoration: none;
     display: inline-block;
     font-size: 25px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 2px
+    
     
 }
