@@ -17,7 +17,7 @@
                 ${{this.price}}
             </p>
             <p id = "shopping-cart-remove">
-                <form method="post" action="/customer/shopping-cart">
+                <form method="post" action="/customer/{{thiscustomer._id}}/shopping-cart">
                     <input type="hidden" name = "item_id" value="{{this.cartId}}">
                     <input type="submit" value="Remove"> 
                 </form> 

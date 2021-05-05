@@ -14,12 +14,14 @@ app.engine('hbs', exphbs({
     defaultLayout: 'main',
     extname: 'hbs'
 }))
+
 app.set('view engine', 'hbs')
 
 
 require('./models');
 
 // set up food routes
+const beforeFoodRouter = require('./routes/beforeFoodRouter')
 const foodRouter = require('./routes/foodRouter')
 const customerRouter = require('./routes/customerRouter')
 
@@ -28,14 +30,16 @@ const vanRouter = require('./routes/vanRouter')
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    // res.send('<h1>Snack in a Van</h1>')
+    console.log('connected')
     res.render('index');
 })
 
 // here goes the customer server
 app.use('/customer', customerRouter)
 
-app.use('/customer/menu', foodRouter)
+app.use('/customer/menu', beforeFoodRouter)
+
+//app.use('/customer/:_id/menu', foodRouter)
 
 // handler for orders in van requests
 app.use('/vender/vans', vanRouter)

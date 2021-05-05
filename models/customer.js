@@ -5,9 +5,10 @@ const cartSchema = new mongoose.Schema({
 })
 
 const customerSchema = new mongoose.Schema({
+    email: String,
+    password: String,
     firstName: String,
     lastName: String,
-    customerId: String,
     cart: [cartSchema]
 })
 

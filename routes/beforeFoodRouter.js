@@ -1,17 +1,18 @@
 const express = require('express')
 
 // add our router 
-const foodRouter = express.Router()
+const beforeFoodRouter = express.Router()
 
 // add the food controller
 const foodController = require('../controllers/foodController.js')
 
-foodRouter.get('/:_id/menu', foodController.getAllFoods)
+// handle the GET request to get all foods
+beforeFoodRouter.get('/', foodController.getAllFoodsBefore)
 
-foodRouter.get('/:_id/menu/:foodId', foodController.getOneFood)
+beforeFoodRouter.get('/:foodId', foodController.getOneFoodBefore)
 
 // handle the GET request to add one food
 //foodRouter.get('/:foodId/add', foodController.addFood)
 
 // export the router
-module.exports = foodRouter
+module.exports = beforeFoodRouter

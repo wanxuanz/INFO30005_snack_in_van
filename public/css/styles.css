@@ -87,6 +87,18 @@ hr {
     /* Modern Browsers */
 }
 
+.button {
+    background-color: var(--color-brown);
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+}
+
 
 /* the Browse Foods page showing all the foods */
 
