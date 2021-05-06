@@ -4,8 +4,9 @@
     <ul>
         <li>
             <p>Items</p>  
-            <p>Name</p>        
-            <p>Price/Unit</p>        
+            <p>Name</p>  
+            <p>Unit Price</p>      
+            <p>Action</p>        
         </li>
         {{#each cartFood}}
          <li>
@@ -16,12 +17,14 @@
             <p>
                 ${{this.price}}
             </p>
-            <p id = "shopping-cart-remove">
-                <form method="post" action="/customer/{{../thiscustomer._id}}/shopping-cart">
+            {{!-- <p id = "shopping-cart-remove"> --}}
+                {{!-- <div> --}}
+                <form method="post" action="/customer/{{../thiscustomer._id}}/shopping-cart" id="shopping-cart-form">
                     <input type="hidden" name = "item_id" value="{{this.cartId}}">
                     <input type="submit" value="Remove"> 
                 </form> 
-            </p>
+                {{!-- </div> --}}
+            {{!-- </p> --}}
         </li>
         {{/each}}
     </ul>
