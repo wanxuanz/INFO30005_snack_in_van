@@ -33,8 +33,10 @@ customerRouter.get('/:_id/shopping-cart', customerController.findCart)
 
 customerRouter.post('/:_id/shopping-cart', (req, res) => customerController.removeOneFood(req, res))
 
-// handle the GET request to go to the detail of a customer's orders
-customerRouter.get('/:_id/orders',customerController.getAllCustomerOrders)
+// handle the GET request to go to the detail of a customer's newOrders
+customerRouter.get('/:_id/newOrders', customerController.getAllCustomernewOrders)
+
+customerRouter.post('/:_id/newOrders', (req, res) => customerController.placeOrder(req, res))
 
 customerRouter.use('/', foodRouter)
 

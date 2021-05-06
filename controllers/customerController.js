@@ -1,35 +1,15 @@
 const mongoose = require("mongoose")
 const { db } = require("../models/food")
 const Food = require("../models/food")
-    // import customer model
+
+// import customer model
 const Customer = mongoose.model("Customer")
-
-// const getAllCustomers = async(req, res) => {
-//     try {
-//         const customers = await Customer.find({}, { firstName: true, customerId: true }).populate('cart.foodId', 'name')
-//         return res.send(customers)
-//     } catch (err) {
-//         res.status(400)
-//         return res.send("Database query failed")
-//     }
-// }
-
-// // catch a POST request and we can add more customer in our database
-// const addCustomer = async(req, res) => {
-//     const customer = new Customer(req.body) // construct a new customer object from body of POST
-//     try {
-//         let result = await customer.save() // save new customer object to database
-//         return res.send(result) // return saved object to sender
-//     } catch (err) { // error detected
-//         res.status(400)
-//         return res.send("Database insert failed")
-//     }
-// }
+const Order = mongoose.model("newOrders")
 
 const findCart = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
-        const cart = customer.cart // array
+        const cart = customer.cart
         const cartFood = []
         var total_price = 0
         for (var i = 0; i < cart.length; i++) {
@@ -114,15 +94,56 @@ const addOneCustomer = async(req, res) => {
     }
 }
 
-const getAllCustomerOrders = async (req, res) => {
+const getAllCustomernewOrders = async(req, res) => {
     try {
-        const orders = await Order.find({ "customerId": req.params.customerId}, {}).lean()
-        res.render('orderlist',{"orders": orders})
-      } catch (err) {
+        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+
+
+        const newOrders = await Order.find({ "customerId": req.params._id }, {}).lean()
+
+        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
+    } catch (err) {
         res.status(400)
         return res.send("Database query failed")
-      }
-  }
+    }
+}
+
+const placeOrder = async(req, res) => {
+    const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getHours() + ':' + today.getMinutes();
+
+    const cart = customer.cart
+    if (cart.length == 0) {
+        return res.render('shoppingCart', { "thiscustomer": customer })
+    }
+    var total_p = 0
+    for (var i = 0; i < cart.length; i++) {
+        var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
+        total_p = total_p + Number(oneFood.price);
+    }
+
+    var postData = {
+        vanId: '1001',
+        time: date,
+        customerId: String(customer._id),
+        items: customer.cart,
+        total: total_p,
+        status: "Outstanding"
+    };
+
+    var order = new Order(postData)
+    try {
+        await Customer.updateOne({ "_id": req.params._id }, { "cart": [] }).lean()
+        await order.save()
+        return res.render('orderSuccess.hbs', { "thiscustomer": customer })
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+
+
+}
 
 
 // remember to export the functions
@@ -131,5 +152,6 @@ module.exports = {
     removeOneFood,
     getOneCustomer,
     addOneCustomer,
-    getAllCustomerOrders
+    getAllCustomernewOrders,
+    placeOrder
 }

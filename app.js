@@ -41,7 +41,7 @@ app.use('/customer/menu', beforeFoodRouter)
 
 //app.use('/customer/:_id/menu', foodRouter)
 
-// handler for orders in van requests
+// handler for newOrders in van requests
 app.use('/vender/vans', vanRouter)
 
 //handler for GET home page

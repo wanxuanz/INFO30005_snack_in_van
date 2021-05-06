@@ -6,17 +6,17 @@ const orderRouter = express.Router()
 // add the order controller
 const orderController = require('../controllers/orderController.js')
 
-// handle the GET request to get all orders
-orderRouter.get('/:vanId/orders', (req,res) => orderController.getAllOrders(req,res))
+// handle the GET request to get all newOrders
+orderRouter.get('/:vanId/newOrders', (req, res) => orderController.getAllnewOrders(req, res))
 
 // handle the GET request to get outstanding order
-orderRouter.get('/:vanId/orders/outstanding', (req,res) => orderController.getOutstandingOrders(req,res))
+orderRouter.get('/:vanId/newOrders/outstanding', (req, res) => orderController.getOutstandingnewOrders(req, res))
 
 // handle the GET request to get one order
-orderRouter.get('/:vanId/orders/:orderId', (req,res) => orderController.getOneOrder(req,res))
+orderRouter.get('/:vanId/newOrders/:orderId', (req, res) => orderController.getOneOrder(req, res))
 
 // handle the get request to update order status as fulfilled
-orderRouter.get('/:vanId/orders/:orderId/update_status', (req,res) => orderController.updateOrderStatus(req,res))
+orderRouter.get('/:vanId/newOrders/:orderId/update_status', (req, res) => orderController.updatenewOrderstatus(req, res))
 
 // export the router
 module.exports = orderRouter

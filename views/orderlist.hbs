@@ -4,12 +4,12 @@
 
 
     <ul>
-        {{#each orders}}
+        {{#each newOrders}}
         <li>
             <table>
-                <tr><td>Order ID: </td><td>{{this.orderId}}</td></tr>
+                <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
                 <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
-                <tr><td>Order time: </td><td>{{this.vanId}}</td></tr>
+                <tr><td>Order time: </td><td>{{this.time}}</td></tr>
                 <tr><td>Status: </td><td>{{this.status}}</td></tr>
                 <tr><td>Items: </td><td><ul><li>{{this.items}}</li></ul></td></tr>
                 <tr><td>Price: $</td><td>{{this.total}}</td></tr>
@@ -17,5 +17,6 @@
 
             </table> 
         </li>
+        {{/each}}
     </ul>
 </section>

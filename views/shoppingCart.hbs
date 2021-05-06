@@ -26,7 +26,7 @@
         {{/each}}
     </ul>
     <p style="text-align: right;">Total price: ${{total_price}}</p>
-    <form ethod="post" action="/customer/shopping-cart/orders">
+    <form method="post" action="/customer/{{thiscustomer._id}}/newOrders">
         <input type="submit" value="Place Order">
     </form>
 
