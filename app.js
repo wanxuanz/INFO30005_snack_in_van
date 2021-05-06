@@ -31,7 +31,7 @@ const vanRouter = require('./routes/vanRouter')
 // handler for GET home page
 app.get('/', (req, res) => {
     console.log('connected')
-    res.render('index');
+    res.render('index', { layout: "beforeLogin.hbs" });
 })
 
 // here goes the customer server

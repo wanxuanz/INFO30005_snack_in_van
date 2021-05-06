@@ -19,9 +19,10 @@ const getAllFoodsBefore = async(req, res) => {
 
 const getAllFoods = async(req, res) => {
     try {
+        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const foods = await Food.find().lean()
             // return res.send(foods)
-        res.render('foodlist', { "foods": foods })
+        res.render('foodlist', { "foods": foods, "thiscustomer": customer })
     } catch (err) {
         res.status(400)
         return res.send("Database query failed")
@@ -47,12 +48,13 @@ const getOneFoodBefore = async(req, res) => {
 const getOneFood = async(req, res) => {
     try {
         // console.log(req.params.foodId)
+        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const oneFood = await Food.findOne({ "foodId": req.params.foodId }).lean()
         if (oneFood === null) { // no food found in database
             res.status(404)
             return res.send("Food not found.")
         }
-        res.render('showFood', { "thisfood": oneFood })
+        res.render('showFood', { "thisfood": oneFood, "thiscustomer": customer })
     } catch (err) { // error occurred
         res.status(400)
         return res.send("Database query failed")
@@ -62,8 +64,7 @@ const getOneFood = async(req, res) => {
 // add food to customer cart
 const addFood = async(req, res) => {
 
-    // assume the login customer with customerid 1001
-    let thisCustomer = await Customer.findOne({ customerId: '1001' })
+    const thisCustomer = await Customer.findOne({ "_id": req.params._id })
 
     let addFood = await Food.findOne({ foodId: req.params.foodId })
 
@@ -74,7 +75,7 @@ const addFood = async(req, res) => {
     await thisCustomer.save()
 
     // show the new customer record
-    result = await Customer.findOne({ customerId: '1001' }).populate('cart.foodId', 'name')
+    result = await Customer.findOne({ "_id": req.params._id }).populate('cart.foodId', 'name')
     res.send(result)
 }
 

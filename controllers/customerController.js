@@ -45,7 +45,7 @@ const findCart = async(req, res) => {
             res.status(404)
             return res.send('Food not found')
         }
-        res.render('shoppingCart', { "customer": customer, "cartFood": cartFood, "total_price": total_price })
+        res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
             // res.render('shoppingCart',{"cartFood": cartFood})
     } catch (err) {
         res.status(400)
@@ -76,7 +76,7 @@ const removeOneFood = async(req, res) => {
             res.status(404)
             return res.send('Food not found')
         }
-        res.render('shoppingCart', { "customer": customer, "cartFood": cartFood, "total_price": total_price })
+        res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
         res.status(400)
         return res.send("Database query failed")
@@ -89,7 +89,7 @@ const getOneCustomer = async(req, res) => {
         //console.log(Customer.findOne({ "email": req.body.email, "password": req.body.password }))
     if (oneCustomer === null) { // no author found in database
         res.status(404)
-        return res.send("Customer not found")
+        return res.render('loginNotSuccess', { layout: "beforeLogin" })
     }
 
     return res.render('customer', { "thiscustomer": oneCustomer.toJSON() })

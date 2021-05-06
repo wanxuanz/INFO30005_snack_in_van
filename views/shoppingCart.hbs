@@ -1,6 +1,6 @@
 <section id = "shopping-cart">
     <h1 style="text-align: left;">Shopping Cart</h1>
-    <h1 style="text-align: left;"> {{customer.firstName}}'s order:</h1>
+    <h1 style="text-align: left;"> {{thiscustomer.firstName}}'s order:</h1>
     <ul>
         <li>
             <p>Items</p>  
@@ -17,7 +17,7 @@
                 ${{this.price}}
             </p>
             <p id = "shopping-cart-remove">
-                <form method="post" action="/customer/{{thiscustomer._id}}/shopping-cart">
+                <form method="post" action="/customer/{{../thiscustomer._id}}/shopping-cart">
                     <input type="hidden" name = "item_id" value="{{this.cartId}}">
                     <input type="submit" value="Remove"> 
                 </form> 
