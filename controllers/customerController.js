@@ -114,10 +114,22 @@ const addOneCustomer = async(req, res) => {
     }
 }
 
+const getAllCustomerOrders = async (req, res) => {
+    try {
+        const orders = await Order.find({ "customerId": req.params.customerId}, {}).lean()
+        res.render('orderlist',{"orders": orders})
+      } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+      }
+  }
+
+
 // remember to export the functions
 module.exports = {
     findCart,
     removeOneFood,
     getOneCustomer,
-    addOneCustomer
+    addOneCustomer,
+    getAllCustomerOrders
 }

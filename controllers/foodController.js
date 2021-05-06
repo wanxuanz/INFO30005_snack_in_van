@@ -76,7 +76,7 @@ const addFood = async(req, res) => {
 
     // show the new customer record
     result = await Customer.findOne({ "_id": req.params._id }).populate('cart.foodId', 'name')
-    res.send(result)
+    res.render("addToCart", {"thisfood":addFood.toJSON(), "thiscustomer": thisCustomer.toJSON()})
 }
 
 

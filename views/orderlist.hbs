@@ -1,0 +1,21 @@
+<section id="orderList">
+
+    <h1>Order Lists</h1>
+
+
+    <ul>
+        {{#each orders}}
+        <li>
+            <table>
+                <tr><td>Order ID: </td><td>{{this.orderId}}</td></tr>
+                <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
+                <tr><td>Order time: </td><td>{{this.vanId}}</td></tr>
+                <tr><td>Status: </td><td>{{this.status}}</td></tr>
+                <tr><td>Items: </td><td><ul><li>{{this.items}}</li></ul></td></tr>
+                <tr><td>Price: $</td><td>{{this.total}}</td></tr>
+                <p></p>
+
+            </table> 
+        </li>
+    </ul>
+</section>

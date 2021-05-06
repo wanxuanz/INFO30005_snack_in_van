@@ -139,6 +139,27 @@ hr {
     color: var(--color-dark);
 }
 
+#orderList p {   /* the words at the top of the page */
+    text-align: center;
+    flex-basis: 60%;
+}
+
+#orderList ul {  /* the list of foods */
+    padding: 0;
+}
+
+#orderList li {  /* each individual food listing */
+    list-style-type: none;          /* switch off bullet-points */    
+    display: flex;
+    flex-direction: column;            /* image and text are side-by-side */
+    justify-content: flex-start;    /* text aligns left */
+    align-items: center;            /* and vertically aligns to center */
+}
+
+#orderList a {   /* the food names */
+    color: var(--color-dark);
+}
+
 #shopping-cart img {
     /* width:  200px;
     height: 100px;*/
@@ -214,6 +235,18 @@ form input[type$=submit] {
 form span.bigScreen {
     /* on small screens, hide some of the wording */
     display: none;
+}
+
+a#addToCart {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#addToCart:hover {
+    color: var(--color-dark);
 }
 
 
@@ -356,6 +389,11 @@ a#favourite:hover {
         /* flow food list into two columns */
         column-count: 2;
     }
+
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 2;
+    }
+
     [class='plus-minus-btn'] {
         font-size: var(--text-small);
     }
@@ -391,6 +429,9 @@ a#favourite:hover {
         /* flow food list into three columns */
         column-count: 3;
     }
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 2;
+    }
 }
 
 @media screen and (min-width: 1600px) {
@@ -398,5 +439,8 @@ a#favourite:hover {
     #foodList ul {
         /* flow food list into four columns */
         column-count: 4;
+    }
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 3;
     }
 }
