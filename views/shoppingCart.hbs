@@ -1,8 +1,12 @@
 <section id = "shopping-cart">
     <h1 style="text-align: left;">Shopping Cart</h1>
+<<<<<<< Updated upstream
     <h1 style="text-align: left;"> {{customer.firstName}}'s order:</h1>
     
     <script src="/abc.js"></script>
+=======
+    <h1 style="text-align: left;"> {{thiscustomer.firstName}}'s order:</h1>
+>>>>>>> Stashed changes
     <ul>
         <li>
             <p>Items</p>  
@@ -19,6 +23,7 @@
             <p>
                 ${{this.price}}
             </p>
+<<<<<<< Updated upstream
             {{#if this.quantity}}
             
             <p id = "shopping-cart-quantity">
@@ -28,6 +33,13 @@
                 </p1>
                 <button class="plus-minus-btn" onclick = "addition('{{this.cartId}}')"><i class="fas fa-plus"></i></button>
                 <button id="edit-btn">Edit</button>
+=======
+            <p id = "shopping-cart-remove">
+                <form method="post" action="/customer/{{../thiscustomer._id}}/shopping-cart">
+                    <input type="hidden" name = "item_id" value="{{this.cartId}}">
+                    <input type="submit" value="Remove"> 
+                </form> 
+>>>>>>> Stashed changes
             </p>
             {{/if}}
 
