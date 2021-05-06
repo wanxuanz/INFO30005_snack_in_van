@@ -9,13 +9,6 @@ const customerController = require('../controllers/customerController.js')
 // handle the GET request to go to the detail of a customer
 customerRouter.get('/', customerController.getAllCustomers)
 
-<<<<<<< Updated upstream
-// handle POST requests to add one customer into our database
-customerRouter.post('/',customerController.addCustomer)
-
-//handle the GET request to get the Shopping Cart
-customerRouter.get('/shopping-cart',customerController.findCart)
-=======
 // // handle POST requests to add one customer into our database
 // customerRouter.post('/', customerController.addCustomer)
 
@@ -37,7 +30,6 @@ customerRouter.post('/:_id/shopping-cart', (req, res) => customerController.remo
 
 // use the foodRouter to get all the foods or get one food detail
 customerRouter.use('/', foodRouter)
->>>>>>> Stashed changes
 
 // export the router
 module.exports = customerRouter

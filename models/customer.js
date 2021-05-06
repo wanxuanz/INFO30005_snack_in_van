@@ -2,13 +2,13 @@ const mongoose = require("mongoose")
 
 const cartSchema = new mongoose.Schema({
     foodId: {type: mongoose.Schema.Types.ObjectId, ref: 'Food'},
-    quantity: Number
 })
 
 const customerSchema = new mongoose.Schema({ 
 firstName: String,
 lastName: String,
-customerId: String,
+email: String,
+password: String,
 cart: [cartSchema]
 })
 
