@@ -142,7 +142,9 @@ assume the login customer is:<br />
 then the URL to access the menu of snacks will be: <br />
 https://snacks-in-a-van-webg100.herokuapp.com/customer/608014ef58b68869da398c48/menu<br />
 You may view the details of each food by clicking on the food name on the menu page <br />
-
+When you view the details of each food, you can add the current food to `shopping cart` by click `Add to Cart` button.
+eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/608014ef58b68869da398c48/menu/1001<br />
+this URL will access the detail fo `Cappuccino`
 
 * (3) **Order three different snacks**
 To be able to order foods, one must be logged in to do so. If one did not log in, when it tries to add something to the shopping cart or click “Cart” on the navbar, it will be directed to the login page. <br />
