@@ -97,22 +97,16 @@ const addOneCustomer = async(req, res) => {
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
-
+        //display the name of each order
         const newOrders = await Order.find({ "customerId": req.params._id }, {}).lean()
-        // console.log(newOrders.length)
         for(var i = 0; i < newOrders.length; i++){
-            // console.log(newOrders[i].items)
             var foodnames = []
             for(var j = 0; j < newOrders[i].items.length; j++){
                 var thisfood = await Food.findOne({"_id" : newOrders[i].items[j].foodId})
                 foodnames.push(thisfood.name)
-                // console.log(thisfood)
             }
-            // console.log(foodnames)
             newOrders[i]["foodnames"] = foodnames
-            // console.log(newOrders[i]["foodnames"])
         }
-
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
         res.status(400)
@@ -158,7 +152,7 @@ const placeOrder = async(req, res) => {
 }
 
 
-// remember to export the functions
+//export the functions
 module.exports = {
     findCart,
     removeOneFood,

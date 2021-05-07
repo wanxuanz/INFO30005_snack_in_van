@@ -33,6 +33,10 @@ app.get('/', (req, res) => {
     console.log('connected')
     res.render('index', { layout: "beforeLogin.hbs" });
 })
+/*customer home page*/
+app.get('/customer', (req, res) => {
+    res.render('index', { layout: "beforeLogin.hbs" });
+})
 
 // here goes the customer server
 app.use('/customer', customerRouter)

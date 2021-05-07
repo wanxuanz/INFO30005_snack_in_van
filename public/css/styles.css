@@ -37,11 +37,11 @@ footer {
     margin: 0;
 }
 
-header {
+/* header { */
     /* "sticky header" which stays at the top of the screen */
-    position: sticky;
-    top: 0;
-}
+    /* position: sticky;
+    top: 0; */
+/* } */
 
 h1 {
     text-align: center;
@@ -56,10 +56,12 @@ a {
 }
 
 nav {
+    background-color: var(--color-background);
     font-weight: bold;
     font-size: 24px;
+    position: sticky;
+	top: 0;
 }
-
 header h1 a {
     color: var(--color-dark);
 }
@@ -77,21 +79,53 @@ hr {
     background-color: #333;
     /* Modern Browsers */
 }
-
-.button {
-    background-color: var(--color-brown);
-    /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
+/* nav .menu-bar{
+    position: sticky;
+} */
+/**************************************************************************/
+/*login page*/
+.register-btn {
+    align-items: flex-start;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
+    cursor: default;
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: outset;
+    background-color: var(--color-brown);
+    color: black;
+    font-size: var(--text-medium);
     transition: background-color 0.3s;
 }
 
+.register-btn:hover{
+    background-color: #e7c52e;
+    transition: background-color 0.3s;
 
+}
+
+/* hyperlink is black */
+.a-register{
+    color:black;
+}
+#login-page input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+
+#login-page ul{
+    padding: 0;
+}
+#register-page input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+#register-page ul{
+    padding: 0;
+}
+
+/**************************************************************************/
 /* the Browse Foods page showing all the foods */
 
 #foodList p {
@@ -131,6 +165,8 @@ hr {
     color: var(--color-dark);
 }
 
+/**************************************************************************/
+/*orderlist*/
 #orderList p {   /* the words at the top of the page */
     text-align: center;
     flex-basis: 60%;
@@ -152,7 +188,7 @@ hr {
 #orderList table {
     margin-left: auto;
     margin-right: auto;
-    width: 500px;
+    width: 450px;
     background-color: var(--color-grey);
     border: solid grey 1px;
 }
@@ -161,6 +197,8 @@ hr {
     color: var(--color-dark);
 }
 
+/**************************************************************************/
+/*shopping cart*/
 #shopping-cart img {
     /* width:  200px;
     height: 100px;*/
@@ -263,6 +301,8 @@ form span.bigScreen {
     display: none;
 }
 
+/**************************************************************************/
+/*section for addToCart in each food*/
 a#addToCart {   /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
@@ -276,6 +316,7 @@ a#addToCart:hover {
 }
 
 
+/**************************************************************************/
 /* the page showing details about an individual food */
 
 #oneFood-details {
@@ -337,7 +378,7 @@ a#addToCart:hover {
     color: green;
 } */
 
-
+/**************************************************************************/
 /* Modal (background) */
 
 .modal-background {
@@ -374,9 +415,17 @@ a#addToCart:hover {
 }
 
 
+/**************************************************************************/
 /* Responsive Design */
 
 @media screen and (max-width: 620px) {
+    h1{
+        font-size: 28px;
+    }
+    nav{
+        background-color: var(--color-grey);
+        font-size: var(--text-medium);
+    }
     body {
         background-color: var(--color-grey);
         font-size: var(--text-small);
@@ -388,18 +437,36 @@ a#addToCart:hover {
     #orderList h1 {
         font-size: var(--text-medium);
     }
-    #menu-bar {
+    .menu-bar {
         font-size: var(--text-medium);
     }
+    
     #shopping-cart img {
         height: 50px;
-        padding: 10px 20px 10px 20px;
-        width: 21.8%;
-        object-fit: scale-down;
     }
     #oneFood h1{
         font-size: var(--text-medium);
     }
+    #shopping-cart input[type$=submit]{
+        font-size: var(--text-small);
+    }
+    #orderList table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        background-color: var(--color-grey);
+        border: solid grey 1px;
+    }
+    .register-btn {
+        font-size: var(--text-small);
+    }
+    input::placeholder{
+        font-size: var(--text-small);
+    }
+    /* form input{
+        size: 30px;
+        height: fit-content;
+    } */
         /* #shopping-cart button{
         font-size: var(--text-small);
 
@@ -411,6 +478,7 @@ a#addToCart:hover {
         display: none;
     } */
 }
+
 
 @media screen and (min-width: 621px) {
     /* for tablet-sized screens */
@@ -427,9 +495,7 @@ a#addToCart:hover {
         column-count: 1;
     }
 
-    [class='plus-minus-btn'] {
-        font-size: var(--text-small);
-    }
+
     #oneFood-details {
         flex-direction: row;
         /* now picture and text are side-by-side */
@@ -454,6 +520,9 @@ a#addToCart:hover {
         /* spell out abbreviated words in full */
         display: inline;
     }
+    /* [class='plus-minus-btn'] {
+        font-size: var(--text-small);
+    } */
 }
 
 @media screen and (min-width: 1200px) {

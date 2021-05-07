@@ -12,7 +12,6 @@ const foodRouter = require('./foodRouter.js');
 
 // // handle POST requests to add one customer into our database
 // customerRouter.post('/', customerController.addCustomer)
-
 /* /go to login.hbs */
 customerRouter.get('/login', function(req, res, next) {
     res.render('login', { layout: 'beforeLogin.hbs' })
