@@ -153,7 +153,7 @@ eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1001
 To be able to order foods, one must be logged in to do so. If one did not log in, when it tries to add something to the shopping cart, it will be directed to the login page. <br />
 If you already logged in, go to the menu page and click the food name you are interested in to go to the food detail page, and then you can click the  `add to cart` button to add the item to shopping cart. You can implement the above sentence several times to add other foods you want to cart. <br />
 After adding foods to your shopping cart, you can click the `Shopping cart` on the navbar. Then you can see the list of items, you may choose to remove some items from the shopping cart or check out, which is by clicking on the “place order” button. <br />
-Next, your new order will go to the database and you can find it in collection named **`neworders`**! <br />
+Next, your new order will go to the database and you can find it in collection named **`neworders`**! The reason why we didn't use the **`orders`** collection is that we change some features but as deliverable 2 need **`orders`**, we cannot change the orders collection, hence we create a collection called **`neworders`** in our database. <br />
 
 
 * (4) **`View order details`**<br />
