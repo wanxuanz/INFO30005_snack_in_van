@@ -116,7 +116,7 @@ eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/
 This will change the status from outstanding to fullfilled of order 10005 in vans 0001.
 
 ## Deliverable 3 (Front end and back end)
-* (1) **Customer Login**
+* (1) **Customer Login**<br />
 This is the main website of our customer app <br />
 https://snacks-in-a-van-webg100.herokuapp.com<br />
 (1a) **Register**: you can register by click the "Register" on navigation bar or just go to the below url to register<br />
@@ -129,7 +129,8 @@ Enter the sample username and password in LOGIN DETAIL: <br />
 **`PASSWORD=123`**<br />
 In addition, the user can log out at any time by click “Log Out” on navigation bar. <br />
 
-* (2) **View menu of snacks**
+* (2) **View menu of snacks**<br />
+After the customer login, the navigation bar will not displaying the `Login` or `Register` button anymore.<br />
 One can view the menu after login, but those who did not sign in can also view the menu <br />
 You can either click “Menu” on the navbar or go straight to the website. <br />
 The list of snacks is shown on the below website <br />
