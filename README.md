@@ -132,7 +132,7 @@ After the customer login, the navigation bar will not displaying the `Login` or 
 In addition, the user can log out at any time by click “Log Out” on navigation bar. <br />
 
 * (2) **`View menu of snacks`**<br />
-One can view the menu after login (in the navigation bar), but those who did not sign in can also view the menu. However, you cannot add the food you want to your `shopping cart` as the user hasn't login in.<br />
+One can view the menu after login (in the navigation bar), but those who did not sign in can also view the menu. However, they cannot add the food they want to their `shopping cart` as the user hasn't login in.<br />
 You can either click “Menu” on the navbar or go straight to the website. <br />
 The list of snacks is shown on the below website **`(not login)`**<br />
 https://snacks-in-a-van-webg100.herokuapp.com/customer/menu<br />
@@ -145,17 +145,16 @@ https://snacks-in-a-van-webg100.herokuapp.com/customer/608014ef58b68869da398c48/
 You may view the details of each food by clicking on the food name on the menu page <br />
 When you view the details of each food, you can add the current food to `shopping cart` by click `Add to Cart` button.
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/608014ef58b68869da398c48/menu/1001<br />
-this URL will access the detail of `Cappuccino`
-Or if the customer hasn't login, the link below can view the detail of `Cappuccino`<br />
+This URL will access the detail of `Cappuccino`
+If the customer hasn't login, the link below can view the detail of `Cappuccino`<br />
 eg:https://snacks-in-a-van-webg100.herokuapp.com/customer/menu/1001
 
 * (3) **`Order three different snacks`**<br />
-To be able to order foods, one must be logged in to do so. If one did not log in, when it tries to add something to the shopping cart or click `shopping cart` on the navbar, it will be directed to the login page. <br />
-If you already logged in, go to the menu page and click the food name you are interested in to go to the food detail page, and then you can click the “add to cart” button to add the item to shopping cart. You can implement the above sentence several times to add other foods you want to cart. <br />
-After adding foods to your shopping cart, you can click the “cart” on the navbar. Then you can see the list of items, you may choose to remove some items from the shopping cart or check out, which is by clicking on the “place order” button. <br />
-Next, your new order will go to the database and you can find it in your “Orders”! <br />
+To be able to order foods, one must be logged in to do so. If one did not log in, when it tries to add something to the shopping cart, it will be directed to the login page. <br />
+If you already logged in, go to the menu page and click the food name you are interested in to go to the food detail page, and then you can click the  `add to cart` button to add the item to shopping cart. You can implement the above sentence several times to add other foods you want to cart. <br />
+After adding foods to your shopping cart, you can click the `Shopping cart` on the navbar. Then you can see the list of items, you may choose to remove some items from the shopping cart or check out, which is by clicking on the “place order” button. <br />
+Next, your new order will go to the database and you can find it in collection named **`neworders`**! <br />
 
 
 * (4) **`View order details`**<br />
 After login, click on the “Orders” in the navbar to view all order details of this customer which includes order id, time, order status, items and total price. <br />
-(Same as the shopping cart, if the customer did not login, when one click on the “Orders” in the navbar, it will switch to the login page for the customer to login.) <br />
