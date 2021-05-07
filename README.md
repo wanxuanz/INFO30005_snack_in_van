@@ -15,7 +15,7 @@
 * [How to access our database](#how-to-access-our-database)
 * [Technologies](#technologies)
 * [App server mockup instruction](#app-server-mockup-instruction)
-* [Front end and back end (deliverable 3)](#Front-end-and-back-end-(deliverable-3))
+* [Front end and back end (deliverable 3)](#Front-end-and-back-end-deliverable-3)
 
 
 ## Team Members
