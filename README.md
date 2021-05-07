@@ -127,14 +127,20 @@ https://snacks-in-a-van-webg100.herokuapp.com/customer/login<br />
 Enter the sample username and password in LOGIN DETAIL: <br />
 **`EMAIL=123@123.com`**<br />
 **`PASSWORD=123`**<br />
+After the customer login, the navigation bar will not displaying the `Login` or `Register` button anymore.The navigation bar will then include `Shopping cart` and `Orders` button.<br /> 
 In addition, the user can log out at any time by click “Log Out” on navigation bar. <br />
 
 * (2) **View menu of snacks**<br />
-After the customer login, the navigation bar will not displaying the `Login` or `Register` button anymore.<br />
-One can view the menu after login, but those who did not sign in can also view the menu <br />
+One can view the menu after login (in the navigation bar), but those who did not sign in can also view the menu. However, you cannot add the food you want to your `shopping cart` as the user hasn't login in.<br />
 You can either click “Menu” on the navbar or go straight to the website. <br />
-The list of snacks is shown on the below website <br />
-https://snacks-in-a-van-webg100.herokuapp.com/customer/menu 
+The list of snacks is shown on the below website **`(not login)`**<br />
+https://snacks-in-a-van-webg100.herokuapp.com/customer/menu<br />
+If the customer login in already, they need to click the `Menu` on the navigation bar and the URL will change accordingly<br />
+assume the login customer is:<br />
+**`EMAIL=123@123.com`**<br />
+**`PASSWORD=123`**<br />
+then the URL to access the menu of snacks will be: <br />
+https://snacks-in-a-van-webg100.herokuapp.com/customer/608014ef58b68869da398c48/menu<br />
 You may view the details of each food by clicking on the food name on the menu page <br />
 
 
