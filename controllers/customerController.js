@@ -13,12 +13,9 @@ const findCart = async(req, res) => {
         const cartFood = []
         var total_price = 0
         for (var i = 0; i < cart.length; i++) {
-            // console.log(cart[i].foodId)
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
-                //console.log(oneFood["cartId"])
             cartFood.push(oneFood)
-
             total_price = total_price + Number(oneFood.price);
         }
         if (customer === null) {
@@ -26,7 +23,6 @@ const findCart = async(req, res) => {
             return res.send('Food not found')
         }
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
-            // res.render('shoppingCart',{"cartFood": cartFood})
     } catch (err) {
         res.status(400)
         return res.send("Database query failed")
@@ -35,9 +31,6 @@ const findCart = async(req, res) => {
 
 const removeOneFood = async(req, res) => {
     try {
-        //var oneFood = await Customer.findOne({ "customerId": '1001' }, { cart: { $elemMatch: { "_id": req.body.item_id } } }).lean()
-        console.log(req.body.item_id)
-
         await Customer.updateOne({ "_id": req.params._id }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
 
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
@@ -69,20 +62,18 @@ const getOneCustomer = async(req, res) => {
         return res.render('loginNotSuccess', { layout: "beforeLogin" })
     }
     const oneCustomer = await Customer.findOne({ "email": req.body.email, "password": req.body.password })
-        //console.log(Customer.findOne({ "email": req.body.email, "password": req.body.password }))
     if (oneCustomer === null) { // no author found in database
         res.status(404)
         return res.render('loginNotSuccess', { layout: "beforeLogin" })
     }
-
     return res.render('customer', { "thiscustomer": oneCustomer.toJSON() })
 };
 
 
 const addOneCustomer = async(req, res) => {
-    if (req.body.email===""){
+    if (req.body.email==="" || req.body.password==="" || req.body.first_name==="" || req.body.last_name===""){
         res.status(404)
-        return res.render('registerfall', { layout: "beforeLogin" })
+        return res.render('registerfail', { layout: "beforeLogin" })
     }
     var postData = {
         email: req.body.email,

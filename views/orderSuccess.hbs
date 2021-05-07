@@ -1,4 +1,10 @@
-<section>
+<section id="order-success">
     <h1>{{thiscustomer.firstName}}'s order has been Placed!</h1>
-    <a href="/customer/{{thiscustomer._id}}/newOrders" class="register-btn">Check Your Order</a>
+    <li>
+        <button class="register-btn">
+        <a href="/customer/{{thiscustomer._id}}/newOrders" class="a-register">Check Your Order</a>
+        </button>
+    </li>
+
+    {{!-- <a href="/customer/{{thiscustomer._id}}/newOrders" class="register-btn">Check Your Order</a> --}}
 </section>

@@ -124,7 +124,32 @@ hr {
 #register-page ul{
     padding: 0;
 }
-
+#register-fail input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+#register-fail ul{
+    padding: 0;
+}
+#order-success li {
+    /* each individual food listing */
+    list-style-type: none;
+    /* switch off bullet-points */
+    display: flex;
+    flex-direction: row;
+    /* image and text are side-by-side */
+    justify-content: center;
+    /* text aligns left */
+    align-items: center;
+    /* and vertically aligns to center */
+}
+#login-page p{
+    text-align: center;
+}
+#login-register-btn {
+    align-items:center
+}
 /**************************************************************************/
 /* the Browse Foods page showing all the foods */
 

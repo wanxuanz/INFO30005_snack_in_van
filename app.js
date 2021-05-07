@@ -17,12 +17,10 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs')
 
-
 require('./models');
 
 // set up food routes
 const beforeFoodRouter = require('./routes/beforeFoodRouter')
-const foodRouter = require('./routes/foodRouter')
 const customerRouter = require('./routes/customerRouter')
 
 // set up van routes
@@ -30,7 +28,6 @@ const vanRouter = require('./routes/vanRouter')
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    console.log('connected')
     res.render('index', { layout: "beforeLogin.hbs" });
 })
 /*customer home page*/
@@ -43,7 +40,6 @@ app.use('/customer', customerRouter)
 
 app.use('/customer/menu', beforeFoodRouter)
 
-//app.use('/customer/:_id/menu', foodRouter)
 
 // handler for newOrders in van requests
 app.use('/vender/vans', vanRouter)
