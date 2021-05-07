@@ -1,17 +1,18 @@
 const mongoose = require("mongoose")
-const { db } = require("../models/food")
 const Food = require("../models/food")
 
 // import customer model
 const Customer = mongoose.model("Customer")
 const Order = mongoose.model("newOrders")
 
+// this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const cart = customer.cart
         const cartFood = []
         var total_price = 0
+        // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
@@ -25,10 +26,11 @@ const findCart = async(req, res) => {
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
         res.status(400)
-        return res.send("Database query failed")
+        return res.send("Cannot find the shopping cart")
     }
 }
 
+// this function is used to remove one food from shopping cart
 const removeOneFood = async(req, res) => {
     try {
         await Customer.updateOne({ "_id": req.params._id }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
@@ -37,8 +39,8 @@ const removeOneFood = async(req, res) => {
         const cart = customer.cart // array
         const cartFood = []
         var total_price = 0
+        // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
-            // console.log(cart[i].foodId)
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
             cartFood.push(oneFood)
@@ -52,10 +54,11 @@ const removeOneFood = async(req, res) => {
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
         res.status(400)
-        return res.send("Database query failed")
+        return res.send("Cannot remove this food")
     }
 }
 
+//find the login customer
 const getOneCustomer = async(req, res) => {
     if (req.body.email===""){
         res.status(404)
@@ -69,8 +72,9 @@ const getOneCustomer = async(req, res) => {
     return res.render('customer', { "thiscustomer": oneCustomer.toJSON() })
 };
 
-
+// add one customer in the register
 const addOneCustomer = async(req, res) => {
+    // handle invalid input
     if (req.body.email==="" || req.body.password==="" || req.body.first_name==="" || req.body.last_name===""){
         res.status(404)
         return res.render('registerfail', { layout: "beforeLogin" })
@@ -92,6 +96,7 @@ const addOneCustomer = async(req, res) => {
     }
 }
 
+// find all the order the current customer has ordered
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
@@ -112,21 +117,22 @@ const getAllCustomernewOrders = async(req, res) => {
     }
 }
 
+// place the shopping cart item into orders
 const placeOrder = async(req, res) => {
     const customer = await Customer.findOne({ "_id": req.params._id }).lean()
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getHours() + ':' + today.getMinutes();
-
+    // shopping cart of current customer
     const cart = customer.cart
     if (cart.length == 0) {
         return res.render('shoppingCart', { "thiscustomer": customer })
     }
+    //calculate the total price of this order
     var total_p = 0
     for (var i = 0; i < cart.length; i++) {
         var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
         total_p = total_p + Number(oneFood.price);
     }
-
     var postData = {
         vanId: '1001',
         time: date,
@@ -137,16 +143,15 @@ const placeOrder = async(req, res) => {
     };
 
     var order = new Order(postData)
+    // handle when nothing is in the shopping cart
     try {
         await Customer.updateOne({ "_id": req.params._id }, { "cart": [] }).lean()
         await order.save()
         return res.render('orderSuccess.hbs', { "thiscustomer": customer })
     } catch (err) {
         res.status(400)
-        return res.send("Database query failed")
+        return res.send("placing order fails")
     }
-
-
 }
 
 

@@ -37,11 +37,6 @@ footer {
     margin: 0;
 }
 
-/* header { */
-    /* "sticky header" which stays at the top of the screen */
-    /* position: sticky;
-    top: 0; */
-/* } */
 
 h1 {
     text-align: center;
@@ -79,9 +74,7 @@ hr {
     background-color: #333;
     /* Modern Browsers */
 }
-/* nav .menu-bar{
-    position: sticky;
-} */
+
 /**************************************************************************/
 /*login page*/
 .register-btn {
@@ -265,38 +258,12 @@ hr {
     background-color: #e7c52e;
     transition: background-color 0.3s;
 }
-/* #shopping-cart form input[type$=submit]{
-    display: inline-block;
-    text-align: left; 
-} */
-/* #shopping-cart form{
-    display: inline-block;
-} */
+
 #shopping-cart-form{
     display:flex;
     flex-basis: 25%;
 }
-/* .plus-minus-btn {
-    width: fit-content; */
-    /* margin: auto;  not include */
-    /* display: flex;  not include*/
-    /* border-style: solid;
-    text-align: center;
-    font-size: var(--text-medium);
-    padding: 0px 10px;
-    transition: background-color 0.3s;
-} */
 
-/* #edit-btn {
-    width: fit-content; */
-    /* margin: auto;  not include */
-    /* display: flex;  not include*/
-    /* border-style: solid;
-    text-align: center;
-    font-size: var(--text-medium);
-    padding: 0px 10px;
-    transition: background-color 0.3s; */
-/* } */
 
 
 
@@ -384,25 +351,6 @@ a#addToCart:hover {
     border: solid grey 1px;
 }
 
-/* #oneFood td:first-child { */
-    /* the first td in each row of the table */
-    /* text-decoration: underline; */
-    /* text-align: right; */
-/* } */
-
-/* a#favourite { */
-    /* the heart-shaped 'favourite' button */
-    /* font-size: 100px;
-    color: lightgrey;
-    display: block;
-    text-align: center;
-    margin: 0;
-} */
-
-/* a#favourite:hover {
-    color: green;
-} */
-
 /**************************************************************************/
 /* Modal (background) */
 
@@ -444,6 +392,7 @@ a#addToCart:hover {
 /* Responsive Design */
 
 @media screen and (max-width: 620px) {
+    /* for phone size */
     h1{
         font-size: 28px;
     }
@@ -488,29 +437,12 @@ a#addToCart:hover {
     input::placeholder{
         font-size: var(--text-small);
     }
-    /* form input{
-        size: 30px;
-        height: fit-content;
-    } */
-        /* #shopping-cart button{
-        font-size: var(--text-small);
-
-    } */
-        /* #edit-btn {
-        font-size: var(--text-small);
-    }
-    [class='plus-minus-btn'] {
-        display: none;
-    } */
 }
 
 
 @media screen and (min-width: 621px) {
     /* for tablet-sized screens */
-    /* body{
-        background-color: var(--color-grey); 
-        /*subtle background colour on big screens*\/
-    } */
+
     #foodList ul {
         /* flow food list into two columns */
         column-count: 2;
@@ -545,9 +477,6 @@ a#addToCart:hover {
         /* spell out abbreviated words in full */
         display: inline;
     }
-    /* [class='plus-minus-btn'] {
-        font-size: var(--text-small);
-    } */
 }
 
 @media screen and (min-width: 1200px) {

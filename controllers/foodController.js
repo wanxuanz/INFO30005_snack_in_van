@@ -1,11 +1,9 @@
 const mongoose = require("mongoose")
-
-// import food model
 const Food = mongoose.model("Food")
 const Customer = mongoose.model("Customer")
 const Cart = mongoose.model("Cart")
 
-// get all foods
+// get all foods before the customer login in 
 const getAllFoodsBefore = async(req, res) => {
     try {
         const foods = await Food.find().lean()
@@ -16,7 +14,7 @@ const getAllFoodsBefore = async(req, res) => {
         return res.send("Database query failed")
     }
 }
-
+// get all foods after the customer has logined in 
 const getAllFoods = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
@@ -29,7 +27,7 @@ const getAllFoods = async(req, res) => {
     }
 }
 
-// find one food by their id
+// find one food by their id which is before login
 const getOneFoodBefore = async(req, res) => {
     try {
         // console.log(req.params.foodId)
@@ -44,10 +42,9 @@ const getOneFoodBefore = async(req, res) => {
         return res.send("Database query failed")
     }
 }
-
+//find one food by their id after the customer login
 const getOneFood = async(req, res) => {
     try {
-        // console.log(req.params.foodId)
         const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const oneFood = await Food.findOne({ "foodId": req.params.foodId }).lean()
         if (oneFood === null) { // no food found in database

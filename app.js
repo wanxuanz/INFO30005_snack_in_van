@@ -35,19 +35,19 @@ app.get('/customer', (req, res) => {
     res.render('index', { layout: "beforeLogin.hbs" });
 })
 
-// here goes the customer server
+// here goes the customer server after the customer has login
 app.use('/customer', customerRouter)
 
+// here goes the customer server before the customer has login
 app.use('/customer/menu', beforeFoodRouter)
-
-
-// handler for newOrders in van requests
-app.use('/vender/vans', vanRouter)
 
 //handler for GET home page
 app.get('/vender', (req, res) => {
     res.send('<h1>Vender App</h1>')
 })
+
+// handler for newOrders in van requests
+app.use('/vender/vans', vanRouter)
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('The snack app is running')
