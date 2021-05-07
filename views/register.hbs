@@ -1,0 +1,38 @@
+<section id = "register-page">
+    <h1>Register</h1>
+            <form action="register" method="post">
+                <ul style="list-style-type:none">
+                    <li>
+                        <label for="first_name">First Name</label>
+                        </br>
+                        <input type="text" id="first_name" name="first_name" placeholder="first name">
+                    </li>
+                    
+                    <li>
+                        <label for="last_name">Last Name</label>
+                        </br>
+                        <input type="text" id="last_name" name="last_name" placeholder="last name">
+                    </li>
+                    <li>
+                        <label for="email">Email</label>
+                        </br>
+                        <input type="text" id="email" name="email" placeholder="email">
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        </br>
+                        <input type="text" id="password" name="password" placeholder="password">
+                    </li>
+                    </br>
+                    
+                    <li>
+                        {{!-- <a href="/customer/login" class="register-btn"> login </a> --}}
+                        <button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
+                        &nbsp;&nbsp;
+                        <button type="submit" class="register-btn"> Confirm</button>
+                        {{!-- <input type="submit" value="confirm"> --}}
+                    </li>
+                </ul>
+            </form>
+
+</section>

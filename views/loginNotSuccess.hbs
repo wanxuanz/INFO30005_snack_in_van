@@ -1,0 +1,38 @@
+
+<section id = "login-page">
+   <div>
+        <h1>Wrong account or password, please try again.</h1> 
+        <form action="login" method="post" >
+            <ul style="list-style-type:none">
+                <li>
+                    Alternatively, you can register from here <i class="fas fa-level-down-alt"></i>
+                </li>
+                <li>
+                    <button class="register-btn"><a href="/customer/register" class="a-register">Register now</a></button>
+                </li>
+                </br>
+                <li>
+                    <label for="email"> Email</label>
+                    </br>
+                    <input type="text" id="email" name="email" placeholder="Email">
+                </li>
+                </br>
+                <li>
+                    <label for="password">Password</label>
+                    </br>
+                    <input type="text" id="password" name="password" placeholder="Password">
+                </li>
+                </br>
+                <li>
+                    {{!-- <input type="submit" value="confirm">  --}}
+                    {{!-- <button onclick="document.location='/customer/register'" class="register-btn">register</button> --}}
+                    {{!-- <a href="/customer/register" class="register-btn"> register </a> --}}
+                     <button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
+                     &nbsp;&nbsp;
+                    {{!-- <input type="submit" value="confirm">  --}}
+                    <button type="submit" class="register-btn"> Confirm</button>
+                    {{!-- <button type="submit" class="register-btn"> <a class="a-register">Confirm</a></button> --}}
+                </li>
+        </form>
+    </div>
+</section>

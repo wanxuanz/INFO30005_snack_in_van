@@ -37,11 +37,6 @@ footer {
     margin: 0;
 }
 
-header {
-    /* "sticky header" which stays at the top of the screen */
-    position: sticky;
-    top: 0;
-}
 
 h1 {
     text-align: center;
@@ -55,20 +50,13 @@ a {
     /* switch off underlining of anchors */
 }
 
-
-/* a:hover {                   /* instead, get anchors to expand when hovered over */
-
-
-/* font-size: larger; */
-
-
-/* } */
-
 nav {
+    background-color: var(--color-background);
     font-weight: bold;
     font-size: 24px;
+    position: sticky;
+	top: 0;
 }
-
 header h1 a {
     color: var(--color-dark);
 }
@@ -87,7 +75,75 @@ hr {
     /* Modern Browsers */
 }
 
+/**************************************************************************/
+/*login page*/
+.register-btn {
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: outset;
+    background-color: var(--color-brown);
+    color: black;
+    font-size: var(--text-medium);
+    transition: background-color 0.3s;
+}
 
+.register-btn:hover{
+    background-color: #e7c52e;
+    transition: background-color 0.3s;
+
+}
+
+/* hyperlink is black */
+.a-register{
+    color:black;
+}
+#login-page input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+
+#login-page ul{
+    padding: 0;
+}
+#register-page input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+#register-page ul{
+    padding: 0;
+}
+#register-fail input[type$=submit]{
+    display: inline-block;
+    text-align: center; 
+    font-size: var(--text-medium);
+}
+#register-fail ul{
+    padding: 0;
+}
+#order-success li {
+    /* each individual food listing */
+    list-style-type: none;
+    /* switch off bullet-points */
+    display: flex;
+    flex-direction: row;
+    /* image and text are side-by-side */
+    justify-content: center;
+    /* text aligns left */
+    align-items: center;
+    /* and vertically aligns to center */
+}
+#login-page p{
+    text-align: center;
+}
+#login-register-btn {
+    align-items:center
+}
+/**************************************************************************/
 /* the Browse Foods page showing all the foods */
 
 #foodList p {
@@ -127,35 +183,49 @@ hr {
     color: var(--color-dark);
 }
 
+/**************************************************************************/
+/*orderlist*/
+#orderList p {   /* the words at the top of the page */
+    text-align: center;
+    flex-basis: 60%;
+}
+
+#orderList ul {  /* the list of foods */
+    padding: 0;
+}
+
+#orderList li {  /* each individual food listing */
+    list-style-type: none;
+    /* switch off bullet-points */
+    display: flex;
+    flex-direction: row;
+    /* justify-content:space-evenly;   */
+    align-items: center;
+}
+
+#orderList table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    background-color: var(--color-grey);
+    border: solid grey 1px;
+}
+
+#orderList a {   /* the food names */
+    color: var(--color-dark);
+}
+
+/**************************************************************************/
+/*shopping cart*/
 #shopping-cart img {
     /* width:  200px;
     height: 100px;*/
     height: 100px;
-    padding: 10px 20px 10px 20px;
-    width: 21.8%;
+    /* padding: 10px 20px 10px 20px; */
+    padding-top: 1%;
+    /* width: 21.8%; */
+    width: 25%;
     object-fit: scale-down;
-}
-
-.plus-minus-btn {
-    width: fit-content;
-    /* margin: auto;  not include */
-    /* display: flex;  not include*/
-    border-style: solid;
-    text-align: center;
-    font-size: var(--text-medium);
-    padding: 0px 10px;
-    transition: background-color 0.3s;
-}
-
-#edit-btn {
-    width: fit-content;
-    /* margin: auto;  not include */
-    /* display: flex;  not include*/
-    border-style: solid;
-    text-align: center;
-    font-size: var(--text-medium);
-    padding: 0px 10px;
-    transition: background-color 0.3s;
 }
 
 #shopping-cart button:hover {
@@ -171,6 +241,7 @@ hr {
 #shopping-cart ul {
     /* the list of foods */
     padding: 0;
+    margin-block-end:0;
 }
 
 #shopping-cart li {
@@ -183,6 +254,19 @@ hr {
     align-items: center;
     /* and vertically aligns to center */
 }
+#shopping-cart form input[type$=submit]:hover {
+    background-color: #e7c52e;
+    transition: background-color 0.3s;
+}
+
+#shopping-cart-form{
+    display:flex;
+    flex-basis: 25%;
+}
+
+
+
+
 
 form {
     /* centre the form */
@@ -196,15 +280,35 @@ form input {
 
 form input[type$=submit] {
     /* submit button - note use of attribute selector */
-    background-color: var(--color-medium);
+    background-color: var(--color-brown);
 }
+/* input[type=submit]:hover {
+    background-color: #45a049;
+  } */
 
+
+  
 form span.bigScreen {
     /* on small screens, hide some of the wording */
     display: none;
 }
 
+/**************************************************************************/
+/*section for addToCart in each food*/
+a#addToCart {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
 
+a#addToCart:hover {
+    color: var(--color-dark);
+}
+
+
+/**************************************************************************/
 /* the page showing details about an individual food */
 
 #oneFood-details {
@@ -247,26 +351,7 @@ form span.bigScreen {
     border: solid grey 1px;
 }
 
-#oneFood td:first-child {
-    /* the first td in each row of the table */
-    text-decoration: underline;
-    text-align: right;
-}
-
-a#favourite {
-    /* the heart-shaped 'favourite' button */
-    font-size: 100px;
-    color: lightgrey;
-    display: block;
-    text-align: center;
-    margin: 0;
-}
-
-a#favourite:hover {
-    color: green;
-}
-
-
+/**************************************************************************/
 /* Modal (background) */
 
 .modal-background {
@@ -303,9 +388,18 @@ a#favourite:hover {
 }
 
 
+/**************************************************************************/
 /* Responsive Design */
 
 @media screen and (max-width: 620px) {
+    /* for phone size */
+    h1{
+        font-size: 28px;
+    }
+    nav{
+        background-color: var(--color-grey);
+        font-size: var(--text-medium);
+    }
     body {
         background-color: var(--color-grey);
         font-size: var(--text-small);
@@ -313,40 +407,52 @@ a#favourite:hover {
     #shopping-cart h1 {
         font-size: var(--text-medium);
     }
-    /* #shopping-cart button{
-        font-size: var(--text-small);
-
-    } */
-    #edit-btn {
-        font-size: var(--text-small);
-    }
-    [class='plus-minus-btn'] {
-        display: none;
-    }
-    #menu-bar {
+    
+    #orderList h1 {
         font-size: var(--text-medium);
     }
+    .menu-bar {
+        font-size: var(--text-medium);
+    }
+    
     #shopping-cart img {
         height: 50px;
-        padding: 10px 20px 10px 20px;
-        width: 21.8%;
-        object-fit: scale-down;
+    }
+    #oneFood h1{
+        font-size: var(--text-medium);
+    }
+    #shopping-cart input[type$=submit]{
+        font-size: var(--text-small);
+    }
+    #orderList table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        background-color: var(--color-grey);
+        border: solid grey 1px;
+    }
+    .register-btn {
+        font-size: var(--text-small);
+    }
+    input::placeholder{
+        font-size: var(--text-small);
     }
 }
 
+
 @media screen and (min-width: 621px) {
     /* for tablet-sized screens */
-    /* body{
-        background-color: var(--color-grey); 
-        /*subtle background colour on big screens*\/
-    } */
+
     #foodList ul {
         /* flow food list into two columns */
         column-count: 2;
     }
-    [class='plus-minus-btn'] {
-        font-size: var(--text-small);
+
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 1;
     }
+
+
     #oneFood-details {
         flex-direction: row;
         /* now picture and text are side-by-side */
@@ -379,6 +485,9 @@ a#favourite:hover {
         /* flow food list into three columns */
         column-count: 3;
     }
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 1;
+    }
 }
 
 @media screen and (min-width: 1600px) {
@@ -386,5 +495,8 @@ a#favourite:hover {
     #foodList ul {
         /* flow food list into four columns */
         column-count: 4;
+    }
+    #orderList ul {      /* flow food list into two columns */
+        column-count: 1;
     }
 }
