@@ -64,7 +64,10 @@ const removeOneFood = async(req, res) => {
 }
 
 const getOneCustomer = async(req, res) => {
-
+    if (req.body.email===""){
+        res.status(404)
+        return res.render('loginNotSuccess', { layout: "beforeLogin" })
+    }
     const oneCustomer = await Customer.findOne({ "email": req.body.email, "password": req.body.password })
         //console.log(Customer.findOne({ "email": req.body.email, "password": req.body.password }))
     if (oneCustomer === null) { // no author found in database
@@ -77,6 +80,10 @@ const getOneCustomer = async(req, res) => {
 
 
 const addOneCustomer = async(req, res) => {
+    if (req.body.email===""){
+        res.status(404)
+        return res.render('registerfall', { layout: "beforeLogin" })
+    }
     var postData = {
         email: req.body.email,
         password: req.body.password,
@@ -90,7 +97,7 @@ const addOneCustomer = async(req, res) => {
 
     } catch (err) { // error detected
         res.status(400)
-        return res.send("Database insert failed")
+        return res.render("Database query failed")
     }
 }
 

@@ -5,7 +5,10 @@ const cartSchema = new mongoose.Schema({
 })
 
 const customerSchema = new mongoose.Schema({
-    email: String,
+    email: {
+        type: String,
+      },
+    
     password: String,
     firstName: String,
     lastName: String,
