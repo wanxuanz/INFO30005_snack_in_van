@@ -118,14 +118,16 @@ This will change the status from outstanding to fullfilled of order 10005 in van
 ## Deliverable 3 (Front end and back end)
 * (1) **Customer Login**
 This is the main website of our customer app <br />
-https://snacks-in-a-van-webg100.herokuapp.com 
+https://snacks-in-a-van-webg100.herokuapp.com
+you can register by click the "Register" on navigation bar or just go to the below url to register<br />
+https://snacks-in-a-van-webg100.herokuapp.com/customer/register
+Once register is successful, the useer is automatically login. If the customer do not enter all the mandatory detail in the register page, they won't register successfully.<br />
 click the “Login” on navbar or just go to the below url to login<br />
 https://snacks-in-a-van-webg100.herokuapp.com/customer/login 
 Enter the sample username and password in LOGIN DETAIL: <br />
 **`EMAIL=123@123.com`**<br />
 **`PASSWORD=123`**
-Otherwise, one can also choose to register a new account and log in.
-In addition, the user can log out at any time by click “Log Out” on nav bar. <br />
+In addition, the user can log out at any time by click “Log Out” on navigation bar. <br />
 
 * (2) **View menu of snacks**
 One can view the menu after login, but those who did not sign in can also view the menu <br />
