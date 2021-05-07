@@ -15,6 +15,7 @@
 * [How to access our database](#how-to-access-our-database)
 * [Technologies](#technologies)
 * [App server mockup instruction](#app-server-mockup-instruction)
+* [Front end and back end](#Front-end-and-back-end)
 
 
 ## Team Members
@@ -115,7 +116,7 @@ type orderid which is shown at previous feature(Show list of all outstanding ord
 eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status <br />
 This will change the status from outstanding to fullfilled of order 10005 in vans 0001.
 
-## Deliverable 3 (Front end and back end)
+## Front end and back end
 * (1) **Customer Login**<br />
 This is the main website of our customer app <br />
 https://snacks-in-a-van-webg100.herokuapp.com<br />
