@@ -114,3 +114,36 @@ eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/outsta
 type orderid which is shown at previous feature(Show list of all outstanding orders) behind orders, after that type **update_status**, the status of this order would change to fullfilled.<br />
 eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status <br />
 This will change the status from outstanding to fullfilled of order 10005 in vans 0001.
+
+## Deliverable 3 (Front end and back end)
+* (1) **Customer Login**
+This is the main website of our customer app <br />
+https://snacks-in-a-van-webg100.herokuapp.com 
+click the “Login” on navbar or just go to the below url to login<br />
+https://snacks-in-a-van-webg100.herokuapp.com/customer/login 
+Enter the sample username and password in LOGIN DETAIL: <br />
+**`EMAIL=123@123.com`**<br />
+**`PASSWORD=123`**
+Otherwise, one can also choose to register a new account and log in.
+In addition, the user can log out at any time by click “Log Out” on nav bar. <br />
+
+* (2) **View menu of snacks**
+One can view the menu after login, but those who did not sign in can also view the menu <br />
+You can either click “Menu” on the navbar or go straight to the website. <br />
+The list of snacks is shown on the below website <br />
+https://snacks-in-a-van-webg100.herokuapp.com/customer/menu 
+You may view the details of each food by clicking on the food name on the menu page <br />
+
+
+* (3) **Order three different snacks**
+To be able to order foods, one must be logged in to do so. If one did not log in, when it tries to add something to the shopping cart or click “Cart” on the navbar, it will be directed to the login page. <br />
+If you already logged in, go to the menu page and click the food name you are interested in to go to the food detail page, and then you can click the “add to cart” button to add the item to shopping cart. You can implement the above sentence several times to add other foods you want to cart. <br />
+After adding foods to your shopping cart, you can click the “cart” on the navbar. Then you can see the list of items, you may choose to remove some items from the shopping cart or check out, which is by clicking on the “place order” button. <br />
+Next, your new order will go to the database and you can find it in your “Orders”! <br />
+
+
+* (4) **View order details**
+After login, click on the “Orders” in the navbar to view all order details of this customer which includes order id, time, order status, items and total price. <br />
+(Same as the shopping cart, if the customer did not login, when one click on the “Orders” in the navbar, it will switch to the login page for the customer to login.) <br />
+![image](https://user-images.githubusercontent.com/69298763/117413367-3b7e1180-af59-11eb-8c0f-f6263f1d4411.png)
+
