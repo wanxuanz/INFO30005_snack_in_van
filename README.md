@@ -145,5 +145,3 @@ Next, your new order will go to the database and you can find it in your “Orde
 * (4) **View order details**
 After login, click on the “Orders” in the navbar to view all order details of this customer which includes order id, time, order status, items and total price. <br />
 (Same as the shopping cart, if the customer did not login, when one click on the “Orders” in the navbar, it will switch to the login page for the customer to login.) <br />
-![image](https://user-images.githubusercontent.com/69298763/117413367-3b7e1180-af59-11eb-8c0f-f6263f1d4411.png)
-
