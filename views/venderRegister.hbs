@@ -1,0 +1,26 @@
+<section >
+    <h1>Register Form</h1>
+    <form method="post" action="/vender/vans/register">
+        <table style="margin: auto; border-spacing: 10px">
+          <tr>
+            <td>Van name:</td>
+            {{!-- <td> <input placeholder="Van ID" name='email' id='van_' value=""/></td> --}}
+            <td>
+                <input style="height:26px;font-size:14pt;"type="text" id="van_name" name="van_name" placeholder="Van ID">
+            </td>
+            
+          </tr>
+          <tr>
+              <td>New Password:</td>
+              <td>
+                  <input style="height:26px;font-size:14pt;"type="password" id="van_password" name="van_password" placeholder="Password" >
+              </td>
+          </tr>
+          <tr>
+          <td colspan="2"><center><button type="submit" class="register-btn"> Register</button></center></td>
+          </tr>
+        </table>
+
+    </form>
+
+</section>
