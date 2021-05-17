@@ -1,5 +1,5 @@
 const express = require('express')
-
+const utilities = require("./utility");
 // add our router 
 const foodRouter = express.Router()
 
@@ -7,13 +7,13 @@ const foodRouter = express.Router()
 const foodController = require('../controllers/foodController.js')
 
 // handle the GET request to get all foods
-foodRouter.get('/:_id/menu', foodController.getAllFoods)
+foodRouter.get('/menu', foodController.getAllFoods)
 
 // handle the GET request to find one food
-foodRouter.get('/:_id/menu/:foodId', foodController.getOneFood)
+foodRouter.get('/menu/:foodId', foodController.getOneFood)
 
 // handle the GET request to add one food
-foodRouter.get('/:_id/menu/:foodId/add', foodController.addFood)
+foodRouter.get('/menu/:foodId/add', utilities.isLoggedIn,foodController.addFood)
 
 // export the router
 module.exports = foodRouter

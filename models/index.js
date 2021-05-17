@@ -9,7 +9,7 @@ mongoose.connect(MONGO_URL || "mongodb://localhost", {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    dbName: "INFO30005" })
+    dbName: "INFO30005_project" })
 
 const db = mongoose.connection
 db.on("error", err => { console.error(err); process.exit(1)

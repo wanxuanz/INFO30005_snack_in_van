@@ -8,7 +8,7 @@ const Order = mongoose.model("newOrders")
 // this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
     try {
-        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
         const cart = customer.cart
         const cartFood = []
         var total_price = 0
@@ -33,9 +33,9 @@ const findCart = async(req, res) => {
 // this function is used to remove one food from shopping cart
 const removeOneFood = async(req, res) => {
     try {
-        await Customer.updateOne({ "_id": req.params._id }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
+        await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
 
-        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+        const customer = await Customer.findOne({ "email": req.session.email}).lean()
         const cart = customer.cart // array
         const cartFood = []
         var total_price = 0
@@ -99,9 +99,9 @@ const addOneCustomer = async(req, res) => {
 // find all the order the current customer has ordered
 const getAllCustomernewOrders = async(req, res) => {
     try {
-        const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
         //display the name of each order
-        const newOrders = await Order.find({ "customerId": req.params._id }, {}).lean()
+        const newOrders = await Order.find({ "customerId": customer._id }, {}).lean()
         for(var i = 0; i < newOrders.length; i++){
             var foodnames = []
             for(var j = 0; j < newOrders[i].items.length; j++){
@@ -119,7 +119,7 @@ const getAllCustomernewOrders = async(req, res) => {
 
 // place the shopping cart item into orders
 const placeOrder = async(req, res) => {
-    const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+    const customer = await Customer.findOne({ "email": req.session.email }).lean()
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getHours() + ':' + today.getMinutes();
     // shopping cart of current customer
@@ -145,7 +145,7 @@ const placeOrder = async(req, res) => {
     var order = new Order(postData)
     // handle when nothing is in the shopping cart
     try {
-        await Customer.updateOne({ "_id": req.params._id }, { "cart": [] }).lean()
+        await Customer.updateOne({ "email": req.session.email }, { "cart": [] }).lean()
         await order.save()
         return res.render('orderSuccess.hbs', { "thiscustomer": customer })
     } catch (err) {
