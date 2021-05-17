@@ -17,7 +17,7 @@
             <p>
                 ${{this.price}}
             </p>
-                <form method="post" action="/customer/{{../thiscustomer._id}}/shopping-cart" id="shopping-cart-form">
+                <form method="post" action="/customer/shopping-cart" id="shopping-cart-form">
                     <input type="hidden" name = "item_id" value="{{this.cartId}}">
                     <input type="submit" value="Remove"> 
                 </form> 
@@ -25,7 +25,7 @@
         {{/each}}
     </ul>
     <p style="text-align: right;">Total price: ${{total_price}}</p>
-    <form method="post" action="/customer/{{thiscustomer._id}}/newOrders">
+    <form method="post" action="/customer//newOrders">
         <input type="submit" value="Place Order">
     </form>
 
