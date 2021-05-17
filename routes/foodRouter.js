@@ -13,7 +13,7 @@ foodRouter.get('/menu', foodController.getAllFoods)
 foodRouter.get('/menu/:foodId', foodController.getOneFood)
 
 // handle the GET request to add one food
-foodRouter.get('/menu/:foodId/add', utilities.isLoggedIn,foodController.addFood)
+foodRouter.get('/menu/:foodId/add', utilities.isLoggedInCustomer, foodController.addFood)
 
 // export the router
 module.exports = foodRouter

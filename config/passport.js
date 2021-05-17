@@ -215,6 +215,7 @@ module.exports = function(passport) {
                         newCustomer.firstName = req.body.first_name;
                         newCustomer.cart = [];
 
+                        req.session.email = email;
                         // and save the user
                         newCustomer.save(function(err) {
                             if (err)
@@ -222,11 +223,6 @@ module.exports = function(passport) {
 
                             return done(null, newCustomer);
                         });
-
-                        // put the user's email in the session so that it can now be used for all
-                        // communications between the client (browser) and the FoodBuddy app
-                        req.session.email = email;
-
                     }
                 });
             });

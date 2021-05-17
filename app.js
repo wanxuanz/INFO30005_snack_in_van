@@ -9,7 +9,7 @@ const session = require('express-session');
 
 // we can pass messages between app and callbacks
 // we will not use it for this app
-const flash  = require('connect-flash-plus');
+const flash = require('connect-flash-plus');
 
 // for using JSON Web Tokens (JWT)
 const jwt = require('jsonwebtoken');
@@ -21,46 +21,10 @@ const dotenv = require('dotenv').config()
 require('./config/passport')(passport);
 
 // setup a session store signing the contents using the secret key
-app.use(session({ secret: process.env.PASSPORT_KEY,
+app.use(session({
+    secret: process.env.PASSPORT_KEY,
     resave: true,
     saveUninitialized: true
-   }));
-
-   //middleware that's required for passport to operate
-app.use(passport.initialize());
-
-// middleware to store user object
-app.use(passport.session());
-
-// use flash to store messages
-app.use(flash());
-
-// we need to add the following line so that we can access the 
-// body of a POST request as  using JSON like syntax
-app.use(express.urlencoded({ extended: true })) 
-
-
-
-// const express = require('express');
-// const app = express();
-var bodyParser = require('body-parser')
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-const cors = require('cors');
-app.use(express.json())
-const passport = require('passport');
-const session      = require('express-session');
-const flash    = require('connect-flash-plus');
-const dotenv = require('dotenv').config()
-
-app.use(cors({
-    credentials: true, // add Access-Control-Allow-Credentials to header
-    origin: "http://localhost:3000" 
-  }));
-
-app.use(session({ secret: process.env.PASSPORT_KEY,
-resave: true,
-saveUninitialized: true
 }));
 
 //middleware that's required for passport to operate
@@ -74,7 +38,35 @@ app.use(flash());
 
 // we need to add the following line so that we can access the 
 // body of a POST request as  using JSON like syntax
-app.use(express.urlencoded({ extended: true })) 
+app.use(express.urlencoded({ extended: true }))
+
+
+
+// const express = require('express');
+// const app = express();
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json())
+
+app.use(session({
+    secret: process.env.PASSPORT_KEY,
+    resave: true,
+    saveUninitialized: true
+}));
+
+//middleware that's required for passport to operate
+app.use(passport.initialize());
+
+// middleware to store user object
+app.use(passport.session());
+
+// use flash to store messages
+app.use(flash());
+
+// we need to add the following line so that we can access the 
+// body of a POST request as  using JSON like syntax
+app.use(express.urlencoded({ extended: true }))
 
 // handle bar
 app.use(express.static('public')) // define where static assets live
@@ -101,18 +93,16 @@ const vanRouter = require('./routes/vanRouter')
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    if (req.session.email==null){
-        thelayout='beforeLogin.hbs' 
-    }
-    else{thelayout='main.hbs'}
-    res.render('index', { layout: thelayout });
-})
-/*customer home page*/
+        if (req.session.email == null) {
+            thelayout = 'beforeLogin.hbs'
+        } else { thelayout = 'main.hbs' }
+        res.render('index', { layout: thelayout });
+    })
+    /*customer home page*/
 app.get('/customer', (req, res) => {
-    if (req.session.email==null){
-        thelayout='beforeLogin.hbs' 
-    }
-    else{thelayout='main.hbs'}
+    if (req.session.email == null) {
+        thelayout = 'beforeLogin.hbs'
+    } else { thelayout = 'main.hbs' }
     res.render('index', { layout: thelayout });
 })
 
@@ -125,7 +115,7 @@ app.use('/customer', customerRouter)
 //handler for GET home page
 app.get('/vender', (req, res) => {
     // res.send('<h1>Vender App</h1>')
-    res.render('venderHomepage',{layout: "vender_main.hbs"});
+    res.render('venderHomepage', { layout: "vender_main.hbs" });
 })
 
 // handler for newOrders in van requests

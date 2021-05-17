@@ -23,9 +23,9 @@ customerRouter.get("/login", (req, res) => {
 // });
 //handle the POST request for login
 customerRouter.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/customer', // redirect to the homepage
-    failureRedirect : '/customer/login', // redirect back to the login page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect: '/customer', // redirect to the homepage
+    failureRedirect: '/customer/login', // redirect back to the login page if there is an error
+    failureFlash: true // allow flash messages
 }));
 
 //handle the GET request to register
@@ -35,9 +35,9 @@ customerRouter.get('/register', function(req, res) {
 
 //handle the POST request to register
 customerRouter.post('/register', passport.authenticate('local-signup', {
-    successRedirect : '/customer', // redirect to the homepage
-    failureRedirect : '/customer/register/', // redirect to signup page
-    failureFlash : true // allow flash messages
+    successRedirect: '/customer', // redirect to the homepage
+    failureRedirect: '/customer/register/', // redirect to signup page
+    failureFlash: true // allow flash messages
 }));
 
 // LOGOUT
@@ -51,23 +51,23 @@ customerRouter.post('/logout', function(req, res) {
 
 
 //handle the GET request to get the Shopping Cart by the customer id
-customerRouter.get('/shopping-cart', utilities.isLoggedIn, customerController.findCart)
+customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, customerController.findCart)
 
 //handle the POST request to remove one food from Shopping Cart by the customer id
-customerRouter.post('/shopping-cart', utilities.isLoggedIn,(req, res) => customerController.removeOneFood(req, res))
+customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.removeOneFood(req, res))
 
 // handle the GET request to go to the detail of a customer's newOrders
-customerRouter.get('/newOrders', utilities.isLoggedIn,customerController.getAllCustomernewOrders)
+customerRouter.get('/newOrders', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
 
 // handle the POST request to add the neworder to orders
-customerRouter.post('/newOrders', utilities.isLoggedIn,(req, res) => customerController.placeOrder(req, res))
+customerRouter.post('/newOrders', utilities.isLoggedInCustomer, (req, res) => customerController.placeOrder(req, res))
 
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 
 //logout
 customerRouter.get('/logout', function(req, res) {
-    
+
     req.logout();
     req.flash('');
     req.session.destroy();

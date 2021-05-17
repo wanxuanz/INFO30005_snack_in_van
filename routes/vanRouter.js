@@ -44,36 +44,9 @@ vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
 });
 vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanController.updateLocation(req, res))
 
+// vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
 
-
-
-// vanRouter.post('/register', (req, res) => vanController.createOneVanLogin(req, res))
-
-
-
-
-
-//get one van
-vanRouter.get('/:vanId', (req, res) => vanController.getOneVan(req, res))
-
-//use the order router
 vanRouter.use('/', orderRouter)
-
-// handle the GET request to get all newOrders
-vanRouter.get('/:vanId/update_status', (req, res) => vanController.updateVanStatus(req, res))
-
-// //handle send locations
-// vanRouter.get('/:vanId/send_location', (req, res) => vanController.sendLocation(req, res))
-
-//handle change and send locations
-vanRouter.post('/:vanId/send_location', (req, res) => vanController.changeAndSendLocation(req, res))
-
-// vanRouter.post('/login', (req, res) => vanController.getOneVanLogin(req, res))
-// vanRouter.get('/register', (req, res) => {
-//     // res.send('<h1>Vender App</h1>')
-//     res.render('venderHomepage',{layout: "vender_main.hbs"});
-// })
-
 
 // export the router
 module.exports = vanRouter

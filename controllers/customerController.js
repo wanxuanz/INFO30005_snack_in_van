@@ -12,7 +12,7 @@ const findCart = async(req, res) => {
         const cart = customer.cart
         const cartFood = []
         var total_price = 0
-        // find the detail of foods
+            // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
@@ -35,11 +35,11 @@ const removeOneFood = async(req, res) => {
     try {
         await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
 
-        const customer = await Customer.findOne({ "email": req.session.email}).lean()
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
         const cart = customer.cart // array
         const cartFood = []
         var total_price = 0
-        // find the detail of foods
+            // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
@@ -60,7 +60,7 @@ const removeOneFood = async(req, res) => {
 
 //find the login customer
 const getOneCustomer = async(req, res) => {
-    if (req.body.email===""){
+    if (req.body.email === "") {
         res.status(404)
         return res.render('loginNotSuccess', { layout: "beforeLogin" })
     }
@@ -75,7 +75,7 @@ const getOneCustomer = async(req, res) => {
 // add one customer in the register
 const addOneCustomer = async(req, res) => {
     // handle invalid input
-    if (req.body.email==="" || req.body.password==="" || req.body.first_name==="" || req.body.last_name===""){
+    if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
         res.status(404)
         return res.render('registerfail', { layout: "beforeLogin" })
     }
@@ -100,12 +100,12 @@ const addOneCustomer = async(req, res) => {
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        //display the name of each order
+            //display the name of each order
         const newOrders = await Order.find({ "customerId": customer._id }, {}).lean()
-        for(var i = 0; i < newOrders.length; i++){
+        for (var i = 0; i < newOrders.length; i++) {
             var foodnames = []
-            for(var j = 0; j < newOrders[i].items.length; j++){
-                var thisfood = await Food.findOne({"_id" : newOrders[i].items[j].foodId})
+            for (var j = 0; j < newOrders[i].items.length; j++) {
+                var thisfood = await Food.findOne({ "_id": newOrders[i].items[j].foodId })
                 foodnames.push(thisfood.name)
             }
             newOrders[i]["foodnames"] = foodnames
@@ -134,8 +134,9 @@ const placeOrder = async(req, res) => {
         total_p = total_p + Number(oneFood.price);
     }
     var postData = {
-        vanId: '1001',
+        vanId: '1',
         time: date,
+        dateCompare: today,
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
@@ -143,7 +144,7 @@ const placeOrder = async(req, res) => {
     };
 
     var order = new Order(postData)
-    // handle when nothing is in the shopping cart
+        // handle when nothing is in the shopping cart
     try {
         await Customer.updateOne({ "email": req.session.email }, { "cart": [] }).lean()
         await order.save()
