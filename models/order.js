@@ -9,6 +9,7 @@ const itemSchema = new mongoose.Schema({
 const newOrderschema = new mongoose.Schema({
     vanId: { type: String, require: true },
     time: { type: String, required: true },
+    dateCompare: {type: Date, default: Date.now},
     customerId: { type: String, required: true },
     items: [itemSchema],
     total: { type: String, required: true },

@@ -44,8 +44,28 @@ vanRouter.get("/send_location",utilities.isLoggedIn, (req, res) => {
 });
 vanRouter.post('/send_location', utilities.isLoggedIn,(req, res) => vanController.updateLocation(req, res))
 
+// vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
+
+vanRouter.use('/', orderRouter)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************************************************/
 
 // vanRouter.post('/register', (req, res) => vanController.createOneVanLogin(req, res))
 
@@ -57,7 +77,7 @@ vanRouter.post('/send_location', utilities.isLoggedIn,(req, res) => vanControlle
 vanRouter.get('/:vanId', (req, res) => vanController.getOneVan(req, res))
 
 //use the order router
-vanRouter.use('/', orderRouter)
+// vanRouter.use('/', orderRouter)
 
 // handle the GET request to get all newOrders
 vanRouter.get('/:vanId/update_status', (req, res) => vanController.updateVanStatus(req, res))

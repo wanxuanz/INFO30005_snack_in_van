@@ -3,6 +3,29 @@ const mongoose = require("mongoose")
 // import order model
 const Order = mongoose.model("newOrders")
 
+
+
+
+//view all orders
+//  In time order. with the older, more urgent orders at the top asc or desc
+const viewAllOrders = async(req, res) => {
+    try {
+        let oneVanOrder = await Order.find({ vanId: req.session.van_name }).sort({dateCompare: 'asc'})
+        return res.send(oneVanOrder)
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+
+
+
+
+/**********************************************************************************************************/
+
+
+
 // get all newOrders
 const getAllnewOrders = async(req, res) => {
     try {
@@ -53,5 +76,8 @@ module.exports = {
     getAllnewOrders,
     getOutstandingnewOrders,
     updatenewOrderstatus,
-    getOneOrder
+    getOneOrder,
+
+
+    viewAllOrders
 }

@@ -134,8 +134,9 @@ const placeOrder = async(req, res) => {
         total_p = total_p + Number(oneFood.price);
     }
     var postData = {
-        vanId: '1001',
+        vanId: '1',
         time: date,
+        dateCompare: today,
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
