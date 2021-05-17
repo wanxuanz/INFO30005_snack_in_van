@@ -19,30 +19,30 @@ vanRouter.get('/', (req, res) => vanController.getAllVans(req, res))
 // POST login form -- authenticate user
 // http:localhost:5000/user/login
 vanRouter.post('/login', passport.authenticate('local-van-login', {
-    successRedirect : '/vender/vans/send_location', // redirect to the homepage
-    failureRedirect : '/vender', // redirect back to the login page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect: '/vender/vans/send_location', // redirect to the homepage
+    failureRedirect: '/vender', // redirect back to the login page if there is an error
+    failureFlash: true // allow flash messages
 }));
 
 
 vanRouter.get("/register", (req, res) => {
-    res.render('venderRegister',{layout: "vender_main.hbs"});
+    res.render('venderRegister', { layout: "vender_main.hbs" });
 });
 
 // POST - user submits the signup form -- signup a new user
 // http:localhost:5000/user/signup
 vanRouter.post('/register', passport.authenticate('local-van-register', {
-    successRedirect : '/vender/vans/send_location', // redirect to the homepage
-    failureRedirect : '/vender', // redirect to signup page
-    failureFlash : true // allow flash messages
+    successRedirect: '/vender/vans/send_location', // redirect to the homepage
+    failureRedirect: '/vender', // redirect to signup page
+    failureFlash: true // allow flash messages
 }));
 //handle send locations
 // vanRouter.get('/send_location', (req, res) => vanController.sendLocation(req, res))
 
-vanRouter.get("/send_location",utilities.isLoggedIn, (req, res) => {
-    res.render('setLocation',{layout: "vender_main.hbs"});
+vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
+    res.render('setLocation', { layout: "vender_main.hbs" });
 });
-vanRouter.post('/send_location', utilities.isLoggedIn,(req, res) => vanController.updateLocation(req, res))
+vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanController.updateLocation(req, res))
 
 
 

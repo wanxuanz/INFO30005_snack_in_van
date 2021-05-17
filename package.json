@@ -1,38 +1,38 @@
 {
-  "name": "customer-menu",
-  "version": "1.0.0",
-  "description": "**The University of Melbourne** # INFO30005 – Web Information Technologies",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.19.0",
-    "connect-flash-plus": "^0.2.1",
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^8.6.0",
-    "express": "^4.17.1",
-    "express-handlebars": "^5.3.1",
-    "express-session": "^1.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.7",
-    "nodemon": "^2.0.7",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/INFO30005-2021-SM1/project-t03-webg100.git"
-  },
-  "bugs": {
-    "url": "https://github.com/INFO30005-2021-SM1/project-t03-webg100/issues"
-  },
-  "homepage": "https://github.com/INFO30005-2021-SM1/project-t03-webg100#readme"
+    "name": "customer-menu",
+    "version": "1.0.0",
+    "description": "**The University of Melbourne** # INFO30005 – Web Information Technologies",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.19.0",
+        "connect-flash-plus": "^0.2.1",
+        "cookie-parser": "^1.4.5",
+        "dotenv": "^8.6.0",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.1",
+        "express-session": "^1.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.12.7",
+        "nodemon": "^2.0.7",
+        "passport": "^0.4.1",
+        "passport-jwt": "^4.0.0",
+        "passport-local": "^1.0.0"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/INFO30005-2021-SM1/project-t03-webg100.git"
+    },
+    "bugs": {
+        "url": "https://github.com/INFO30005-2021-SM1/project-t03-webg100/issues"
+    },
+    "homepage": "https://github.com/INFO30005-2021-SM1/project-t03-webg100#readme"
 }
