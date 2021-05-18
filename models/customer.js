@@ -3,6 +3,7 @@ const bcrypt   = require('bcrypt-nodejs')
 
 const cartSchema = new mongoose.Schema({
     foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
+    quantity: Number
 })
 
 const customerSchema = new mongoose.Schema({

@@ -2,20 +2,23 @@
     <h1 style="text-align: left; ">Shopping Cart</h1>
     <h1 style="text-align: left;"> {{thiscustomer.firstName}}'s order summary:</h1>
     <ul>
-        <li>
-            <p>Items</p>  
-            <p>Name</p>  
-            <p>Unit Price</p>      
+        <li>  
+            <p>Name</p>
+            <p>Unit Price</p>   
+            <p>quantity</p>   
             <p>Action</p>        
         </li>
         {{#each cartFood}}
          <li>
-            <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
+            {{!-- <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}"> --}}
             <p>
                 {{this.name}}
             </p>
             <p>
                 ${{this.price}}
+            </p>
+            <p>
+                {{this.quantity}}
             </p>
                 <form method="post" action="/customer/shopping-cart" id="shopping-cart-form">
                     <input type="hidden" name = "item_id" value="{{this.cartId}}">

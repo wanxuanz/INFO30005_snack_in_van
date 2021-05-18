@@ -16,8 +16,9 @@ const findCart = async(req, res) => {
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
+            oneFood["quantity"] = cart[i].quantity
             cartFood.push(oneFood)
-            total_price = total_price + Number(oneFood.price);
+            total_price = total_price + Number(oneFood.price) * cart[i].quantity;
         }
         if (customer === null) {
             res.status(404)
@@ -43,9 +44,9 @@ const removeOneFood = async(req, res) => {
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
+            oneFood["quantity"] = cart[i].quantity
             cartFood.push(oneFood)
-
-            total_price = total_price + Number(oneFood.price);
+            total_price = total_price + Number(oneFood.price) * cart[i].quantity;
         }
         if (customer === null) {
             res.status(404)

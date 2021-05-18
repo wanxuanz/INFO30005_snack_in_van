@@ -1,0 +1,18 @@
+<section >
+    <h1>{{thisfood.name}}'s Quantity Select</h1>
+    <form method="post" action="/customer/menu/{{thisfood.foodId}}/add_quantity">
+        <table style="margin: auto; border-spacing: 10px">
+          <tr>
+            <td>Quantity:</td>
+            <td>
+              <input style="height:26px;font-size:14pt;" type="number" name="quantity" placeholder="quantity" min="0" oninput="validity.valid||(value='');">
+            </td>            
+          </tr>
+          <tr>
+          <td colspan="2"><center><button type="submit" class="register-btn"> Confirm</button></center></td>
+          </tr>
+        </table>
+
+    </form>
+
+</section>

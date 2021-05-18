@@ -5,12 +5,17 @@ const Order = mongoose.model("newOrders")
 
 
 
-
 //view all orders
 //  In time order. with the older, more urgent orders at the top asc or desc
 const viewAllOrders = async(req, res) => {
     try {
         let oneVanOrder = await Order.find({ vanId: req.session.van_name }).sort({ dateCompare: 'asc' })
+        // console.log(oneVanOrder)
+        var item = [];
+        for (var i = 0; i < oneVanOrder.length; i++) {
+            item.push(oneVanOrder[i].items)
+        }
+        // console.log(item)
         return res.send(oneVanOrder)
     } catch (err) {
         res.status(400)
