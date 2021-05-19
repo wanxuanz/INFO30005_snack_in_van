@@ -21,5 +21,6 @@ const newOrderschema = new mongoose.Schema({
 const Order = mongoose.model("newOrders", newOrderschema)
 const Item = mongoose.model("Item", itemSchema)
 
-module.exports = Order
-module.exports = Item
+module.exports = { Order, Item }
+// module.exports = Order
+// module.exports = Item

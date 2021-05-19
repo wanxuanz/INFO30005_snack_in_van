@@ -1,9 +1,13 @@
-const mongoose = require("mongoose")
-const Food = require("../models/food")
 
+const Food = require("../models/food")
+const customer = require("../models/customer")
+const Customer = customer.Customer
+const order = require("../models/order")
+const Order = order.Order
 // import customer model
-const Customer = mongoose.model("Customer")
-const Order = mongoose.model("newOrders")
+// const mongoose = require("mongoose")
+// const Customer = mongoose.model("Customer")
+// const Order = mongoose.model("newOrders")
 
 // this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
@@ -27,6 +31,7 @@ const findCart = async(req, res) => {
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
         res.status(400)
+        console.log(err)
         return res.send("Cannot find the shopping cart")
     }
 }
@@ -101,8 +106,12 @@ const addOneCustomer = async(req, res) => {
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
+        console.log(customer._id)
             //display the name of each order
-        const newOrders = await Order.find({ "customerId": customer._id }, {}).lean()
+        const newOrders = await Order.find({ "customerId": customer._id }).lean()
+        // if(!newOrders){
+        //     return res.render('orderlist')
+        // }
         for (var i = 0; i < newOrders.length; i++) {
             var foodnames = []
             for (var j = 0; j < newOrders[i].items.length; j++) {
@@ -120,6 +129,7 @@ const getAllCustomernewOrders = async(req, res) => {
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
         res.status(400)
+        console.log(err)
         return res.send("Database query failed")
     }
 }
