@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 // define item schema
 const itemSchema = new mongoose.Schema({
     foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
+    quantity: Number
 })
 
 // define order schema

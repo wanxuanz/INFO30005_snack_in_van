@@ -107,7 +107,13 @@ const getAllCustomernewOrders = async(req, res) => {
             var foodnames = []
             for (var j = 0; j < newOrders[i].items.length; j++) {
                 var thisfood = await Food.findOne({ "_id": newOrders[i].items[j].foodId })
-                foodnames.push(thisfood.name)
+                var foodname_quantity = {
+                    foodname: thisfood.name,
+                    quantity: newOrders[i].items[j].quantity
+                }
+                console.log(newOrders[i].items[j])
+                // foodnames.push(thisfood.name)
+                foodnames.push(foodname_quantity)
             }
             newOrders[i]["foodnames"] = foodnames
         }
@@ -132,7 +138,8 @@ const placeOrder = async(req, res) => {
     var total_p = 0
     for (var i = 0; i < cart.length; i++) {
         var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-        total_p = total_p + Number(oneFood.price);
+        oneFood["quantity"] = cart[i].quantity
+        total_p = total_p + Number(oneFood.price) * cart[i].quantity;
     }
     var postData = {
         vanId: '1',

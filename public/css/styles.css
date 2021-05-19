@@ -210,7 +210,9 @@ hr {
     background-color: var(--color-grey);
     border: solid grey 1px;
 }
-
+/* #orderListItemTable {
+    style="border: 5px solid #BF863F; "
+} */
 #orderList a {   /* the food names */
     color: var(--color-dark);
 }
