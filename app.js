@@ -20,6 +20,8 @@ const dotenv = require('dotenv').config()
 // configure passport authenticator
 require('./config/passport')(passport);
 
+const validator = require("email-validator");
+
 // setup a session store signing the contents using the secret key
 app.use(session({
     secret: process.env.PASSPORT_KEY,
@@ -102,8 +104,9 @@ app.get('/', (req, res) => {
 app.get('/customer', (req, res) => {
     if (req.session.email == null) {
         thelayout = 'beforeLogin.hbs'
-    } else { thelayout = 'main.hbs' }
-    res.render('index', { layout: thelayout });
+    }
+     else { thelayout = 'main.hbs' }
+    res.render('index', { layout: thelayout })
 })
 
 // here goes the customer server after the customer has login

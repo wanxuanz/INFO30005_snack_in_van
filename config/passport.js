@@ -1,5 +1,5 @@
 require('dotenv').config() // for JWT password key
-
+const validator = require("email-validator");
 // used to create our local strategy for authenticating
 // using username and password
 const LocalStrategy = require('passport-local').Strategy;
@@ -205,7 +205,17 @@ module.exports = function(passport) {
                     if (existingCustomer) {
                         console.log("existing");
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                    } else {
+                    }
+                    if (!validator.validate(email)) {
+                        return done(null, false, req.flash('signupMessage', 'Please input your email correctly'));
+                    }
+                    if (!req.body.passowrd==req.body.passowrd2){
+                        return done(null, false, req.flash('signupMessage', 'Please input the same passowrd twice.'));
+                    }
+                    if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
+                        return done(null, false, req.flash('signupMessage', 'please input all information below'));
+                    }
+                     else {
                         // otherwise
                         // create a new user
                         var newCustomer = new Customer();
@@ -227,4 +237,5 @@ module.exports = function(passport) {
                 });
             });
         }));
+    
 };

@@ -14,7 +14,7 @@ const customerController = require('../controllers/customerController.js');
 const foodRouter = require('./foodRouter.js');
 
 customerRouter.get("/login", (req, res) => {
-    res.render('login', { layout: 'beforeLogin.hbs' });
+    res.render('login', { layout: 'beforeLogin.hbs',message: req.flash('loginMessage') });
 });
 
 //handle the GET request for login
@@ -30,13 +30,13 @@ customerRouter.post('/login', passport.authenticate('local-login', {
 
 //handle the GET request to register
 customerRouter.get('/register', function(req, res) {
-    res.render('register', { layout: 'beforeLogin.hbs' })
+    res.render('register', { layout: 'beforeLogin.hbs', message: req.flash('signupMessage')})
 });
 
 //handle the POST request to register
 customerRouter.post('/register', passport.authenticate('local-signup', {
     successRedirect: '/customer', // redirect to the homepage
-    failureRedirect: '/customer/register/', // redirect to signup page
+    failureRedirect: '/customer/register', // redirect to signup page
     failureFlash: true // allow flash messages
 }));
 
@@ -48,6 +48,17 @@ customerRouter.post('/logout', function(req, res) {
     res.redirect('/customer/');
 });
 
+
+//handle the GET request to get the customer profile
+customerRouter.get('/getinfo', utilities.isLoggedInCustomer, customerController.getInfo)
+
+//handle the get request to change the customer profile
+customerRouter.get('/changeinfo', utilities.isLoggedInCustomer, (res) => {
+    res.render('changeinfo');
+});
+
+//handle the POST request to change the customer profile
+customerRouter.post('/changeinfo',utilities.isLoggedInCustomer, console.log("dddddd"),(req, res) => customerController.changeInfo(req, res))
 
 
 //handle the GET request to get the Shopping Cart by the customer id

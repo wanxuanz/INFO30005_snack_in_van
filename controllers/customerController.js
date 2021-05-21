@@ -79,22 +79,21 @@ const getOneCustomer = async(req, res) => {
 };
 
 // add one customer in the register
-const addOneCustomer = async(req, res) => {
+const changeInfo = async(req, res) => {
     // handle invalid input
-    if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
+    console.log('hahahaha')
+    if (req.body.password2 === "" ||req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
         res.status(404)
-        return res.render('registerfail', { layout: "beforeLogin" })
+        return res.render('changeinfofail')
     }
-    var postData = {
-        email: req.body.email,
-        password: req.body.password,
-        firstName: req.body.first_name,
-        lastName: req.body.last_name
-    };
-    const customer = new Customer(postData) // construct a new customer object from body of POST
+    const oneCustomer=Customer.findOne({ 'email': req.seesion.email })
+    
+    oneCustomer.password = oneCustomer.generateHash(req.body.password);
+    oneCustomer.lastName = req.body.last_name;
+    oneCustomer.firstName = req.body.first_name; // construct a new customer object from body of POST
     try {
-        await customer.save() // save new customer object to database
-        return res.render('customer', { "thiscustomer": customer.toJSON() }) // return saved object to sender
+        await oneCustomer.save() // save new customer object to database
+        return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
 
     } catch (err) { // error detected
         res.status(400)
@@ -174,12 +173,23 @@ const placeOrder = async(req, res) => {
 }
 
 
+const getInfo = async(req, res) => {
+    
+    const oneCustomer = await Customer.findOne({ "email": req.session.email})
+    if (oneCustomer === null) { // no author found in database
+        res.status(404)
+        return res.render('loginNotSuccess', { layout: "beforeLogin" })
+    }
+    return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
+};
+
 //export the functions
 module.exports = {
     findCart,
     removeOneFood,
     getOneCustomer,
-    addOneCustomer,
+    changeInfo,
     getAllCustomernewOrders,
-    placeOrder
+    placeOrder,
+    getInfo
 }
