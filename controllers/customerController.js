@@ -106,12 +106,8 @@ const addOneCustomer = async(req, res) => {
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        console.log(customer._id)
-            //display the name of each order
-        const newOrders = await Order.find({ "customerId": customer._id }).lean()
-        // if(!newOrders){
-        //     return res.render('orderlist')
-        // }
+        //display the name of each order from newest to oldest
+        const newOrders = await Order.find({ "customerId": customer._id }).sort({ dateCompare: 'desc' }).lean()
         for (var i = 0; i < newOrders.length; i++) {
             var foodnames = []
             for (var j = 0; j < newOrders[i].items.length; j++) {
@@ -120,7 +116,7 @@ const getAllCustomernewOrders = async(req, res) => {
                     foodname: thisfood.name,
                     quantity: newOrders[i].items[j].quantity
                 }
-                console.log(newOrders[i].items[j])
+                // console.log(newOrders[i].items[j])
                 // foodnames.push(thisfood.name)
                 foodnames.push(foodname_quantity)
             }
@@ -139,6 +135,8 @@ const placeOrder = async(req, res) => {
     const customer = await Customer.findOne({ "email": req.session.email }).lean()
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getHours() + ':' + today.getMinutes();
+    var year_month_day = today.toISOString().split('T')[0];
+    var time = today.toISOString().split('T')[1].split('.')[0]
     // shopping cart of current customer
     const cart = customer.cart
     if (cart.length == 0) {
@@ -155,6 +153,7 @@ const placeOrder = async(req, res) => {
         vanId: '1',
         time: date,
         dateCompare: today,
+        dateUTC: year_month_day + 'T' + time + 'Z',
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
@@ -173,6 +172,39 @@ const placeOrder = async(req, res) => {
     }
 }
 
+// handle cancel one order but not delete it from the database
+const cancelOrder = async(req, res) => {
+    try {
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
+        console.log(customer._id)
+    
+        //set the visibility to false
+        await Order.updateOne({"_id": req.body.orderId}, {"$set": { "visibility": false }});
+
+        // display from newest to olderest
+        const newOrders = await Order.find({ "customerId": customer._id }).sort({ dateCompare: 'desc' }).lean()
+        for (var i = 0; i < newOrders.length; i++) {
+            var foodnames = []
+            for (var j = 0; j < newOrders[i].items.length; j++) {
+                var thisfood = await Food.findOne({ "_id": newOrders[i].items[j].foodId })
+                var foodname_quantity = {
+                    foodname: thisfood.name,
+                    quantity: newOrders[i].items[j].quantity
+                }
+                // console.log(newOrders[i].items[j])
+                // foodnames.push(thisfood.name)
+                foodnames.push(foodname_quantity)
+            }
+            newOrders[i]["foodnames"] = foodnames
+        }
+        console.log(newOrders)
+        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
+    } catch (err) {
+        res.status(400)
+        console.log(err)
+        return res.send("cannot cancel the order")
+    }
+}
 
 //export the functions
 module.exports = {
@@ -181,5 +213,6 @@ module.exports = {
     getOneCustomer,
     addOneCustomer,
     getAllCustomernewOrders,
-    placeOrder
+    placeOrder,
+    cancelOrder
 }
