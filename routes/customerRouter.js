@@ -65,6 +65,10 @@ customerRouter.post('/newOrders', utilities.isLoggedInCustomer, (req, res) => cu
 // handle the POST request to cancel the neworder in orders
 customerRouter.post('/newOrders/cancel_order', utilities.isLoggedInCustomer, (req, res) => customerController.cancelOrder(req, res))
 
+// handle the POST request to change the neworder in orders
+
+customerRouter.post('/newOrders/change_order', utilities.isLoggedInCustomer, (req, res) => customerController.changeOrder(req, res))
+
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 

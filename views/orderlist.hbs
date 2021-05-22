@@ -17,6 +17,23 @@
             return false
         }   
     }  
+    function update(status, dateUTC){
+        var orderDate = new Date(dateUTC)
+        var now = new Date()
+        var diff = now - orderDate;
+        {{!-- 600000 is 10 minutes --}}
+        if(diff < 600000 && status !== "fulfilled"){
+            return confirm('Are you sure you want to change your order?');
+        }
+        if(diff < 600000 && status === "fulfilled"){
+            alert("you cannot modify as your order is fulfilled ")
+            return false
+        }
+        if(diff > 600000){
+            alert("you cannot change the order as it has placed for more than 10 minutes")
+            return false
+        }
+    }
     </script>
     <h1>Orders List</h1>
     <ul>
@@ -55,7 +72,8 @@
                         </form>
                         <form method="post" action="newOrders/change_order">
                         <input type="hidden" name = "orderId" value="{{this._id}}">
-                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return clicked('{{this.status}}', '{{this.dateUTC}}');">
+                        <input type="hidden" name = "items" value="{{this.items}}">
+                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
                         Change Order
                         </button>
                         </form>

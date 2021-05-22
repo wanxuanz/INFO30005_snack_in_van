@@ -21,7 +21,7 @@
                 {{this.quantity}}
             </p>
                 <form method="post" action="/customer/shopping-cart" id="shopping-cart-form">
-                    <input type="hidden" name = "item_id" value="{{this.cartId}}">
+                    <input type="hidden" name = "item_id" value="{{this._id}}">
                     <input type="submit" value="Remove"> 
                 </form> 
         </li>

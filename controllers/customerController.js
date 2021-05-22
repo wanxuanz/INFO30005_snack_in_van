@@ -19,7 +19,7 @@ const findCart = async(req, res) => {
             // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-            oneFood["cartId"] = cart[i]._id
+            // oneFood["cartId"] = cart[i]._id
             oneFood["quantity"] = cart[i].quantity
             cartFood.push(oneFood)
             total_price = total_price + Number(oneFood.price) * cart[i].quantity;
@@ -39,8 +39,8 @@ const findCart = async(req, res) => {
 // this function is used to remove one food from shopping cart
 const removeOneFood = async(req, res) => {
     try {
-        await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
-
+        // await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
+        await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
         const cart = customer.cart // array
         const cartFood = []
@@ -206,6 +206,43 @@ const cancelOrder = async(req, res) => {
     }
 }
 
+const changeOrder = async(req, res) => {
+    try {
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
+        // var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
+        const order = await Order.findOne({"_id": req.body.orderId }).lean()
+        const items = order.items
+        console.log(items)
+        var newItems = []
+        var cartFood = []
+        total_price = 0;
+        for(var i = 0; i < items.length; i++){
+            var oneFood = await Food.findOne({ "_id": items[i].foodId }).lean()
+            var oneItem = {
+                foodId: items[i].foodId,
+                quantity: items[i].quantity
+            }
+            oneFood["quantity"] = items[i].quantity
+            total_price += Number(oneFood.price) * items[i].quantity
+            cartFood.push(oneFood)
+            newItems.push(oneItem)
+        }
+        // console.log(newItems)
+        await Customer.updateOne({"email": req.session.email}, {"$set": { "cart": newItems }}).lean();
+        const newCustomer = await Customer.findOne({ "email": req.session.email }).lean()
+        // console.log(newCustomer)
+        //set the visibility to false
+        await Order.updateOne({"_id": req.body.orderId}, {"$set": { "visibility": false }});
+        //put back this order to the shopping cart of this customer
+        return res.render('shoppingCart', { "thiscustomer": newCustomer, "cartFood": cartFood, "total_price": total_price })
+
+    } catch (err) {
+        res.status(400)
+        console.log(err)
+        return res.send("cannot cancel the order")
+    }
+}
+
 //export the functions
 module.exports = {
     findCart,
@@ -214,5 +251,6 @@ module.exports = {
     addOneCustomer,
     getAllCustomernewOrders,
     placeOrder,
-    cancelOrder
+    cancelOrder,
+    changeOrder
 }
