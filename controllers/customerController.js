@@ -63,6 +63,44 @@ const removeOneFood = async(req, res) => {
         return res.send("Cannot remove this food")
     }
 }
+const editQuantity = async(req, res) => {
+    try {
+        // if the quantity is 0, remove the food
+        if(req.body.quantity == 0){
+            await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
+        }else{  // update the quantity
+            await Food.updateOne( {name:'Beer'}, {description: 'changed the beer'} )
+            // await Order.updateOne({"_id": req.body.orderId}, {"$set": { "visibility": false }});
+            await Customer.updateOne({"email": req.session.email, "cart.foodId":req.body.item_id},
+            {
+                $set:{
+                    "cart.$.quantity": req.body.quantity
+                }
+            })
+        }
+        // await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
+        const customer = await Customer.findOne({ "email": req.session.email }).lean()
+        const cart = customer.cart // array
+        const cartFood = []
+        var total_price = 0
+            // find the detail of foods
+        for (var i = 0; i < cart.length; i++) {
+            var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
+            oneFood["cartId"] = cart[i]._id
+            oneFood["quantity"] = cart[i].quantity
+            cartFood.push(oneFood)
+            total_price = total_price + Number(oneFood.price) * cart[i].quantity;
+        }
+        if (customer === null) {
+            res.status(404)
+            return res.send('Food not found')
+        }
+        res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
+    } catch (err) {
+        res.status(400)
+        return res.send("Cannot remove this food")
+    }
+}
 
 //find the login customer
 const getOneCustomer = async(req, res) => {
@@ -252,5 +290,6 @@ module.exports = {
     getAllCustomernewOrders,
     placeOrder,
     cancelOrder,
-    changeOrder
+    changeOrder,
+    editQuantity
 }

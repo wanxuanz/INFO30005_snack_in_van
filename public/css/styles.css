@@ -260,7 +260,14 @@ hr {
     background-color: #e7c52e;
     transition: background-color 0.3s;
 }
-
+/* #input_quantity{
+    flex-basis: 25%;
+} */
+.form_quantity{
+    display: none;
+    flex-basis: 50%;
+    justify-content: space-evenly;
+}
 #shopping-cart-form{
     display:flex;
     flex-basis: 25%;
@@ -439,6 +446,11 @@ a#addToCart:hover {
     input::placeholder{
         font-size: var(--text-small);
     }
+    #shopping-cart input[type$=number]{
+        font-size: var(--text-small);
+        width: 50%;
+    }
+
 }
 
 

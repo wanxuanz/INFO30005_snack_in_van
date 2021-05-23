@@ -54,7 +54,10 @@ customerRouter.post('/logout', function(req, res) {
 customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, customerController.findCart)
 
 //handle the POST request to remove one food from Shopping Cart by the customer id
-customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.removeOneFood(req, res))
+// customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.removeOneFood(req, res))
+
+// handle the POST request to edit one quantity one food from Shopping Cart by the customer id
+customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.editQuantity(req, res))
 
 // handle the GET request to go to the detail of a customer's newOrders
 customerRouter.get('/newOrders', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
