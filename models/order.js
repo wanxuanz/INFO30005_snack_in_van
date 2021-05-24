@@ -14,7 +14,8 @@ const newOrderschema = new mongoose.Schema({
     customerId: { type: String, required: true },
     items: [itemSchema],
     total: { type: String, required: true },
-    status: { type: String, required: true }
+    status: { type: String, required: true },
+    rating:{type:Number ,default:5}
 })
 
 

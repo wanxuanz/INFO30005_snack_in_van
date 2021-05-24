@@ -237,5 +237,49 @@ module.exports = function(passport) {
                 });
             });
         }));
+        // passport.use('local-changeinfo', new LocalStrategy({
+        //     usernameField: 'email',
+        //     passwordField: 'password',
+        //     passReqToCallback: true
+        // }, // pass the req as the first arg to the callback for verification 
+
+        // function(req, email, password, done) {
+        //     process.nextTick(function() {
+        //         Customer.findOne({ 'email': req.session.email }, function(err, existingCustomer) {
+        //             // search a user by the username (email in our case)
+        //             // if user is not found or exists, exit with false indicating
+        //             // authentication failure
+        //             console.log("ttttttt3");
+        //             if (err) {
+        //                 console.log(err);
+        //                 return done(err);
+        //             }
+        //             if (!req.body.passowrd==req.body.passowrd2){
+        //                 console.log("ttttttt");
+        //                 return done(null, false, req.flash('changeMessage', 'Please input the same passowrd twice.'));
+        //             }
+        //             if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
+        //                 console.log("ttttttt1");
+        //                 return done(null, false, req.flash('changeMessage', 'please input all information below'));
+        //             }
+        //              else {
+        //                 // otherwise
+        //                 // create a new user
+                        
+        //                 console.log("ttttttt3");
+        //                 existingCustomer.password = existingCustomer.generateHash(password);
+        //                 existingCustomer.lastName = req.body.last_name;
+        //                 existingCustomer.firstName = req.body.first_name;
+        //                 // and save the user
+        //                 existingCustomer.save(function(err) {
+        //                     if (err)
+        //                         throw err;
+
+        //                     return done(null, existingCustomer);
+        //                 });
+        //             }
+        //         });
+        //     });
+        //}));
     
 };

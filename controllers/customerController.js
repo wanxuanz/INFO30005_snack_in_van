@@ -4,6 +4,7 @@ const customer = require("../models/customer")
 const Customer = customer.Customer
 const order = require("../models/order")
 const Order = order.Order
+// const { Customer } = require('../models/customer');
 // import customer model
 // const mongoose = require("mongoose")
 // const Customer = mongoose.model("Customer")
@@ -81,18 +82,25 @@ const getOneCustomer = async(req, res) => {
 // add one customer in the register
 const changeInfo = async(req, res) => {
     // handle invalid input
-    console.log('hahahaha')
     if (req.body.password2 === "" ||req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
         res.status(404)
-        return res.render('changeinfofail')
+        return res.render('changeinfofail',{"message":"blank input, type again please"})
     }
-    const oneCustomer=Customer.findOne({ 'email': req.seesion.email })
+    if (!req.body.password2 === req.body.password) {
+        res.status(404)
+        return res.render('changeinfofail',{"message":"Please input the same passowrd twice."})
+    }
+    // let pass=Customer.generateHash(req.body.password)
+    // await Customer.updateOne({ "email": req.session.email }, { "password": pass,"lastName": req.body.last_name, "firstName":req.body.first_name}).lean()
     
-    oneCustomer.password = oneCustomer.generateHash(req.body.password);
-    oneCustomer.lastName = req.body.last_name;
-    oneCustomer.firstName = req.body.first_name; // construct a new customer object from body of POST
+    // oneCustomer.password = pass;
+    // oneCustomer.lastName = req.body.last_name;
+    // oneCustomer.firstName = req.body.first_name; // construct a new customer object from body of POST
     try {
-        await oneCustomer.save() // save new customer object to database
+        var oneCustomer = new Customer();
+        var passw=oneCustomer.generateHash(req.body.password)
+        await Customer.findOneAndUpdate({ "email": req.session.email }, { "password": passw,"lastName": req.body.last_name, "firstName":req.body.first_name}).lean()
+        var oneCustomer=await Customer.findOne({"email": req.session.email })
         return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
 
     } catch (err) { // error detected
@@ -101,6 +109,13 @@ const changeInfo = async(req, res) => {
     }
 }
 
+
+const changeInfo1 = async(req, res) => {
+    
+    var oneCustomer=await Customer.findOne({"email": req.session.email })
+    return res.render('changeinfo',{"thiscustomer":oneCustomer.toJSON()}) // return saved object to sender
+
+}
 // find all the order the current customer has ordered
 const getAllCustomernewOrders = async(req, res) => {
     try {
@@ -157,7 +172,8 @@ const placeOrder = async(req, res) => {
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
-        status: "Outstanding"
+        status: "Outstanding",
+        rating:5
     };
 
     var order = new Order(postData)
@@ -183,6 +199,7 @@ const getInfo = async(req, res) => {
     return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
 };
 
+
 //export the functions
 module.exports = {
     findCart,
@@ -191,5 +208,6 @@ module.exports = {
     changeInfo,
     getAllCustomernewOrders,
     placeOrder,
+    changeInfo1,
     getInfo
 }
