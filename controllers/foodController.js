@@ -130,8 +130,7 @@ const addFoodQuantity = async(req, res) => {
         thisCustomer.cart.push(orderRecord)
     }
 
-    console.log(thisCustomer)
-        //找customer的shopping cart然后存数量就好了
+    //find the customer's shopping cart and store the quantity
     await thisCustomer.save()
     return res.render("addToCart", { "thisfood": addFood.toJSON(), "quantity": req.body.quantity })
 
