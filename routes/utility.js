@@ -17,21 +17,10 @@ function isLoggedInCustomer(req, res, next) {
     res.redirect('/customer/login');
 }
 
-function isSelectedVan(req, res, next) {
-    console.log(req.session.vanId)
-    if (req.session.vanId) {
-
-        return next();
-    }
-    // if not logged in, redirect to login form
-    res.redirect('/customer');
-}
-
 
 // export the function so that we can use
 // in other parts of our all
 module.exports = {
     isLoggedIn,
-    isLoggedInCustomer,
-    isSelectedVan
+    isLoggedInCustomer
 }

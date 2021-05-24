@@ -7,24 +7,20 @@ const itemSchema = new mongoose.Schema({
 })
 
 // define order schema
-const newOrderschema = new mongoose.Schema({
+const Orderschema = new mongoose.Schema({
     vanId: { type: String, require: true },
     time: { type: String, required: true },
     dateCompare: { type: Date, default: Date.now },
-    dateUTC: String,
     customerId: { type: String, required: true },
     items: [itemSchema],
     total: { type: String, required: true },
-    status: { type: String, required: true },
-    visibility: { type: Boolean, default: true },
-    visibility_not_change: { type: String, required: true, default: "visible" },
-    rating: { type: Number, default: 5 }
+    status: { type: String, required: true }
 })
 
 
-const Order = mongoose.model("newOrders", newOrderschema)
+const Order = mongoose.model("Orders", Orderschema)
 const Item = mongoose.model("Item", itemSchema)
 
 module.exports = { Order, Item }
-    // module.exports = Order
-    // module.exports = Item
+// module.exports = Order
+// module.exports = Item

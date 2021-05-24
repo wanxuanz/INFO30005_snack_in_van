@@ -1,12 +1,12 @@
 <section id="orderList">
 
-    <h1>Orders List</h1>
+    <h1>All Orders</h1>
     <ul>
-        {{#each Orders}}
+        {{#each oneVanOrder}}
         <li>
             <table>
                 <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
-                <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
+                <tr><td>Customer ID: </td><td>{{this.customerId}}</td></tr>
                 <tr><td>Order time: </td><td>{{this.time}}</td></tr>
                 <tr><td>Status: </td><td>{{this.status}}</td></tr>
                 <tr><td>Items: </td>

@@ -1,5 +1,3 @@
-const cors = require('cors')
-
 const express = require('express');
 const app = express();
 
@@ -22,10 +20,6 @@ const dotenv = require('dotenv').config()
 // configure passport authenticator
 require('./config/passport')(passport);
 
-// Enable cors
-app.use(cors())
-const validator = require("email-validator");
-
 // setup a session store signing the contents using the secret key
 app.use(session({
     secret: process.env.PASSPORT_KEY,
@@ -46,6 +40,10 @@ app.use(flash());
 // body of a POST request as  using JSON like syntax
 app.use(express.urlencoded({ extended: true }))
 
+
+
+// const express = require('express');
+// const app = express();
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -95,18 +93,17 @@ const vanRouter = require('./routes/vanRouter')
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    if (req.session.email == null) {
-        thelayout = 'beforeLogin.hbs'
-    } else { thelayout = 'main.hbs' }
-    res.render('index', { layout: thelayout });
-})
-
-/*customer home page*/
+        if (req.session.email == null) {
+            thelayout = 'beforeLogin.hbs'
+        } else { thelayout = 'main.hbs' }
+        res.render('index', { layout: thelayout });
+    })
+    /*customer home page*/
 app.get('/customer', (req, res) => {
     if (req.session.email == null) {
         thelayout = 'beforeLogin.hbs'
     } else { thelayout = 'main.hbs' }
-    res.render('index', { layout: thelayout })
+    res.render('index', { layout: thelayout });
 })
 
 // here goes the customer server after the customer has login
@@ -121,7 +118,7 @@ app.get('/vender', (req, res) => {
     res.render('venderHomepage', { layout: "vender_main.hbs" });
 })
 
-// handler for newOrders in van requests
+// handler for Orders in van requests
 app.use('/vender/vans', vanRouter)
 
 app.listen(process.env.PORT || 3000, () => {

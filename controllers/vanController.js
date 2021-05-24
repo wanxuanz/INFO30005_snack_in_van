@@ -2,40 +2,44 @@ const mongoose = require("mongoose")
 
 // import van model
 const Van = mongoose.model("vans")
-
-const geocoder = require('../utils/geocoder')
+const Food = mongoose.model("Food")
 
 // change an van status(POST)
 const updateVanStatus = async(req, res) => {
 
-    let oneVan = await Van.findOne({ vanId: req.params.vanId })
+    if (req.session.email == null) {
+        thelayout = 'vender_main.hbs'
+    } else { thelayout = 'vender_main.hbs' }
+
+    let oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+    console.log(oneVan)
         // if the van is open, we change it to close
     if (oneVan.status === 'close') {
-        await Van.updateOne({ vanId: req.params.vanId }, { status: "open" })
+        await Van.updateOne({ vanId: req.session.van_name }, { status: "open"}).lean()
     } else {
-        await Van.updateOne({ vanId: req.params.vanId }, { status: "close" })
+        await Van.updateOne({ vanId: req.session.van_name }, { status: "close"}).lean()
     }
-    result = await Van.findOne({ vanId: req.params.vanId })
-    res.send(result)
+    return res.render('showVanStatus', { "oneVan": oneVan, layout: thelayout })
 }
+
+// const showVanStatus = async(req, res) => {
+
+//     let oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+
+//     return res.render("venderHome", { "oneVan": oneVan })
+
+// }
+
+
 
 const updateLocation = async(req, res) => {
     try {
         //get the van whose van_name is stored in the session -- van is logged in
         if (req.session.van_name) {
-            // const loc = await geocoder.geocode(req.body.van_location)
-            // const location = {
-            //     type: 'Point',
-            //     coordinates: [loc[0].longitude, loc[0].latitude],
-            //     formattedAdddress: loc[0].formattedAdddress
-            // }
-
-            const location = {
-                type: 'Point',
-                coordinates: [req.body.longitude, req.body.latitude]
-            }
-            await Van.updateOne({ vanId: req.session.van_name }, { address: req.body.van_location })
-            await Van.updateOne({ vanId: req.session.van_name }, { location: location })
+            // find the van_name in the database
+            let van = await Van.findOne({ vanId: req.session.van_name })
+                // if no location in van, set a new one
+            await Van.updateOne({ vanId: req.session.van_name }, { location: req.body.van_location })
                 // mark status as open
             await Van.updateOne({ vanId: req.session.van_name }, { status: "open" })
             return res.render('sendLocationSuccess', { layout: "vender_main" })
@@ -44,7 +48,6 @@ const updateLocation = async(req, res) => {
         }
     } catch (err) { // error occurred
         res.status(400)
-        console.log(err)
         return res.send("Cannot find your van name")
     }
 }
@@ -89,17 +92,52 @@ const getAllVans = async(req, res) => {
 // get one van
 const getOneVan = async(req, res) => {
     try {
-        const oneVan = await Van.findOne({ "vanId": req.params.vanId })
-        if (oneVan === null) { // no order found in database
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+        if (oneVan === null) { // no van found in database
             res.status(404)
             return res.send("Van not found")
         }
-        return res.send(oneVan) // order was found
+        return res.render('venderHome', { "oneVan": oneVan, layout: thelayout})
     } catch (err) { // error occurred
         res.status(400)
         return res.send("Database query failed")
     }
 }
+
+// send location
+// const sendLocation = async (req, res) => {
+//   try {
+//       const oneVan = await Van.findOne( {"vanId": req.params.vanId} )
+//       var location = await oneVan.location
+//       if (oneVan === null) {   // no order found in database
+//           res.status(404)
+//           return res.send("Van not found")
+//       }
+//       // res.send(JSON.stringify(location))
+//       return res.send('Van location: '+ JSON.stringify(location) + ' has been sent successfully!')  // order was found
+//   } catch (err) {     // error occurred
+//       res.status(400)
+//       return res.send("Database query failed")
+//   }
+// }
+
+
+const sendLocation = async(req, res) => {
+    try {
+        //get the van whose van_name is stored in the session -- van is logged in
+        if (req.session.van_name) {
+            // find the van_name in the database
+            let van = await Van.findOne({ vanId: req.session.van_name })
+        }
+    } catch (err) { // error occurred
+        res.status(400)
+        return res.send("Cannot find your van name")
+    }
+}
+
 
 // catch a POST request and change the current location of the van and send it location
 const changeAndSendLocation = async(req, res) => {
@@ -108,13 +146,51 @@ const changeAndSendLocation = async(req, res) => {
     res.send('Van locatioin: ' + JSON.stringify(message.location) + ' has been updated and sent successfully')
 }
 
+const getVanFoods = async(req, res) => {
+    try {
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const foods = await Food.find().lean()
+            // return res.send(foods)
+        res.render('vanfoodlist', { "foods": foods, layout: thelayout})
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+// change an food status(POST)
+// const updateFoodStatus = async(req, res) => {
+//     if (req.session.email == null) {
+//         thelayout = 'vender_main.hbs'
+//     } else { thelayout = 'vender_main.hbs' }
+
+//     const oneFood = await Food.findOne({ foodId: req.params.foodId }).lean()
+//     console.log(oneFood)
+//     if (oneFood.availability === 'Unavailable') {
+//         await Food.updateOne({ foodId: req.params.foodId }, { availability: "Available" }).lean()
+//     } else {
+//         await Food.updateOne({ foodId: req.params.foodId }, { availability: "Unavailable" }).lean()
+//     }
+//     return res.render('showFoodStatus', { "oneFood": oneFood, layout: thelayout })
+// }
+
+
+
+
 // export the functionss
 module.exports = {
     updateVanStatus,
     getAllVans,
-    getOneVan,
+    sendLocation,
     changeAndSendLocation,
     getOneVanLogin,
     createOneVanLogin,
-    updateLocation
+    updateLocation,
+
+    getOneVan,
+    getVanFoods,
+    //updateFoodStatus,
+    // showVanStatus
 }

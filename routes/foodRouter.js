@@ -7,10 +7,10 @@ const foodRouter = express.Router()
 const foodController = require('../controllers/foodController.js')
 
 // handle the GET request to get all foods
-foodRouter.get('/menu', utilities.isSelectedVan, foodController.getAllFoods)
+foodRouter.get('/menu', foodController.getAllFoods)
 
 // handle the GET request to find one food
-foodRouter.get('/menu/:foodId', utilities.isSelectedVan, foodController.getOneFood)
+foodRouter.get('/menu/:foodId', foodController.getOneFood)
 
 // handle the GET request to add one food
 foodRouter.get('/menu/:foodId/add', utilities.isLoggedInCustomer, foodController.addFood)
@@ -25,5 +25,5 @@ foodRouter.get('/menu/:foodId/select_quantity', utilities.isLoggedInCustomer, fo
 
 // handle the POST request to add the record quantity to the database
 foodRouter.post('/menu/:foodId/add_quantity', utilities.isLoggedInCustomer, foodController.addFoodQuantity)
-    // export the router
+// export the router
 module.exports = foodRouter

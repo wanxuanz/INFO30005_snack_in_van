@@ -3,7 +3,7 @@
 :root {
     --text-big: 36px;
     --text-medium: 22px;
-    --text-small: 15px;
+    --text-small: 16px;
     /* --font-body: 'Lexend Mega', sans-serif; */
     /* --font-body: 'Goudy Bookletter 1911', serif; */
     --font-body: 'Roboto', sans-serif;
@@ -16,7 +16,6 @@
     --color-background: #F5F2ED;
     --color-brown: #BF863F;
     --color-median-yellow: #CC9E22;
-    --color-darkgrey: #D97D14;
 }
 
 
@@ -38,26 +37,11 @@ footer {
     margin: 0;
 }
 
+
 h1 {
     text-align: center;
     font-size: var(--text-big);
     color: var(--color-dark);
-    margin-top: 0;
-}
-
-h2 {
-    /* text-align: center; */
-    font-size: var(--text-small);
-    color: var(--color-brown);
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-h3 {
-    /* text-align: center; */
-    font-size: var(--text-median);
-    text-align: center;
-    color: var(--color-brown);
     margin-top: 0;
 }
 
@@ -71,9 +55,8 @@ nav {
     font-weight: bold;
     font-size: 24px;
     position: sticky;
-    top: 0;
+	top: 0;
 }
-
 header h1 a {
     color: var(--color-dark);
 }
@@ -92,12 +75,15 @@ hr {
     /* Modern Browsers */
 }
 
-
+button#updateStatus {
+    align-items: flex-start;
+    text-align: center; 
+}
+#register-page ul{
+    padding:0
+}
 /**************************************************************************/
-
-
 /*login page*/
-
 .register-btn {
     align-items: flex-start;
     text-align: center;
@@ -111,48 +97,41 @@ hr {
     transition: background-color 0.3s;
 }
 
-.register-btn:hover {
+.register-btn:hover{
     background-color: #e7c52e;
     transition: background-color 0.3s;
-}
 
+}
 
 /* hyperlink is black */
-
-.a-register {
-    color: black;
+.a-register{
+    color:black;
 }
-
-#login-page input[type$=submit] {
+#login-page input[type$=submit]{
     display: inline-block;
-    text-align: center;
+    text-align: center; 
     font-size: var(--text-medium);
 }
 
-#login-page ul {
+#login-page ul{
     padding: 0;
 }
-
-#register-page input[type$=submit] {
+#register-page input[type$=submit]{
     display: inline-block;
-    text-align: center;
+    text-align: center; 
     font-size: var(--text-medium);
 }
-
-#register-page ul {
+#register-page ul{
     padding: 0;
 }
-
-#register-fail input[type$=submit] {
+#register-fail input[type$=submit]{
     display: inline-block;
-    text-align: center;
+    text-align: center; 
     font-size: var(--text-medium);
 }
-
-#register-fail ul {
+#register-fail ul{
     padding: 0;
 }
-
 #order-success li {
     /* each individual food listing */
     list-style-type: none;
@@ -165,19 +144,74 @@ hr {
     align-items: center;
     /* and vertically aligns to center */
 }
-
-#login-page p {
+#login-page p{
     text-align: center;
 }
-
 #login-register-btn {
-    align-items: center
+    align-items:center
+}
+
+#vanDetials a{
+    
+}
+
+a#updateVanStatus {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#updateVanStatus:hover {
+    color: var(--color-dark);
 }
 
 
+a#availability {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#availability:hover {
+    color: var(--color-dark);
+}
+
+a#updateOrderStatus {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#updateOrderStatus:hover {
+    color: var(--color-dark);
+}
+
+
+/* #shopping-cart button:hover {
+    background-color: #CC9E22;
+} */
+
+#vanDetials table {
+    /* the table of nutritional data */
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    background-color: var(--color-grey);
+    border: solid grey 1px;
+}
+#foodList p {
+    /* the words at the top of the page */
+    text-align: center;
+    flex-basis: 60%;
+}
+
 /**************************************************************************/
-
-
 /* the Browse Foods page showing all the foods */
 
 #foodList p {
@@ -217,25 +251,18 @@ hr {
     color: var(--color-dark);
 }
 
-
 /**************************************************************************/
-
-
 /*orderlist*/
-
-#orderList p {
-    /* the words at the top of the page */
+#orderList p {   /* the words at the top of the page */
     text-align: center;
     flex-basis: 60%;
 }
 
-#orderList ul {
-    /* the list of foods */
+#orderList ul {  /* the list of foods */
     padding: 0;
 }
 
-#orderList li {
-    /* each individual food listing */
+#orderList li {  /* each individual food listing */
     list-style-type: none;
     /* switch off bullet-points */
     display: flex;
@@ -251,18 +278,15 @@ hr {
     background-color: var(--color-grey);
     border: solid grey 1px;
 }
-
-#orderList a {
-    /* the food names */
+/* #orderListItemTable {
+    style="border: 5px solid #BF863F; "
+} */
+#orderList a {   /* the food names */
     color: var(--color-dark);
 }
 
-
 /**************************************************************************/
-
-
 /*shopping cart*/
-
 #shopping-cart img {
     /* width:  200px;
     height: 100px;*/
@@ -287,7 +311,7 @@ hr {
 #shopping-cart ul {
     /* the list of foods */
     padding: 0;
-    margin-block-end: 0;
+    margin-block-end:0;
 }
 
 #shopping-cart li {
@@ -300,27 +324,19 @@ hr {
     align-items: center;
     /* and vertically aligns to center */
 }
-
 #shopping-cart form input[type$=submit]:hover {
     background-color: #e7c52e;
     transition: background-color 0.3s;
 }
 
-
-/* #input_quantity{
-    flex-basis: 25%;
-} */
-
-.form_quantity {
-    display: none;
-    flex-basis: 50%;
-    justify-content: space-evenly;
-}
-
-#shopping-cart-form {
-    display: flex;
+#shopping-cart-form{
+    display:flex;
     flex-basis: 25%;
 }
+
+
+
+
 
 form {
     /* centre the form */
@@ -336,31 +352,26 @@ form input[type$=submit] {
     /* submit button - note use of attribute selector */
     background-color: var(--color-brown);
 }
-
-
 /* input[type=submit]:hover {
     background-color: #45a049;
   } */
 
+
+  
 form span.bigScreen {
     /* on small screens, hide some of the wording */
     display: none;
 }
 
-
 /**************************************************************************/
-
-
 /*section for addToCart in each food*/
-
-a#addToCart {
-    /* the heart-shaped 'favourite' button */
+a#addToCart {   /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
     background-color: lightgrey;
     display: block;
-    text-align: center;
-}
+    text-align:center;
+}    
 
 a#addToCart:hover {
     color: var(--color-dark);
@@ -368,8 +379,6 @@ a#addToCart:hover {
 
 
 /**************************************************************************/
-
-
 /* the page showing details about an individual food */
 
 #oneFood-details {
@@ -412,10 +421,7 @@ a#addToCart:hover {
     border: solid grey 1px;
 }
 
-
 /**************************************************************************/
-
-
 /* Modal (background) */
 
 .modal-background {
@@ -453,16 +459,14 @@ a#addToCart:hover {
 
 
 /**************************************************************************/
-
-
 /* Responsive Design */
 
 @media screen and (max-width: 620px) {
     /* for phone size */
-    h1 {
+    h1{
         font-size: 28px;
     }
-    nav {
+    nav{
         background-color: var(--color-grey);
         font-size: var(--text-medium);
     }
@@ -473,19 +477,21 @@ a#addToCart:hover {
     #shopping-cart h1 {
         font-size: var(--text-medium);
     }
+    
     #orderList h1 {
         font-size: var(--text-medium);
     }
     .menu-bar {
         font-size: var(--text-medium);
     }
+    
     #shopping-cart img {
         height: 50px;
     }
-    #oneFood h1 {
+    #oneFood h1{
         font-size: var(--text-medium);
     }
-    #shopping-cart input[type$=submit] {
+    #shopping-cart input[type$=submit]{
         font-size: var(--text-small);
     }
     #orderList table {
@@ -498,28 +504,25 @@ a#addToCart:hover {
     .register-btn {
         font-size: var(--text-small);
     }
-    input::placeholder {
-        font-size: var(--text-small);
-    }
-    #shopping-cart input[type$=number] {
-        font-size: var(--text-small);
-        width: 50%;
-    }
-    .register-page-input {
+    input::placeholder{
         font-size: var(--text-small);
     }
 }
 
+
 @media screen and (min-width: 621px) {
     /* for tablet-sized screens */
+
     #foodList ul {
         /* flow food list into two columns */
         column-count: 2;
     }
-    #orderList ul {
-        /* flow food list into two columns */
+
+    #orderList ul {      /* flow food list into two columns */
         column-count: 1;
     }
+
+
     #oneFood-details {
         flex-direction: row;
         /* now picture and text are side-by-side */
@@ -552,8 +555,7 @@ a#addToCart:hover {
         /* flow food list into three columns */
         column-count: 3;
     }
-    #orderList ul {
-        /* flow food list into two columns */
+    #orderList ul {      /* flow food list into two columns */
         column-count: 1;
     }
 }
@@ -564,8 +566,7 @@ a#addToCart:hover {
         /* flow food list into four columns */
         column-count: 4;
     }
-    #orderList ul {
-        /* flow food list into two columns */
+    #orderList ul {      /* flow food list into two columns */
         column-count: 1;
     }
 }

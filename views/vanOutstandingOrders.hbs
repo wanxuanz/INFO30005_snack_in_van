@@ -1,0 +1,68 @@
+<section id="orderList">
+
+    <h1>Outstanding Orders</h1>
+    <script>
+    
+    function update(status, orderId){
+        
+        if(status === "Outstanding"){
+            return Order.updateOne({ _id:  orderId}, { status: "Fulfilled" }).lean()
+            console.log("yesssssss!")
+        } //else {
+            //return Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
+        //}
+        return Order.updateOne({ _id:  orderId}, { status: "Fulfilled" }).lean()
+        // oneVan.save()
+        // return res.render('showVanStatus', { "oneVan": oneVan })
+    }
+    </script> 
+
+    <ul>
+        {{#each outstandingOrders}}
+        <li>
+            <table>
+                <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
+                <tr><td>Customer ID: </td><td>{{this.customerId}}</td></tr>
+                <tr><td>Order time: </td><td>{{this.time}}</td></tr>
+                <tr><td>Items: </td>
+                <td><table style="border: 5px solid #BF863F; width:85%;" align = "left">
+                    <tr style='background:#c0c0c0;'><td>Name</td><td>Quantity</td></tr>
+                    {{#each foodnames}}
+                    <tr>
+                        <td>{{this.foodname}} </td><td>{{this.quantity}}</td>
+                    </tr>
+                    {{/each}}
+                </table></td>
+                </tr>
+                <tr><td>Total Price: </td><td>${{this.total}}</td></tr>
+                <tr><td>Status: </td><td>{{this.status}}</td></tr>
+                
+                <tr>
+                    <td colspan="2">
+                        <form method="post" action="/vender/vans/orders/outstanding/updateOrderStatus">
+                            <input type="hidden" name = "status" value="{{this.status}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this._id}}');">
+                            Change Status
+                            </button>
+                        </form>
+                    </td> 
+                </tr>
+                {{!-- <tr>
+                    <td colspan="2">
+                        <form method="post" action="outstandingOrders/completed" >
+                        <input type="hidden" name = "orderId" value="{{vanorder.orderId}}"
+                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
+                        Mark as Completed
+                        </button>
+                    </td>  
+                </tr> --}}
+                       
+
+                    </td>
+                </tr>
+                {{!-- <tr><td><center><button margin="0 auto"><a id="updateOrderStatus" href="/vender/vans/orders/outstanding/{{this.orderId}}/updateOrderStatus">{{this.status}}</a></button></center></td></tr> --}}
+            </table> 
+        </li>
+        {{/each}}
+    </ul>
+</section>

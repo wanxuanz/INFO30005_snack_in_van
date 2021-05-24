@@ -1,14 +1,13 @@
 <section id="orderList">
 
-    <h1>Orders List</h1>
+    <h1>Order History</h1>
     <ul>
-        {{#each Orders}}
+        {{#each OrderHistory}}
         <li>
             <table>
                 <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
-                <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
+                <tr><td>Customer ID: </td><td>{{this.customerId}}</td></tr>
                 <tr><td>Order time: </td><td>{{this.time}}</td></tr>
-                <tr><td>Status: </td><td>{{this.status}}</td></tr>
                 <tr><td>Items: </td>
                 <td><table style="border: 5px solid #BF863F; width:85%;" align = "left">
                     <tr style='background:#c0c0c0;'><td>Name</td><td>Quantity</td></tr>
