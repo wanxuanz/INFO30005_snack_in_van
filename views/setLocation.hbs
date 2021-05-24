@@ -13,6 +13,7 @@
             <tr>
                 <td colspan="2"><center><button id="find-location" class="register-btn" onclick="getLocation()">Find my Location</button></center></td>
             </tr>
+            <tr><td colspan="2" id = "waiting"></td></tr>
             <tr>
                 <td colspan="2"><center><button type="submit" id="submit-location" class="register-btn">Confirm</button></center></td>
             </tr>
@@ -24,15 +25,17 @@
     var latitude = document.getElementById("latitude");
     var submitLocation = document.getElementById('submit-location');
     var findLocation = document.getElementById('find-location');
+    var waiting = document.getElementById("waiting");
     
     submitLocation.style.display = 'none'; 
     document.getElementById('find-location').addEventListener('click', showBtn); 
-    
+
     function showBtn(e) { 
-    submitLocation.style.display = 'block'; 
-    findLocation.style.display = 'none'
-    e.preventDefault(); 
-    } 
+        findLocation.style.display = 'none'
+        waiting.innerHTML = "Please wait to get your location"
+
+        e.preventDefault(); 
+    }
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -41,7 +44,10 @@
     }
 
     function showPosition(position) {
-    longitude.value =  position.coords.longitude;
-    latitude.value = position.coords.latitude;
+        waiting.style.display = 'none';
+        submitLocation.style.display = 'block'; 
+        longitude.value =  position.coords.longitude;
+        latitude.value = position.coords.latitude;
     }
+
 </script>

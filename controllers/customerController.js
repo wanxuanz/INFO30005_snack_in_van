@@ -3,6 +3,8 @@ const customer = require("../models/customer")
 const Customer = customer.Customer
 const order = require("../models/order")
 const Order = order.Order
+const van = require("../models/van")
+const Van = van.Van
     // import customer model
     // const mongoose = require("mongoose")
     // const Customer = mongoose.model("Customer")
@@ -211,7 +213,7 @@ const placeOrder = async(req, res) => {
 const getVans = async(req, res, next) => {
     try {
         const vans = await Van.find();
-
+        console.log(vans)
         return res.status(200).json({
             success: true,
             count: vans.length,

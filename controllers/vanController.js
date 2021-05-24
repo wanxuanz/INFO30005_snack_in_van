@@ -44,6 +44,7 @@ const updateLocation = async(req, res) => {
         }
     } catch (err) { // error occurred
         res.status(400)
+        console.log(err)
         return res.send("Cannot find your van name")
     }
 }
