@@ -4,6 +4,7 @@ const Food = require("../models/food")
 // import customer model
 const Customer = mongoose.model("Customer")
 const Order = mongoose.model("newOrders")
+const Van = mongoose.model("vans")
 
 // this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
@@ -135,7 +136,7 @@ const placeOrder = async(req, res) => {
         total_p = total_p + Number(oneFood.price);
     }
     var postData = {
-        vanId: '1',
+        vanId: req.session.vanId,
         time: date,
         dateCompare: today,
         customerId: String(customer._id),
@@ -156,6 +157,34 @@ const placeOrder = async(req, res) => {
     }
 }
 
+const getVans = async(req, res, next) => {
+    try {
+        const vans = await Van.find();
+
+        return res.status(200).json({
+            success: true,
+            count: vans.length,
+            data: vans
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: 'Server error' })
+    }
+}
+
+const chooseVan = async(req, res) => {
+    try {
+        //const customer = await Customer.findOne({ "email": req.session.email }).lean()
+
+        // await Customer.updateOne({ "email": req.session.email }, { vanId: req.body.van_id })
+        req.session.vanId = req.body.van_id
+            // console.log(req.session.vanId)
+        return res.render('selectVanSuccess', { "vanId": req.session.vanId })
+    } catch (err) {
+
+    }
+}
+
 
 //export the functions
 module.exports = {
@@ -164,5 +193,7 @@ module.exports = {
     getOneCustomer,
     addOneCustomer,
     getAllCustomernewOrders,
-    placeOrder
+    placeOrder,
+    getVans,
+    chooseVan
 }

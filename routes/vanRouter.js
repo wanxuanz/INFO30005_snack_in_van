@@ -36,9 +36,7 @@ vanRouter.post('/register', passport.authenticate('local-van-register', {
     failureRedirect: '/vender', // redirect to signup page
     failureFlash: true // allow flash messages
 }));
-//handle send locations
-// vanRouter.get('/send_location', (req, res) => vanController.sendLocation(req, res))
-
+//handle send locationsx
 vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
     res.render('setLocation', { layout: "vender_main.hbs" });
 });

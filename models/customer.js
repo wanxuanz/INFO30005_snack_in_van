@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt   = require('bcrypt-nodejs')
+const bcrypt = require('bcrypt-nodejs')
 
 const cartSchema = new mongoose.Schema({
     foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
@@ -9,10 +9,10 @@ const cartSchema = new mongoose.Schema({
 const customerSchema = new mongoose.Schema({
     email: {
         type: String,
-        unique : true, 
-        required : true,
-      },
-    
+        unique: true,
+        required: true,
+    },
+
     password: String,
     firstName: String,
     lastName: String,

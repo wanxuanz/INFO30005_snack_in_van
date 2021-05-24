@@ -42,13 +42,14 @@ customerRouter.post('/register', passport.authenticate('local-signup', {
 
 // LOGOUT
 customerRouter.post('/logout', function(req, res) {
-    // save the favourites
     req.logout();
     req.flash('');
     res.redirect('/customer/');
 });
 
+customerRouter.get('/chooseVan', customerController.getVans)
 
+customerRouter.post('/chooseVan', customerController.chooseVan)
 
 //handle the GET request to get the Shopping Cart by the customer id
 customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, customerController.findCart)

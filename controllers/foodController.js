@@ -23,7 +23,7 @@ const getAllFoods = async(req, res) => {
         //const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const foods = await Food.find().lean()
             // return res.send(foods)
-        res.render('foodlist', { "foods": foods, layout: thelayout })
+        res.render('foodlist', { "foods": foods, "vanId": req.session.vanId, layout: thelayout })
     } catch (err) {
         res.status(400)
         return res.send("Database query failed")
@@ -87,9 +87,9 @@ const selectQuantity = async(req, res) => {
     const thisCustomer = await Customer.findOne({ email: req.session.email })
 
     let addFood = await Food.findOne({ foodId: req.params.foodId })
-    
 
-    
+
+
     // // add food to customer's order list
     // orderRecord = new Cart({ foodId: addFood._id })
     // thisCustomer.cart.push(orderRecord)
@@ -102,38 +102,38 @@ const selectQuantity = async(req, res) => {
 
 //add food to customer cart
 const addFoodQuantity = async(req, res) => {
-    
+
     // find the customer
     const thisCustomer = await Customer.findOne({ email: req.session.email })
     var shopping_cart = thisCustomer.cart
-    // find the foodId
+        // find the foodId
     let addFood = await Food.findOne({ foodId: req.params.foodId })
-    // if there are food in shopping cart
-    if(shopping_cart.length){
+        // if there are food in shopping cart
+    if (shopping_cart.length) {
         var flag = 1
-        // if the food is already exist in the shopping cart, we add up the quantity
+            // if the food is already exist in the shopping cart, we add up the quantity
         for (var i = 0; i < shopping_cart.length; i++) {
             // compare object id using equals
-            if(shopping_cart[i].foodId.equals(addFood._id)){
+            if (shopping_cart[i].foodId.equals(addFood._id)) {
                 shopping_cart[i].quantity += Number(req.body.quantity)
                 flag = 0;
             }
         }
         // cannot find the food
-        if(flag){
+        if (flag) {
             console.log("cannot find the food here")
-            orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity})
-            thisCustomer.cart.push(orderRecord)     
+            orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity })
+            thisCustomer.cart.push(orderRecord)
         }
-    }else{ // first time insertion
-        orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity})
+    } else { // first time insertion
+        orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity })
         thisCustomer.cart.push(orderRecord)
     }
 
     console.log(thisCustomer)
-    //找customer的shopping cart然后存数量就好了
+        //找customer的shopping cart然后存数量就好了
     await thisCustomer.save()
-    return res.render("addToCart", { "thisfood": addFood.toJSON(), "quantity": req.body.quantity})
+    return res.render("addToCart", { "thisfood": addFood.toJSON(), "quantity": req.body.quantity })
 
     // const thisCustomer = await Customer.findOne({ email: req.session.email })
 
