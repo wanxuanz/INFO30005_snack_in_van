@@ -24,6 +24,7 @@ require('./config/passport')(passport);
 
 // Enable cors
 app.use(cors())
+const validator = require("email-validator");
 
 // setup a session store signing the contents using the secret key
 app.use(session({
@@ -105,7 +106,7 @@ app.get('/customer', (req, res) => {
     if (req.session.email == null) {
         thelayout = 'beforeLogin.hbs'
     } else { thelayout = 'main.hbs' }
-    res.render('index', { layout: thelayout });
+    res.render('index', { layout: thelayout })
 })
 
 // here goes the customer server after the customer has login

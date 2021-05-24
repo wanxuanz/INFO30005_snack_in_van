@@ -1,5 +1,6 @@
 <section id = "login-page">
    <div>
+       <h1>{{message}}</h1>
         <form action="login" method="post" >
             <ul style="list-style-type:none">
                 <li>
@@ -11,18 +12,32 @@
                 <li>
                     <label for="password">Password</label>
                     </br>
-                    <input type="text" id="password" name="password" placeholder="Password">
+                    <input type="password" id="pwd" name="password" placeholder="Password">
+                    <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
+                    <script>
+                        var eye = document.getElementById("eye");
+                        var pwd = document.getElementById("pwd");
+
+                        function showhide(){
+
+                                if (pwd.type == "password") {
+                                    pwd.type = "text";
+                                        eye.className='fas fa-eye-slash'
+                                }else {
+                                    pwd.type = "password";
+                                    eye.className='fas fa-eye'
+                                }
+                        }
+                    </script>
+
                 </li>
                 </br>
                 <li>
-                    {{!-- <input type="submit" value="confirm">  --}}
-                    {{!-- <button onclick="document.location='/customer/register'" class="register-btn">register</button> --}}
-                    {{!-- <a href="/customer/register" class="register-btn"> register </a> --}}
                      <button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
                      &nbsp;&nbsp;
-                    {{!-- <input type="submit" value="confirm">  --}}
+                    
                     <button type="submit" class="register-btn"> Confirm</button>
-                    {{!-- <button type="submit" class="register-btn"> <a class="a-register">Confirm</a></button> --}}
+                    
                 </li>
         </form>
     </div>

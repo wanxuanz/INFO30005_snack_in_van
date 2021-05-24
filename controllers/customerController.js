@@ -5,10 +5,6 @@ const order = require("../models/order")
 const Order = order.Order
 const van = require("../models/van")
 const Van = van.Van
-    // import customer model
-    // const mongoose = require("mongoose")
-    // const Customer = mongoose.model("Customer")
-    // const Order = mongoose.model("newOrders")
 
 // this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
@@ -117,22 +113,28 @@ const getOneCustomer = async(req, res) => {
 };
 
 // add one customer in the register
-const addOneCustomer = async(req, res) => {
+const changeInfo = async(req, res) => {
     // handle invalid input
-    if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
+    if (req.body.password2 === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
         res.status(404)
-        return res.render('registerfail', { layout: "beforeLogin" })
+        return res.render('changeinfofail', { "message": "blank input, type again please" })
     }
-    var postData = {
-        email: req.body.email,
-        password: req.body.password,
-        firstName: req.body.first_name,
-        lastName: req.body.last_name
-    };
-    const customer = new Customer(postData) // construct a new customer object from body of POST
+    if (!req.body.password2 === req.body.password) {
+        res.status(404)
+        return res.render('changeinfofail', { "message": "Please input the same passowrd twice." })
+    }
+    // let pass=Customer.generateHash(req.body.password)
+    // await Customer.updateOne({ "email": req.session.email }, { "password": pass,"lastName": req.body.last_name, "firstName":req.body.first_name}).lean()
+
+    // oneCustomer.password = pass;
+    // oneCustomer.lastName = req.body.last_name;
+    // oneCustomer.firstName = req.body.first_name; // construct a new customer object from body of POST
     try {
-        await customer.save() // save new customer object to database
-        return res.render('customer', { "thiscustomer": customer.toJSON() }) // return saved object to sender
+        var oneCustomer = new Customer();
+        var passw = oneCustomer.generateHash(req.body.password)
+        await Customer.findOneAndUpdate({ "email": req.session.email }, { "password": passw, "lastName": req.body.last_name, "firstName": req.body.first_name }).lean()
+        var oneCustomer = await Customer.findOne({ "email": req.session.email })
+        return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
 
     } catch (err) { // error detected
         res.status(400)
@@ -140,7 +142,14 @@ const addOneCustomer = async(req, res) => {
     }
 }
 
-// find all the order the current customer has ordered
+
+const changeInfo1 = async(req, res) => {
+
+        var oneCustomer = await Customer.findOne({ "email": req.session.email })
+        return res.render('changeinfo', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
+
+    }
+    // find all the order the current customer has ordered
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
@@ -195,7 +204,8 @@ const placeOrder = async(req, res) => {
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
-        status: "Outstanding"
+        status: "Outstanding",
+        rating: 5
     };
 
     var order = new Order(postData)
@@ -309,17 +319,34 @@ const changeOrder = async(req, res) => {
     }
 }
 
+const getInfo = async(req, res) => {
+
+    const oneCustomer = await Customer.findOne({ "email": req.session.email })
+    if (oneCustomer === null) { // no author found in database
+        res.status(404)
+        return res.render('loginNotSuccess', { layout: "beforeLogin" })
+    }
+    return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
+};
+
+
 //export the functions
 module.exports = {
     findCart,
     removeOneFood,
     getOneCustomer,
-    addOneCustomer,
+    changeInfo,
     getAllCustomernewOrders,
     placeOrder,
+    <<
+    << << < HEAD
     getVans,
     chooseVan,
     cancelOrder,
     changeOrder,
-    editQuantity
+    editQuantity ===
+    === =
+    changeInfo1,
+    getInfo >>>
+    >>> > deliverable4 - vender - van - 2 - quantity - display
 }

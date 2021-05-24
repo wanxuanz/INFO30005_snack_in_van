@@ -12,9 +12,10 @@ const customerRouter = express.Router()
 // add the customer controller
 const customerController = require('../controllers/customerController.js');
 const foodRouter = require('./foodRouter.js');
+const orderRouter = require('./orderRouter.js');
 
 customerRouter.get("/login", (req, res) => {
-    res.render('login', { layout: 'beforeLogin.hbs' });
+    res.render('login', { layout: 'beforeLogin.hbs', message: req.flash('loginMessage') });
 });
 
 //handle the GET request for login
@@ -30,13 +31,13 @@ customerRouter.post('/login', passport.authenticate('local-login', {
 
 //handle the GET request to register
 customerRouter.get('/register', function(req, res) {
-    res.render('register', { layout: 'beforeLogin.hbs' })
+    res.render('register', { layout: 'beforeLogin.hbs', message: req.flash('signupMessage') })
 });
 
 //handle the POST request to register
 customerRouter.post('/register', passport.authenticate('local-signup', {
     successRedirect: '/customer', // redirect to the homepage
-    failureRedirect: '/customer/register/', // redirect to signup page
+    failureRedirect: '/customer/register', // redirect to signup page
     failureFlash: true // allow flash messages
 }));
 
@@ -50,6 +51,27 @@ customerRouter.post('/logout', function(req, res) {
 customerRouter.get('/chooseVan', customerController.getVans)
 
 customerRouter.post('/chooseVan', customerController.chooseVan)
+    //handle the GET request to get the customer profile
+customerRouter.get('/getinfo', utilities.isLoggedInCustomer, customerController.getInfo)
+
+//handle the get request to change the customer profile
+customerRouter.get('/changeinfo', utilities.isLoggedInCustomer, (req, res) =>
+    customerController.changeInfo1(req, res)
+);
+
+customerRouter.post('/changeinfo', utilities.isLoggedInCustomer, (req, res) => customerController.changeInfo(req, res))
+
+// customerRouter.get("/changeinfo", (req, res) => {
+//     res.render('changeinfo', {message: req.flash('changeMessage') });
+// });
+
+//handle the POST request to change the customer profile
+// customerRouter.post('/changeinfo', passport.authenticate('local-changeinfo', {
+//     successRedirect: '/customer', // redirect to the homepage
+//     failureRedirect: '/customer/changeinfos', // redirect to signup page
+//     failureFlash: true // allow flash messages
+// }));
+
 
 //handle the GET request to get the Shopping Cart by the customer id
 customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, customerController.findCart)
@@ -76,13 +98,16 @@ customerRouter.post('/newOrders/change_order', utilities.isLoggedInCustomer, (re
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 
+customerRouter.use('/orders', orderRouter)
+
+
 //logout
 customerRouter.get('/logout', function(req, res) {
 
     req.logout();
     req.flash('');
     req.session.destroy();
-    res.redirect('/customer/');
+    res.redirect('/customer');
 });
 
 

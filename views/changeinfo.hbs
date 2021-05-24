@@ -1,36 +1,31 @@
 <section id = "register-page">
-    <h1>Register</h1>
-            <h1>{{message}}</h1>
-            <form action="register" method="post">
+    <h1>change my detail</h1>
+        <h1>{{message}}</h1>    
+            <form action="changeinfo" method="post">
                 <ul style="list-style-type:none">
-                    <li>
-                        <label for="email">Email</label>
-                        </br>
-                        <input type="text" id="email" name="email" placeholder="email">
-                    </li>
                     <li>
                         <label for="first_name">First Name</label>
                         </br>
-                        <input type="text" pattern="[A-Za-z ]{1,30}" id="first_name" name="first_name" placeholder="first name">
+                        
+                        <input type="text" pattern="[A-Za-z ]{1,30}" id="first_name" name="first_name" placeholder={{thiscustomer.firstName}} class="register-page-input">
                     </li>
-                    <li>
+                     <li>
                         <h2>☼ only character and spaces </h2>
                         <h2>☼ only 1 to 30 digits </h2>
                     </li>
                     <li>
                         <label for="last_name">Last Name</label>
                         </br>
-                        <input type="text" pattern="[A-Za-z ]{1,30}" id="last_name" name="last_name" placeholder="last name">
+                        <input type="text" pattern="[A-Za-z ]{1,30}" id="last_name" name="last_name" placeholder={{thiscustomer.lastName}}  class="register-page-input">
                     </li>
-                    <li>
+                     <li>
                         <h2>☼ only character and spaces </h2>
                         <h2>☼ only 1 to 30 digits </h2>
                     </li>
-                    
                     <li>
                         <label for="password">Password</label>
                         </br>
-                        <input type="password" pattern="[A-Za-z0-9]{5,10}" id="pwd" name="password" placeholder="********">
+                        <input type="password" pattern="[A-Za-z0-9]{5,10}" id="pwd" name="password" placeholder="********" class="register-page-input">
                         <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
                     </li>
                     <li>
@@ -41,17 +36,17 @@
                     <li>
                         <label for="password">Confirm your Password</label>
                         </br>
-                        <input type="password" id="pwd" name="password2" placeholder="********">
+                        <input type="password" id="pwd" name="password2" placeholder="********" class="register-page-input">
                         <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
-                    
                     </li>
                     
                     </br>
                     <li>
-                        <button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
+                        {{!-- <a href="/customer/login" class="register-btn"> login </a> --}}
+                        <button class="register-btn"><a href="/customer/getinfo" class="a-register">Cancel</a></button>
                         &nbsp;&nbsp;
                         <button type="submit" class="register-btn"> Confirm</button>
-
+                        {{!-- <input type="submit" value="confirm"> --}}
                     </li>
                 </ul>
             </form>

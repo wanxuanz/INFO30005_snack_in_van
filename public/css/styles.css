@@ -3,7 +3,7 @@
 :root {
     --text-big: 36px;
     --text-medium: 22px;
-    --text-small: 16px;
+    --text-small: 15px;
     /* --font-body: 'Lexend Mega', sans-serif; */
     /* --font-body: 'Goudy Bookletter 1911', serif; */
     --font-body: 'Roboto', sans-serif;
@@ -16,6 +16,7 @@
     --color-background: #F5F2ED;
     --color-brown: #BF863F;
     --color-median-yellow: #CC9E22;
+    --color-darkgrey: #D97D14;
 }
 
 
@@ -41,6 +42,22 @@ h1 {
     text-align: center;
     font-size: var(--text-big);
     color: var(--color-dark);
+    margin-top: 0;
+}
+
+h2 {
+    /* text-align: center; */
+    font-size: var(--text-small);
+    color: var(--color-brown);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h3 {
+    /* text-align: center; */
+    font-size: var(--text-median);
+    text-align: center;
+    color: var(--color-brown);
     margin-top: 0;
 }
 
@@ -487,6 +504,9 @@ a#addToCart:hover {
     #shopping-cart input[type$=number] {
         font-size: var(--text-small);
         width: 50%;
+    }
+    .register-page-input {
+        font-size: var(--text-small);
     }
 }
 

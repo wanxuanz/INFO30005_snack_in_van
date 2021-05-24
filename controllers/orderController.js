@@ -76,13 +76,35 @@ const updatenewOrderstatus = async(req, res) => {
     res.send(result)
 }
 
+const getRating = async(req, res) => {
+    
+    try {
+        //const customer = await Customer.findOne({ "_id": req.params._id }).lean()
+        const order = await Order.findOne({"_id": req.params.orderId}).lean()
+            // return res.send(foods)
+        res.render('rating', {"thisorder":order})
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+
+}
+
+const finishRating = async(req, res) => {
+
+    return res.render('ratingsuccess') // return saved object to sender
+
+}
+
+
 // export the functions
 module.exports = {
     getAllnewOrders,
     getOutstandingnewOrders,
     updatenewOrderstatus,
     getOneOrder,
-
+    finishRating,
+    getRating,
 
     viewAllOrders
 }
