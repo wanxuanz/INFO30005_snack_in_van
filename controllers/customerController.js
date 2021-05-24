@@ -338,15 +338,11 @@ module.exports = {
     changeInfo,
     getAllCustomernewOrders,
     placeOrder,
-    <<
-    << << < HEAD
     getVans,
     chooseVan,
     cancelOrder,
     changeOrder,
-    editQuantity ===
-    === =
+    editQuantity,
     changeInfo1,
-    getInfo >>>
-    >>> > deliverable4 - vender - van - 2 - quantity - display
+    getInfo
 }
