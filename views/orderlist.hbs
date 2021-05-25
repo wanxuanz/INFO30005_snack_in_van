@@ -1,18 +1,18 @@
 <section id="orderList">
     <script>
+    const ten_mintues = 600000
     function cancel(status, dateUTC) {
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        {{!-- 600000 is 10 minutes --}}
-        if(diff < 600000 && status !== "fulfilled"){
+        if(diff < ten_mintues && status !== "fulfilled"){
             return confirm('Are you sure you want to cancel your order?');
         }
-        if(diff < 600000 && status === "fulfilled"){
+        if(diff < ten_mintues && status === "fulfilled"){
             alert("you cannot modify as your order is fulfilled ")
             return false
         }
-        if(diff > 600000){
+        if(diff > ten_mintues){
             alert("you cannot cancel the order as it has placed for more than 10 minutes")
             return false
         }   
@@ -21,15 +21,14 @@
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        {{!-- 600000 is 10 minutes --}}
-        if(diff < 600000 && status !== "fulfilled"){
+        if(diff < ten_mintues && status !== "fulfilled"){
             return confirm('Are you sure you want to change your order?');
         }
-        if(diff < 600000 && status === "fulfilled"){
+        if(diff < ten_mintues && status === "fulfilled"){
             alert("you cannot modify as your order is fulfilled ")
             return false
         }
-        if(diff > 600000){
+        if(diff > ten_mintues){
             alert("you cannot change the order as it has placed for more than 10 minutes")
             return false
         }
@@ -41,7 +40,7 @@
         {{#if this.visibility}}
         <li>
             <table>
-                <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
+                <tr style="row"><td>Order ID: </td><td>{{this._id}}</td></tr>
                 <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
                 <tr><td>Order time: </td><td>{{this.time}}</td></tr>
                 <tr><td>Status: </td><td>{{this.status}}</td></tr>
@@ -55,21 +54,50 @@
                     {{/each}}
                 </table></td>
                 </tr>
-                <tr><td>Total Price: </td><td>${{this.total}}</td></tr>
+                <tr><td>Total Price: </td>
+                    <td>${{this.total}} 
+                        {{!-- {{#if this.discount }}
+                        20%discount
+                        {{/if}} --}}
+                    </td>
+                    </tr>
 
-                <tr>
+
+                {{#if (checkTime this.dateUTC) }}
+                <tr  style="height: 45px; align: justify;">
                     <td colspan="2">
                         <form method="post" action="newOrders/cancel_order">
                         <input type="hidden" name = "orderId" value="{{this._id}}">
                         <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
                         Cancel Order
                         </button>
-                    </td>  
-                </tr>
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
                         </form>
+                    </td>
+
+                </tr>
+                {{!-- <tr  style="height: 45px; justify-content: space-evenly;">
+                    <td style="width:50%">  
+                        <form method="post" action="newOrders/cancel_order">
+                        <input type="hidden" name = "orderId" value="{{this._id}}">
+                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
+                        Cancel Order
+                        </button>
+                        </form>
+                    </td>   
+                    <td style="width:50%">
+                        
+                        <form method="post" action="newOrders/change_order">
+                        <input type="hidden" name = "orderId" value="{{this._id}}">
+                        <input type="hidden" name = "items" value="{{this.items}}">
+                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
+                        Change Order
+                        </button>
+                        </form>
+                    </td> 
+                </tr> --}}
+                <tr style="height: 45px;">
+                    <td colspan="2">
+                        
                         <form method="post" action="newOrders/change_order">
                         <input type="hidden" name = "orderId" value="{{this._id}}">
                         <input type="hidden" name = "items" value="{{this.items}}">
@@ -79,8 +107,9 @@
                         </form>
                     </td> 
                 </tr>
-                
-                <tr><td>&nbsp;</td></tr>
+  
+                {{/if}} 
+
             </table> 
         </li>
         {{/if}}
