@@ -412,6 +412,59 @@ a#addToCart:hover {
     border: solid grey 1px;
 }
 
+/**************************************************************************/
+/* Vender */
+
+a#updateVanStatus {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#updateVanStatus:hover {
+    color: var(--color-dark);
+}
+
+
+a#availability {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#availability:hover {
+    color: var(--color-dark);
+}
+
+a#updateOrderStatus {   /* the heart-shaped 'favourite' button */
+    font-size: 25px;
+    color: var(--color-brown);
+    background-color: lightgrey;
+    display: block;
+    text-align:center;
+}    
+
+a#updateOrderStatus:hover {
+    color: var(--color-dark);
+}
+
+
+/* #shopping-cart button:hover {
+    background-color: #CC9E22;
+} */
+
+#vanDetials table {
+    /* the table of nutritional data */
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    background-color: var(--color-grey);
+    border: solid grey 1px;
+}
 
 /**************************************************************************/
 

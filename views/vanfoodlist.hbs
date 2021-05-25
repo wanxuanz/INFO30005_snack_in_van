@@ -1,0 +1,14 @@
+<section id="foodList">
+    <ul>
+        {{#each foods}}
+{{!-- this authors will be the data-name --}}
+        <li>
+            <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
+            <p>{{this.name}}: ${{this.price}}</p>
+            {{!-- <button margin="0 auto"><a id="availability" href="/vender/vans/menu/{{this.foodId}}/updateFoodStatus">{{this.availability}}</a></button> --}}
+        </li>
+
+        {{/each}}
+        
+    </ul>
+</section>

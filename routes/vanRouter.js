@@ -44,7 +44,27 @@ vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanControll
 
 // vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
 
+// go to home page
+vanRouter.get("/home", utilities.isLoggedIn, (req, res) => vanController.getOneVan(req, res))
+
+// vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
+
+// get the vender menu
+vanRouter.get('/menu', utilities.isLoggedIn, (req, res) => vanController.getVanFoods(req, res))
+
+// update van status
+vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, (req, res) => vanController.updateVanStatus(req, res))
+
 vanRouter.use('/', orderRouter)
+
+// logout
+vanRouter.get('/logout', function(req, res) {
+
+    req.logout();
+    req.flash('');
+    req.session.destroy();
+    res.redirect('/vender');
+});
 
 // export the router
 module.exports = vanRouter

@@ -23,6 +23,33 @@ const viewAllOrders = async(req, res) => {
     }
 }
 
+// find outstanding order
+const viewOutstandingOrders = async(req, res) => {
+    try {
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const outstandingOrders = await Order.find({ vanId: req.session.van_name, status: "Outstanding" }).sort({ dateCompare: 'asc' }).lean()
+        return res.render('vanOutstandingOrders', { "outstandingOrders": outstandingOrders, layout: thelayout})
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+// find order history
+const viewOrderHistory = async(req, res) => {
+    try {
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const OrderHistory = await Order.find({ vanId: req.session.van_name, status: "Fulfilled" }).sort({ dateCompare: 'asc' }).lean()
+        return res.render('vanOrderHistory', { "OrderHistory": OrderHistory, layout: thelayout})
+    } catch (err) {
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
 
 
 
@@ -96,6 +123,24 @@ const finishRating = async(req, res) => {
 
 }
 
+const updateOrderStatus = async(req, res) => {
+    if (req.session.email == null) {
+        thelayout = 'vender_main.hbs'
+    } else { thelayout = 'vender_main.hbs' }
+
+    const outstandingOrder = await Order.findOne({ vanId: req.session.van_name , "_id": req.params._id}).lean()
+    await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled" }).lean()
+    console.log(outstandingOrder._id)
+
+    return res.render("updateOrderStatus", {"outstandingOrder": outstandingOrder})
+    // const outstandingOrders = await Order.find({ vanId: req.session.van_name }).lean()
+    // for(var i=0; i<outstandingOrders.length; i++) {
+    //     console.log(i)
+    //     await Order.updateOne({ _id: outstandingOrders[i]._id }, { status: "Fulfilled" }).lean()
+    //     return res.render('updateOrderStatus', {layout: thelayout})
+    // }
+}
+
 
 // export the functions
 module.exports = {
@@ -106,5 +151,8 @@ module.exports = {
     finishRating,
     getRating,
 
-    viewAllOrders
+    viewAllOrders,
+    viewOutstandingOrders,
+    viewOrderHistory,
+    updateOrderStatus
 }
