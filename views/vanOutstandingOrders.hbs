@@ -39,8 +39,8 @@
                 
                 <tr>
                     <td colspan="2">
-                        <form method="post" action="/vender/vans/orders/outstanding/updateOrderStatus">
-                            <input type="hidden" name = "status" value="{{this.status}}">
+                        <form method="post" action="/vender/vans/orders/outstanding/{{this._id}}/updateOrderStatus">
+                            <input type="hidden" name = "_id" value="{{this._id}}">
                             <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this._id}}');">
                             Change Status
                             </button>

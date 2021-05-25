@@ -14,7 +14,7 @@ orderRouter.get('/orders/outstanding', utilities.isLoggedIn, (req, res) => order
 
 orderRouter.get('/orders/history', utilities.isLoggedIn, (req, res) => orderController.viewOrderHistory(req, res))
 
-orderRouter.post('/orders/outstanding/updateOrderStatus', utilities.isLoggedIn, (req, res) => orderController.updateOrderStatus(req, res))
+orderRouter.post('/orders/outstanding/:_id/updateOrderStatus', utilities.isLoggedIn, (req, res) => orderController.updateOrderStatus(req, res))
 
 
 // export the router

@@ -125,13 +125,18 @@ const updateOrderStatus = async(req, res) => {
         if (req.session.email == null) {
             thelayout = 'vender_main.hbs'
         } else { thelayout = 'vender_main.hbs' }
-        
-        const outstandingOrders = await Order.find({ vanId: req.session.van_name }).lean()
-        for(var i=0; i<outstandingOrders.length; i++) {
-            console.log(i)
-            await Order.updateOne({ _id: outstandingOrders[i]._id }, { status: "Fulfilled" }).lean()
-            return res.render('updateOrderStatus', {layout: thelayout})
-        }
+
+        const outstandingOrder = await Order.findOne({ vanId: req.session.van_name , "_id": req.params._id}).lean()
+        await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled" }).lean()
+        console.log(outstandingOrder._id)
+
+        return res.render("updateOrderStatus", {"outstandingOrder": outstandingOrder})
+        // const outstandingOrders = await Order.find({ vanId: req.session.van_name }).lean()
+        // for(var i=0; i<outstandingOrders.length; i++) {
+        //     console.log(i)
+        //     await Order.updateOne({ _id: outstandingOrders[i]._id }, { status: "Fulfilled" }).lean()
+        //     return res.render('updateOrderStatus', {layout: thelayout})
+        // }
 }
 
 // export the functions
