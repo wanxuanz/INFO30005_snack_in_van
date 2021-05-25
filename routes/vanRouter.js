@@ -52,9 +52,9 @@ vanRouter.get("/home", utilities.isLoggedIn, (req, res) => vanController.getOneV
 // get the vender menu
 vanRouter.get('/menu', utilities.isLoggedIn, (req, res) => vanController.getVanFoods(req, res))
 
+// update van status
 vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, (req, res) => vanController.updateVanStatus(req, res))
 
-// update food status
 // vanRouter.post('/:foodId/updateFoodStatus', utilities.isLoggedIn, (req, res) => vanController.updateFoodStatus(req, res))
 
 

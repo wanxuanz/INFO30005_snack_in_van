@@ -190,7 +190,7 @@ module.exports = {
     updateLocation,
 
     getOneVan,
-    getVanFoods,
+    getVanFoods
     //updateFoodStatus,
     // showVanStatus
 }

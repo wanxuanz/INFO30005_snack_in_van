@@ -151,10 +151,6 @@ button#updateStatus {
     align-items:center
 }
 
-#vanDetials a{
-    
-}
-
 a#updateVanStatus {   /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
