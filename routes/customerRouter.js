@@ -69,13 +69,12 @@ customerRouter.post('/newOrders/cancel_order', utilities.isLoggedInCustomer, (re
 
 customerRouter.post('/newOrders/change_order', utilities.isLoggedInCustomer, (req, res) => customerController.changeOrder(req, res))
 
-customerRouter.get('/:orderId', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
-
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 
 customerRouter.use('/orders', orderRouter)
 
+customerRouter.get('/:orderId', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
 
 //logout
 customerRouter.get('/logout', function(req, res) {
