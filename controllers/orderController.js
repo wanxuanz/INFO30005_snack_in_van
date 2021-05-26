@@ -48,8 +48,6 @@ const updatenewOrderstatus = async(req, res) => {
     res.send(result)
 }
 
-<<<<<<< Updated upstream
-=======
 const getRating = async(req, res) => {
     
     try {
@@ -99,7 +97,6 @@ const updateOrderStatus = async(req, res) => {
 }
 
 
->>>>>>> Stashed changes
 // export the functions
 module.exports = {
     getAllnewOrders,
