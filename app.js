@@ -113,7 +113,12 @@ app.use('/customer', customerRouter)
 //handler for GET home page
 app.get('/vender', (req, res) => {
     // res.send('<h1>Vender App</h1>')
-    res.render('venderHomepage', { layout: "vender_main.hbs" });
+    try {
+        res.render('venderHomepage', { layout: "vender_main.hbs" });
+    } catch (error) {
+        
+    }
+    return res.status(400).render('error', { errorCode: '400', message: 'cannot get vender home page' })
 })
 
 // handler for newOrders in van requests
