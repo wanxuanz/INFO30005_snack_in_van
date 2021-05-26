@@ -16,7 +16,6 @@ const findCart = async(req, res) => {
             // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-                // oneFood["cartId"] = cart[i]._id
             oneFood["quantity"] = cart[i].quantity
             cartFood.push(oneFood)
             total_price = total_price + Number(oneFood.price) * cart[i].quantity;
@@ -27,39 +26,11 @@ const findCart = async(req, res) => {
         }
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
-        res.status(400)
         console.log(err)
-        return res.send("Cannot find the shopping cart")
+        return res.status(400).render('error', { errorCode: '400', message: 'Cannot find the shopping cart.' })
     }
 }
 
-// this function is used to remove one food from shopping cart
-const removeOneFood = async(req, res) => {
-    try {
-        // await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "_id": req.body.item_id } } }).lean()
-        await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
-        const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        const cart = customer.cart // array
-        const cartFood = []
-        var total_price = 0
-            // find the detail of foods
-        for (var i = 0; i < cart.length; i++) {
-            var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
-            oneFood["cartId"] = cart[i]._id
-            oneFood["quantity"] = cart[i].quantity
-            cartFood.push(oneFood)
-            total_price = total_price + Number(oneFood.price) * cart[i].quantity;
-        }
-        if (customer === null) {
-            res.status(404)
-            return res.send('Food not found')
-        }
-        res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
-    } catch (err) {
-        res.status(400)
-        return res.send("Cannot remove this food")
-    }
-}
 const editQuantity = async(req, res) => {
     try {
         // if the quantity is 0, remove the food
@@ -67,16 +38,14 @@ const editQuantity = async(req, res) => {
             await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
         } else { // update the quantity
             await Food.updateOne({ name: 'Beer' }, { description: 'changed the beer' })
-                // await Order.updateOne({"_id": req.body.orderId}, {"$set": { "visibility": false }});
             await Customer.updateOne({ "email": req.session.email, "cart.foodId": req.body.item_id }, {
                 $set: {
                     "cart.$.quantity": req.body.quantity
                 }
             })
         }
-        // await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        const cart = customer.cart // array
+        const cart = customer.cart
         const cartFood = []
         var total_price = 0
             // find the detail of foods
@@ -93,24 +62,9 @@ const editQuantity = async(req, res) => {
         }
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
-        res.status(400)
-        return res.send("Cannot remove this food")
+        return res.status(400).render('error', { errorCode: '400', message: 'Cannot edit this item' })
     }
 }
-
-//find the login customer
-const getOneCustomer = async(req, res) => {
-    if (req.body.email === "") {
-        res.status(404)
-        return res.render('loginNotSuccess', { layout: "beforeLogin" })
-    }
-    const oneCustomer = await Customer.findOne({ "email": req.body.email, "password": req.body.password })
-    if (oneCustomer === null) { // no author found in database
-        res.status(404)
-        return res.render('loginNotSuccess', { layout: "beforeLogin" })
-    }
-    return res.render('customer', { "thiscustomer": oneCustomer.toJSON() })
-};
 
 // add one customer in the register
 const changeInfo = async(req, res) => {
@@ -123,12 +77,6 @@ const changeInfo = async(req, res) => {
         res.status(404)
         return res.render('changeinfofail', { "message": "Please input the same passowrd twice." })
     }
-    // let pass=Customer.generateHash(req.body.password)
-    // await Customer.updateOne({ "email": req.session.email }, { "password": pass,"lastName": req.body.last_name, "firstName":req.body.first_name}).lean()
-
-    // oneCustomer.password = pass;
-    // oneCustomer.lastName = req.body.last_name;
-    // oneCustomer.firstName = req.body.first_name; // construct a new customer object from body of POST
     try {
         var oneCustomer = new Customer();
         var passw = oneCustomer.generateHash(req.body.password)
@@ -137,19 +85,21 @@ const changeInfo = async(req, res) => {
         return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
 
     } catch (err) { // error detected
-        res.status(400)
-        return res.render("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
 
 const changeInfo1 = async(req, res) => {
-
+    try {
         var oneCustomer = await Customer.findOne({ "email": req.session.email })
         return res.render('changeinfo', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
-
+    } catch (error) {
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
-    // find all the order the current customer has ordered
+}
+
+// find all the order the current customer has ordered
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
@@ -160,20 +110,16 @@ const getAllCustomernewOrders = async(req, res) => {
             for (var j = 0; j < newOrders[i].items.length; j++) {
                 var thisfood = await Food.findOne({ "_id": newOrders[i].items[j].foodId })
                 var foodname_quantity = {
-                        foodname: thisfood.name,
-                        quantity: newOrders[i].items[j].quantity
-                    }
-                    // console.log(newOrders[i].items[j])
-                    // foodnames.push(thisfood.name)
+                    foodname: thisfood.name,
+                    quantity: newOrders[i].items[j].quantity
+                }
                 foodnames.push(foodname_quantity)
             }
             newOrders[i]["foodnames"] = foodnames
         }
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
-        res.status(400)
-        console.log(err)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
@@ -214,8 +160,7 @@ const placeOrder = async(req, res) => {
         await order.save()
         return res.render('orderSuccess.hbs', { "thiscustomer": customer })
     } catch (err) {
-        res.status(400)
-        return res.send("placing order fails")
+        return res.status(400).render('error', { errorCode: '400', message: 'placing order fails' })
     }
 }
 
@@ -259,11 +204,9 @@ const cancelOrder = async(req, res) => {
             for (var j = 0; j < newOrders[i].items.length; j++) {
                 var thisfood = await Food.findOne({ "_id": newOrders[i].items[j].foodId })
                 var foodname_quantity = {
-                        foodname: thisfood.name,
-                        quantity: newOrders[i].items[j].quantity
-                    }
-                    // console.log(newOrders[i].items[j])
-                    // foodnames.push(thisfood.name)
+                    foodname: thisfood.name,
+                    quantity: newOrders[i].items[j].quantity
+                }
                 foodnames.push(foodname_quantity)
             }
             newOrders[i]["foodnames"] = foodnames
@@ -271,9 +214,7 @@ const cancelOrder = async(req, res) => {
         console.log(newOrders)
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
-        res.status(400)
-        console.log(err)
-        return res.send("cannot cancel the order")
+        return res.status(400).render('error', { errorCode: '400', message: 'cannot cancel the order' })
     }
 }
 
@@ -308,28 +249,26 @@ const changeOrder = async(req, res) => {
         return res.render('shoppingCart', { "thiscustomer": newCustomer, "cartFood": cartFood, "total_price": total_price })
 
     } catch (err) {
-        res.status(400)
-        console.log(err)
-        return res.send("cannot cancel the order")
+        return res.status(400).render('error', { errorCode: '400', message: 'cannot change the order' })
     }
 }
 
 const getInfo = async(req, res) => {
-
-    const oneCustomer = await Customer.findOne({ "email": req.session.email })
-    if (oneCustomer === null) { // no author found in database
-        res.status(404)
-        return res.render('loginNotSuccess', { layout: "beforeLogin" })
+    try {
+        const oneCustomer = await Customer.findOne({ "email": req.session.email })
+        if (oneCustomer === null) { // no author found in database
+            res.status(404)
+            return res.render('loginNotSuccess', { layout: "beforeLogin" })
+        }
+        return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
+    } catch (error) {
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
-    return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
-};
-
+}
 
 //export the functions
 module.exports = {
     findCart,
-    removeOneFood,
-    getOneCustomer,
     changeInfo,
     getAllCustomernewOrders,
     placeOrder,

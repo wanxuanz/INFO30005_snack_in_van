@@ -51,12 +51,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
 
-app.use(session({
-    secret: process.env.PASSPORT_KEY,
-    resave: true,
-    saveUninitialized: true
-}));
-
 //middleware that's required for passport to operate
 app.use(passport.initialize());
 
@@ -99,7 +93,7 @@ app.get('/', (req, res) => {
     if (req.session.email == null) {
         thelayout = 'beforeLogin.hbs'
     } else { thelayout = 'main.hbs' }
-    res.render('index', { layout: thelayout });
+    res.render('initialBody', { layout: 'initial' });
 })
 
 /*customer home page*/
@@ -124,6 +118,10 @@ app.get('/vender', (req, res) => {
 
 // handler for newOrders in van requests
 app.use('/vender/vans', vanRouter)
+
+app.all('*', (req, res) => { // 'default' route to catch user errors
+    return res.status(404).render('error', { errorCode: '404', message: 'That route is invalid.' })
+})
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('The snack app is running')

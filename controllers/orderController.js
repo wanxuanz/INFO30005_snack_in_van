@@ -1,26 +1,6 @@
 const mongoose = require("mongoose")
-
-// import order model
 const Order = mongoose.model("newOrders")
 const Food = require("../models/food")
-
-//view all orders
-//  In time order. with the older, more urgent orders at the top asc or desc
-const viewAllOrders = async(req, res) => {
-    try {
-        let oneVanOrder = await Order.find({ vanId: req.session.van_name }).sort({ dateCompare: 'asc' }).lean()
-            // console.log(oneVanOrder)
-        var item = [];
-        for (var i = 0; i < oneVanOrder.length; i++) {
-            item.push(oneVanOrder[i].items)
-        }
-        // console.log(item)
-        return res.send(oneVanOrder)
-    } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
 
 // find outstanding order
 const viewOutstandingOrders = async(req, res) => {
@@ -34,20 +14,16 @@ const viewOutstandingOrders = async(req, res) => {
             for (var j = 0; j < outstandingOrders[i].items.length; j++) {
                 var thisfood = await Food.findOne({ "_id": outstandingOrders[i].items[j].foodId })
                 var foodname_quantity = {
-                        foodname: thisfood.name,
-                        quantity: outstandingOrders[i].items[j].quantity
-                    }
-                    // console.log(newOrders[i].items[j])
-                    // foodnames.push(thisfood.name)
+                    foodname: thisfood.name,
+                    quantity: outstandingOrders[i].items[j].quantity
+                }
                 foodnames.push(foodname_quantity)
             }
             outstandingOrders[i]["foodnames"] = foodnames
         }
         return res.render('vanOutstandingOrders', { "outstandingOrders": outstandingOrders, layout: thelayout })
     } catch (err) {
-        res.status(400)
-        console.log(err)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
@@ -60,17 +36,9 @@ const viewOrderHistory = async(req, res) => {
         const OrderHistory = await Order.find({ vanId: req.session.van_name, status: "Fulfilled" }).sort({ dateCompare: 'asc' }).lean()
         return res.render('vanOrderHistory', { "OrderHistory": OrderHistory, layout: thelayout })
     } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
-
-
-
-
-/**********************************************************************************************************/
-
-
 
 // get all newOrders
 const getAllnewOrders = async(req, res) => {
@@ -78,8 +46,7 @@ const getAllnewOrders = async(req, res) => {
         let oneVanOrder = await Order.find({ vanId: req.params.vanId })
         return res.send(oneVanOrder)
     } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
@@ -93,8 +60,7 @@ const getOneOrder = async(req, res) => {
         }
         return res.send(oneOrder) // order was found
     } catch (err) { // error occurred
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
@@ -104,23 +70,19 @@ const getOutstandingnewOrders = async(req, res) => {
         const newOrders = await Order.find({ vanId: req.params.vanId, status: "outstanding" }, {});
         return res.send(newOrders)
     } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
 const getRating = async(req, res) => {
-
     try {
         //const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const order = await Order.findOne({ "_id": req.params.orderId }).lean()
             // return res.send(foods)
         res.render('rating', { "thisorder": order })
     } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
-
 }
 
 const finishRating = async(req, res) => {
@@ -130,27 +92,27 @@ const finishRating = async(req, res) => {
         const order = await Order.findOne({ "_id": req.params.orderId }).lean()
         return res.render('ratingsuccess', { "thisorder": order });
     } catch (err) {
-        res.status(400)
-        return res.send("Database query failed")
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 
 }
 
-// return saved object to sender
-
-
 const updateOrderStatus = async(req, res) => {
-    if (req.session.email == null) {
-        thelayout = 'vender_main.hbs'
-    } else { thelayout = 'vender_main.hbs' }
+    try {
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
 
-    const outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
-    await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false }).lean()
-    console.log(outstandingOrder._id)
+        const outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
+        await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false }).lean()
+        console.log(outstandingOrder._id)
 
-    return res.render("updateOrderStatus", { "outstandingOrder": outstandingOrder })
+        return res.render("updateOrderStatus", { "outstandingOrder": outstandingOrder })
+    } catch (error) {
+        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+    }
+
 }
-
 
 // export the functions
 module.exports = {
@@ -159,7 +121,6 @@ module.exports = {
     getOneOrder,
     finishRating,
     getRating,
-    viewAllOrders,
     viewOutstandingOrders,
     viewOrderHistory,
     updateOrderStatus

@@ -42,12 +42,8 @@ vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
 });
 vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanController.updateLocation(req, res))
 
-// vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
-
 // go to home page
 vanRouter.get("/home", utilities.isLoggedIn, (req, res) => vanController.getOneVan(req, res))
-
-// vanRouter.get('/orders', (req, res) => vanController.viewAllOrders(req, res))
 
 // get the vender menu
 vanRouter.get('/menu', utilities.isLoggedIn, (req, res) => vanController.getVanFoods(req, res))

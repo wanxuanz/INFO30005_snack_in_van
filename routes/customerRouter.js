@@ -18,10 +18,6 @@ customerRouter.get("/login", (req, res) => {
     res.render('login', { layout: 'beforeLogin.hbs', message: req.flash('loginMessage') });
 });
 
-//handle the GET request for login
-// customerRouter.get('/login', function(req, res, next) {
-//     res.render('login', { layout: 'beforeLogin.hbs' })
-// });
 //handle the POST request for login
 customerRouter.post('/login', passport.authenticate('local-login', {
     successRedirect: '/customer', // redirect to the homepage
@@ -41,13 +37,6 @@ customerRouter.post('/register', passport.authenticate('local-signup', {
     failureFlash: true // allow flash messages
 }));
 
-// LOGOUT
-customerRouter.post('/logout', function(req, res) {
-    req.logout();
-    req.flash('');
-    res.redirect('/customer/');
-});
-
 customerRouter.get('/chooseVan', customerController.getVans)
 
 customerRouter.post('/chooseVan', customerController.chooseVan)
@@ -61,23 +50,8 @@ customerRouter.get('/changeinfo', utilities.isLoggedInCustomer, (req, res) =>
 
 customerRouter.post('/changeinfo', utilities.isLoggedInCustomer, (req, res) => customerController.changeInfo(req, res))
 
-// customerRouter.get("/changeinfo", (req, res) => {
-//     res.render('changeinfo', {message: req.flash('changeMessage') });
-// });
-
-//handle the POST request to change the customer profile
-// customerRouter.post('/changeinfo', passport.authenticate('local-changeinfo', {
-//     successRedirect: '/customer', // redirect to the homepage
-//     failureRedirect: '/customer/changeinfos', // redirect to signup page
-//     failureFlash: true // allow flash messages
-// }));
-
-
 //handle the GET request to get the Shopping Cart by the customer id
 customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, utilities.isSelectedVan, customerController.findCart)
-
-//handle the POST request to remove one food from Shopping Cart by the customer id
-// customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.removeOneFood(req, res))
 
 // handle the POST request to edit one quantity one food from Shopping Cart by the customer id
 customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.editQuantity(req, res))
@@ -95,6 +69,8 @@ customerRouter.post('/newOrders/cancel_order', utilities.isLoggedInCustomer, (re
 
 customerRouter.post('/newOrders/change_order', utilities.isLoggedInCustomer, (req, res) => customerController.changeOrder(req, res))
 
+customerRouter.get('/:orderId', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
+
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 
@@ -103,12 +79,11 @@ customerRouter.use('/orders', orderRouter)
 
 //logout
 customerRouter.get('/logout', function(req, res) {
-
     req.logout();
     req.flash('');
     req.session.destroy();
     res.redirect('/customer');
-});
+})
 
 
 // export the router

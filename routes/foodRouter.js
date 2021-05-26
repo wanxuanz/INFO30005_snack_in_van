@@ -15,15 +15,11 @@ foodRouter.get('/menu/:foodId', utilities.isSelectedVan, foodController.getOneFo
 // handle the GET request to add one food
 foodRouter.get('/menu/:foodId/add', utilities.isLoggedInCustomer, foodController.addFood)
 
-
-
-
-
-/**************************************************************************************************************************/
 // display the select quantity page
 foodRouter.get('/menu/:foodId/select_quantity', utilities.isLoggedInCustomer, foodController.selectQuantity)
 
 // handle the POST request to add the record quantity to the database
 foodRouter.post('/menu/:foodId/add_quantity', utilities.isLoggedInCustomer, foodController.addFoodQuantity)
-    // export the router
+
+// export the router
 module.exports = foodRouter

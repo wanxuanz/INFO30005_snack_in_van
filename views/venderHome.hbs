@@ -26,39 +26,15 @@
             <li>
                 <h3>Location: [{{oneVan.location.coordinates}}]</h2>
             </li>
-            {{!-- <li>
-                <h3>Rating: {{oneVan.location}}</h2>
-            </li> --}}
             <li>
-                <form method="post" action="/vender/vans/home/updateVanStatus">
-                        <input type="hidden" name = "status" value="{{this.status}}">
-                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{oneVan.status}}');">
-                        Change Status
-                        </button>
-                    </form>
-            </li>
-        </ul>   
-    </section>
-    {{!-- <table>
-        <tr><td>Van Name: </td><td>{{oneVan.vanName}}</td></tr>
-        <tr><td>Van ID: </td><td>{{oneVan.vanId}}</td></tr>
-        <tr><td>Location: </td><td>{{oneVan.location}}</td></tr>
-        <tr><td>Rating: </td>
-        <tr>
-            <td colspan="2">
                 <form method="post" action="/vender/vans/home/updateVanStatus">
                     <input type="hidden" name = "status" value="{{this.status}}">
                     <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{oneVan.status}}');">
                     Change Status
                     </button>
                 </form>
-            </td> 
-        </tr> --}}
-
-
-        {{!-- <tr>
-            <td colspan="2"><center><button type="submit" class="register-btn">{{oneVan.status}}</button></center></td>
-        </tr> --}}
-        {{!-- <tr><td><a id="updateVanStatus" href="/vender/vans/home/updateVanStatus" style="color: #7A280A;">{{oneVan.status}}</a></td></tr> --}} 
+            </li>
+        </ul>   
+    </section>
     </table> 
 </section>

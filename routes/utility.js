@@ -25,8 +25,7 @@ function isSelectedVan(req, res, next) {
 }
 
 
-// export the function so that we can use
-// in other parts of our all
+// export the function
 module.exports = {
     isLoggedIn,
     isLoggedInCustomer,
