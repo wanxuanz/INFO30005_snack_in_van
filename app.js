@@ -95,6 +95,11 @@ app.get('/', (req, res) => {
     } else { thelayout = 'main.hbs' }
     res.render('initialBody', { layout: 'initial' });
 })
+//handler for GET home page
+app.get('/vender', (req, res) => {
+    // res.send('<h1>Vender App</h1>')
+        res.render('venderHomepage', { layout: "vender_main.hbs" });
+})
 
 /*customer home page*/
 app.get('/customer', (req, res) => {
@@ -104,25 +109,25 @@ app.get('/customer', (req, res) => {
     res.render('index', { layout: thelayout })
 })
 
+// handler for newOrders in van requests
+app.use('/vender/vans', vanRouter)
+
 // here goes the customer server after the customer has login
 app.use('/customer', customerRouter)
+
+
 
 // here goes the customer server before the customer has login
 //app.use('/customer/menu', beforeFoodRouter)
 
-//handler for GET home page
-app.get('/vender', (req, res) => {
-    // res.send('<h1>Vender App</h1>')
-    try {
-        res.render('venderHomepage', { layout: "vender_main.hbs" });
-    } catch (error) {
-        
-    }
-    return res.status(400).render('error', { errorCode: '400', message: 'cannot get vender home page' })
-})
+// //handler for GET home page
+// app.get('/vender', (req, res) => {
+//     // res.send('<h1>Vender App</h1>')
+//         res.render('venderHomepage', { layout: "vender_main.hbs" });
+// })
 
-// handler for newOrders in van requests
-app.use('/vender/vans', vanRouter)
+// // handler for newOrders in van requests
+// app.use('/vender/vans', vanRouter)
 
 app.all('*', (req, res) => { // 'default' route to catch user errors
     return res.status(404).render('error', { errorCode: '404', message: 'That route is invalid.' })
