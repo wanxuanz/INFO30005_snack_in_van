@@ -204,8 +204,7 @@ const placeOrder = async(req, res) => {
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
-        status: "Outstanding",
-        rating: 5
+        status: "Outstanding"
     };
 
     var order = new Order(postData)

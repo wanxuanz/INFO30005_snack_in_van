@@ -18,18 +18,17 @@
     <section id = "register-page">
         <ul style="list-style-type:none">
             <li>
-                <h3>Van Name: {{oneVan.vanName}}</h3>
-            </li>
-            
-            <li>
-                <h3>Van ID: {{oneVan.vanId}}</h3>
+                <h3>Van Name: {{oneVan.vanId}}</h3>
             </li>
             <li>
-                <h3>Location: {{oneVan.location}}</h2>
+                <h3>Address Message: {{oneVan.address}}</h2>
             </li>
             <li>
+                <h3>Location: [{{oneVan.location.coordinates}}]</h2>
+            </li>
+            {{!-- <li>
                 <h3>Rating: {{oneVan.location}}</h2>
-            </li>
+            </li> --}}
             <li>
                 <form method="post" action="/vender/vans/home/updateVanStatus">
                         <input type="hidden" name = "status" value="{{this.status}}">

@@ -9,11 +9,7 @@
 
         <section id="oneFood-text">
             <p id="description">{{thisfood.description}}</p>
-
             <p id = "price">price: ${{thisfood.price}}</p>
-
-            {{!-- <a id="addToCart" href="/customer/{{thiscustomer._id}}/menu/{{thisfood.foodId}}/add">Add to Cart</a> --}}
-            <a id="addToCart" href="/customer/menu/{{thisfood.foodId}}/add">Add to Cart</a>
             <a id="addToCart" href="/customer/menu/{{thisfood.foodId}}/select_quantity">Select quantity</a>
         </section>
     </section>

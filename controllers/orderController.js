@@ -2,8 +2,7 @@ const mongoose = require("mongoose")
 
 // import order model
 const Order = mongoose.model("newOrders")
-
-
+const Food = require("../models/food")
 
 //view all orders
 //  In time order. with the older, more urgent orders at the top asc or desc
@@ -30,9 +29,24 @@ const viewOutstandingOrders = async(req, res) => {
             thelayout = 'vender_main.hbs'
         } else { thelayout = 'vender_main.hbs' }
         const outstandingOrders = await Order.find({ vanId: req.session.van_name, status: "Outstanding" }).sort({ dateCompare: 'asc' }).lean()
+        for (var i = 0; i < outstandingOrders.length; i++) {
+            var foodnames = []
+            for (var j = 0; j < outstandingOrders[i].items.length; j++) {
+                var thisfood = await Food.findOne({ "_id": outstandingOrders[i].items[j].foodId })
+                var foodname_quantity = {
+                        foodname: thisfood.name,
+                        quantity: outstandingOrders[i].items[j].quantity
+                    }
+                    // console.log(newOrders[i].items[j])
+                    // foodnames.push(thisfood.name)
+                foodnames.push(foodname_quantity)
+            }
+            outstandingOrders[i]["foodnames"] = foodnames
+        }
         return res.render('vanOutstandingOrders', { "outstandingOrders": outstandingOrders, layout: thelayout })
     } catch (err) {
         res.status(400)
+        console.log(err)
         return res.send("Database query failed")
     }
 }
@@ -95,14 +109,6 @@ const getOutstandingnewOrders = async(req, res) => {
     }
 }
 
-// change an order status
-const updatenewOrderstatus = async(req, res) => {
-
-    await Order.updateOne({ vanId: req.params.vanId, orderId: req.params.orderId }, { status: 'fulfilled' })
-    result = await Order.findOne({ orderId: req.params.orderId })
-    res.send(result)
-}
-
 const getRating = async(req, res) => {
 
     try {
@@ -139,16 +145,10 @@ const updateOrderStatus = async(req, res) => {
     } else { thelayout = 'vender_main.hbs' }
 
     const outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
-    await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled" }).lean()
+    await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false }).lean()
     console.log(outstandingOrder._id)
 
     return res.render("updateOrderStatus", { "outstandingOrder": outstandingOrder })
-        // const outstandingOrders = await Order.find({ vanId: req.session.van_name }).lean()
-        // for(var i=0; i<outstandingOrders.length; i++) {
-        //     console.log(i)
-        //     await Order.updateOne({ _id: outstandingOrders[i]._id }, { status: "Fulfilled" }).lean()
-        //     return res.render('updateOrderStatus', {layout: thelayout})
-        // }
 }
 
 
@@ -156,11 +156,9 @@ const updateOrderStatus = async(req, res) => {
 module.exports = {
     getAllnewOrders,
     getOutstandingnewOrders,
-    updatenewOrderstatus,
     getOneOrder,
     finishRating,
     getRating,
-
     viewAllOrders,
     viewOutstandingOrders,
     viewOrderHistory,
