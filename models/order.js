@@ -18,7 +18,8 @@ const newOrderschema = new mongoose.Schema({
     status: { type: String, required: true },
     visibility: { type: Boolean, default: true },
     visibility_not_change: { type: String, required: true, default: "visible" },
-    rating: { type: Number, default: 5 }
+    rating: { type: String },
+    notshowrating: { type: Boolean, default: true }
 })
 
 

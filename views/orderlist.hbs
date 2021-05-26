@@ -56,29 +56,50 @@
                 </table></td>
                 </tr>
                 <tr><td>Total Price: </td><td>${{this.total}}</td></tr>
+                {{#if this.notshowrating}}
+                    <tr>
+                        <td colspan="2">
+                            <form method="post" action="newOrders/cancel_order">
+                            <input type="hidden" name = "orderId" value="{{this._id}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
+                            Cancel Order
+                            </button>
+                        </td>  
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            </form>
+                            <form method="post" action="newOrders/change_order">
+                            <input type="hidden" name = "orderId" value="{{this._id}}">
+                            <input type="hidden" name = "items" value="{{this.items}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
+                            Change Order
+                            </button>
+                            </form>
+                        </td> 
+                    </tr>
+                    
+                {{else}}
+                    {{#if this.rating}}
+                         
+                             <tr><td>Rating:</td><td>{{this.rating}}/5</td></tr>
+                         
+                        
+                    {{else}}
+                        <tr>
+                            <td colspan="2">
+                
+                                <center><button type="submit"  class="register-btn" style="padding: 1%;"><a href="/customer/orders/{{this._id}}/rating" class="a-register">Rating now</a></button></center>
+                            </td>  
+                        </tr>
+                    {{/if}}
+                        
+                        
+                    
+                {{/if}}
 
-                <tr>
-                    <td colspan="2">
-                        <form method="post" action="newOrders/cancel_order">
-                        <input type="hidden" name = "orderId" value="{{this._id}}">
-                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
-                        Cancel Order
-                        </button>
-                    </td>  
-                </tr>
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td colspan="2">
-                        </form>
-                        <form method="post" action="newOrders/change_order">
-                        <input type="hidden" name = "orderId" value="{{this._id}}">
-                        <input type="hidden" name = "items" value="{{this.items}}">
-                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
-                        Change Order
-                        </button>
-                        </form>
-                    </td> 
-                </tr>
+                    
                 
                 <tr><td>&nbsp;</td></tr>
             </table> 

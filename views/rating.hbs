@@ -1,14 +1,13 @@
 
 <ul style="list-style-type:none">
 
-                <li><h3>Order ID: </h3><h1>{{thisorder._id}}</h1></li>
                 <li><h3>Van ID: </h3><h1>{{thisorder.vanId}}</h1></li>
                 <li><h3>Order time: </h3><h1>{{thisorder.time}}</h1></li>
     
                 
   
 <li>
-<h1>Rating this order</h1>
+<h3>Click the star below to rate this order</h3>
 <form action="rating" method="post" >
 <ul style="list-style-type:none">
 
@@ -22,7 +21,7 @@
 	<li>
 		<button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
 		&nbsp;&nbsp;
-	<input type="hidden" name = "rating" id="rating" name=4>
+	<input type="hidden" name="rating" id="rating" value="4">
 	<button type="submit" class="register-btn"> Confirm</button>
                     
     </li>
@@ -43,7 +42,7 @@
 		star3.className='far fa-star'
 		star4.className='far fa-star'
 		star5.className='far fa-star'
-		result.setAttribute('name', 1)
+		result.setAttribute('value', "1")
 	}
 	function two(){
 		star1.className='fas fa-star'
@@ -51,7 +50,7 @@
 		star3.className='far fa-star'
 		star4.className='far fa-star'
 		star5.className='far fa-star'
-		result.setAttribute('name', 2)
+		result.setAttribute('value', "2")
 	}
 	function three(){
 		star1.className='fas fa-star'
@@ -59,7 +58,7 @@
 		star3.className='fas fa-star'
 		star4.className='far fa-star'
 		star5.className='far fa-star'
-		result.setAttribute('name', 3)
+		result.setAttribute('value', "3")
 	}
 	function four(){
 		star1.className='fas fa-star'
@@ -67,7 +66,7 @@
 		star3.className='fas fa-star'
 		star4.className='fas fa-star'
 		star5.className='far fa-star'
-		result.setAttribute('name', 4)
+		result.setAttribute('value', "4")
 	}
 	function five(){
 		star1.className='fas fa-star'
@@ -75,6 +74,6 @@
 		star3.className='fas fa-star'
 		star4.className='fas fa-star'
 		star5.className='fas fa-star'
-		result.setAttribute('name', 5)
+		result.setAttribute('value', "5")
 	}
 </script>

@@ -6,7 +6,8 @@ const orderRouter = express.Router()
 // add the order controller
 const orderController = require('../controllers/orderController.js')
 
-orderRouter.get('/orders', (req, res) => orderController.viewAllOrders(req, res))
+// handle the GET request to get all newOrders
+orderRouter.get('/:vanId/newOrders', (req, res) => orderController.getAllnewOrders(req, res))
 
 orderRouter.get('/:orderId/rating', utilities.isLoggedInCustomer, orderController.getRating)
 
