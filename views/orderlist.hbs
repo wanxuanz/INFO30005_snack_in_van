@@ -1,18 +1,18 @@
 <section id="orderList">
     <script>
+    const ten_mintues = 600000
     function cancel(status, dateUTC) {
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        {{!-- 600000 is 10 minutes --}}
-        if(diff < 600000 && status !== "fulfilled"){
+        if(diff < ten_mintues && status !== "fulfilled"){
             return confirm('Are you sure you want to cancel your order?');
         }
-        if(diff < 600000 && status === "fulfilled"){
+        if(diff < ten_mintues && status === "fulfilled"){
             alert("you cannot modify as your order is fulfilled ")
             return false
         }
-        if(diff > 600000){
+        if(diff > ten_mintues){
             alert("you cannot cancel the order as it has placed for more than 10 minutes")
             return false
         }   
@@ -21,15 +21,14 @@
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        {{!-- 600000 is 10 minutes --}}
-        if(diff < 600000 && status !== "fulfilled"){
+        if(diff < ten_mintues && status !== "fulfilled"){
             return confirm('Are you sure you want to change your order?');
         }
-        if(diff < 600000 && status === "fulfilled"){
+        if(diff < ten_mintues && status === "fulfilled"){
             alert("you cannot modify as your order is fulfilled ")
             return false
         }
-        if(diff > 600000){
+        if(diff > ten_mintues){
             alert("you cannot change the order as it has placed for more than 10 minutes")
             return false
         }
@@ -41,7 +40,7 @@
         {{#if this.visibility}}
         <li>
             <table>
-                <tr><td>Order ID: </td><td>{{this._id}}</td></tr>
+                <tr style="row"><td>Order ID: </td><td>{{this._id}}</td></tr>
                 <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
                 <tr><td>Order time: </td><td>{{this.time}}</td></tr>
                 <tr><td>Status: </td><td>{{this.status}}</td></tr>
@@ -56,7 +55,11 @@
                 </table></td>
                 </tr>
                 <tr><td>Total Price: </td><td>${{this.total}}</td></tr>
+                {{!-- {{#if this.discount }}
+                        20%discount
+                        {{/if}} --}}
                 {{#if this.notshowrating}}
+                {{#if (checkTime this.dateUTC) }}
                     <tr>
                         <td colspan="2">
                             <form method="post" action="newOrders/cancel_order">
@@ -79,7 +82,7 @@
                             </form>
                         </td> 
                     </tr>
-                    
+                {{/if}}    
                 {{else}}
                     {{#if this.rating}}
                          
@@ -93,15 +96,8 @@
                                 <center><button type="submit"  class="register-btn" style="padding: 1%;"><a href="/customer/orders/{{this._id}}/rating" class="a-register">Rating now</a></button></center>
                             </td>  
                         </tr>
-                    {{/if}}
-                        
-                        
-                    
+                    {{/if}}             
                 {{/if}}
-
-                    
-                
-                <tr><td>&nbsp;</td></tr>
             </table> 
         </li>
         {{/if}}

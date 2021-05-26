@@ -263,6 +263,7 @@ ul#van-list {
     /* the words at the top of the page */
     text-align: center;
     flex-basis: 60%;
+    margin: 0%;
 }
 
 #orderList ul {

@@ -79,7 +79,8 @@ require('./config/passport')(passport);
 
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    helpers: require(__dirname + "/public/js/helpers.js").helpers
 }))
 
 app.set('view engine', 'hbs')

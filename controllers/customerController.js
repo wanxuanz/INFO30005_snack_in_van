@@ -181,7 +181,7 @@ const getAllCustomernewOrders = async(req, res) => {
 const placeOrder = async(req, res) => {
     const customer = await Customer.findOne({ "email": req.session.email }).lean()
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getHours() + ':' + today.getMinutes();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes();
     var year_month_day = today.toISOString().split('T')[0];
     var time = today.toISOString().split('T')[1].split('.')[0]
         // shopping cart of current customer
