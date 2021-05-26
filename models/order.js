@@ -12,7 +12,15 @@ const newOrderschema = new mongoose.Schema({
     customerId: { type: String, required: true },
     items: [itemSchema],
     total: { type: String, required: true },
+<<<<<<< Updated upstream
     status: { type: String, required: true }
+=======
+    status: { type: String, required: true },
+    visibility: { type: Boolean, default: true },
+    visibility_not_change: { type: String, required: true, default: "visible" },
+    rating: { type: String},
+    notshowrating:{type: Boolean, default: true}
+>>>>>>> Stashed changes
 })
 
 

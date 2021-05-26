@@ -11,7 +11,28 @@
                 <li>
                     <label for="password">Password</label>
                     </br>
+<<<<<<< Updated upstream
                     <input type="text" id="password" name="password" placeholder="Password">
+=======
+                    <input type="password" id="pwd" name="password" placeholder="********">
+                    <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
+                    <script>
+                        var eye = document.getElementById("eye");
+                        var pwd = document.getElementById("pwd");
+
+                        function showhide(){
+
+                                if (pwd.type == "password") {
+                                    pwd.type = "text";
+                                        eye.className='fas fa-eye-slash'
+                                }else {
+                                    pwd.type = "password";
+                                    eye.className='fas fa-eye'
+                                }
+                        }
+                    </script>
+
+>>>>>>> Stashed changes
                 </li>
                 </br>
                 <li>

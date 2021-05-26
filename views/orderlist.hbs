@@ -1,5 +1,59 @@
 <section id="orderList">
+<<<<<<< Updated upstream
 
+=======
+    <script>
+    function cancel(status, dateUTC) {
+        var orderDate = new Date(dateUTC)
+        var now = new Date()
+        var diff = now - orderDate;
+        {{!-- 600000 is 10 minutes --}}
+        if(diff < 600000 && status !== "fulfilled"){
+            return confirm('Are you sure you want to cancel your order?');
+        }
+        if(diff < 600000 && status === "fulfilled"){
+            alert("you cannot modify as your order is fulfilled ")
+            return false
+        }
+        if(diff > 600000){
+            alert("you cannot cancel the order as it has placed for more than 10 minutes")
+            return false
+        }   
+    }  
+    function update(status, dateUTC){
+        var orderDate = new Date(dateUTC)
+        var now = new Date()
+        var diff = now - orderDate;
+        {{!-- 600000 is 10 minutes --}}
+        if(diff < 600000 && status !== "fulfilled"){
+            return confirm('Are you sure you want to change your order?');
+        }
+        if(diff < 600000 && status === "fulfilled"){
+            alert("you cannot modify as your order is fulfilled ")
+            return false
+        }
+        if(diff > 600000){
+            alert("you cannot change the order as it has placed for more than 10 minutes")
+            return false
+        }
+    }
+    function showrating(status,rating){
+        var result=""
+        if(rating!="" && status == "fulfilled"){
+            result="showstring"
+            return result
+        }
+        if(rating=="" && status == "fulfilled"){
+            result="showbutthon"
+            return result
+        }
+        if(status != "fulfilled"){
+            return false
+        }
+
+    }
+    </script>
+>>>>>>> Stashed changes
     <h1>Orders List</h1>
     <ul>
         {{#each newOrders}}
@@ -17,6 +71,55 @@
                         </ul>
                     </td></tr>
                 <tr><td>Total Price: </td><td>${{this.total}}</td></tr>
+<<<<<<< Updated upstream
+=======
+                {{#if this.notshowrating}}
+                    <tr>
+                        <td colspan="2">
+                            <form method="post" action="newOrders/cancel_order">
+                            <input type="hidden" name = "orderId" value="{{this._id}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
+                            Cancel Order
+                            </button>
+                        </td>  
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            </form>
+                            <form method="post" action="newOrders/change_order">
+                            <input type="hidden" name = "orderId" value="{{this._id}}">
+                            <input type="hidden" name = "items" value="{{this.items}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
+                            Change Order
+                            </button>
+                            </form>
+                        </td> 
+                    </tr>
+                    
+                {{else}}
+                    {{#if this.rating}}
+                         
+                             <tr><td>Rating:</td><td>{{this.rating}}/5</td></tr>
+                         
+                        
+                    {{else}}
+                        <tr>
+                            <td colspan="2">
+                
+                                <center><button type="submit"  class="register-btn" style="padding: 1%;"><a href="/customer/orders/{{this._id}}/rating" class="a-register">Rating now</a></button></center>
+                            </td>  
+                        </tr>
+                    {{/if}}
+                        
+                        
+                    
+                {{/if}}
+
+                    
+                
+                <tr><td>&nbsp;</td></tr>
+>>>>>>> Stashed changes
             </table> 
         </li>
         {{/each}}
