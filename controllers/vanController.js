@@ -8,15 +8,19 @@ const geocoder = require('../utils/geocoder')
 // change an van status(POST)
 const updateVanStatus = async(req, res) => {
 
-    let oneVan = await Van.findOne({ vanId: req.params.vanId })
+    if (req.session.email == null) {
+        thelayout = 'vender_main.hbs'
+    } else { thelayout = 'vender_main.hbs' }
+
+    let oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+    console.log(oneVan)
         // if the van is open, we change it to close
     if (oneVan.status === 'close') {
-        await Van.updateOne({ vanId: req.params.vanId }, { status: "open" })
+        await Van.updateOne({ vanId: req.session.van_name }, { status: "open"}).lean()
     } else {
-        await Van.updateOne({ vanId: req.params.vanId }, { status: "close" })
+        await Van.updateOne({ vanId: req.session.van_name }, { status: "close"}).lean()
     }
-    result = await Van.findOne({ vanId: req.params.vanId })
-    res.send(result)
+    return res.render('showVanStatus', { "oneVan": oneVan, layout: thelayout })
 }
 
 const updateLocation = async(req, res) => {
@@ -89,13 +93,30 @@ const getAllVans = async(req, res) => {
 // get one van
 const getOneVan = async(req, res) => {
     try {
-        const oneVan = await Van.findOne({ "vanId": req.params.vanId })
-        if (oneVan === null) { // no order found in database
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+        if (oneVan === null) { // no van found in database
             res.status(404)
             return res.send("Van not found")
         }
-        return res.send(oneVan) // order was found
+        return res.render('venderHome', { "oneVan": oneVan, layout: thelayout})
     } catch (err) { // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+const getVanFoods = async(req, res) => {
+    try {
+        if (req.session.email == null) {
+            thelayout = 'vender_main.hbs'
+        } else { thelayout = 'vender_main.hbs' }
+        const foods = await Food.find().lean()
+            // return res.send(foods)
+        res.render('vanfoodlist', { "foods": foods, layout: thelayout})
+    } catch (err) {
         res.status(400)
         return res.send("Database query failed")
     }
@@ -116,5 +137,8 @@ module.exports = {
     changeAndSendLocation,
     getOneVanLogin,
     createOneVanLogin,
-    updateLocation
+    updateLocation,
+
+    getOneVan,
+    getVanFoods
 }
