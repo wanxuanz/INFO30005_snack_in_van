@@ -74,7 +74,6 @@ customerRouter.use('/', foodRouter)
 
 customerRouter.use('/orders', orderRouter)
 
-customerRouter.get('/:orderId', utilities.isLoggedInCustomer, customerController.getAllCustomernewOrders)
 
 //logout
 customerRouter.get('/logout', function(req, res) {
