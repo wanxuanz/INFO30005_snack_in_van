@@ -18,12 +18,9 @@ function isLoggedInCustomer(req, res, next) {
 }
 
 function isSelectedVan(req, res, next) {
-    console.log(req.session.vanId)
     if (req.session.vanId) {
-
         return next();
     }
-    // if not logged in, redirect to login form
     res.redirect('/customer');
 }
 

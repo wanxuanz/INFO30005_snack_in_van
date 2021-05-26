@@ -92,6 +92,42 @@ hr {
     /* Modern Browsers */
 }
 
+ul#van-list {
+    list-style-type: none;
+    /* Remove bullets */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margins */
+}
+
+.float-left {
+    height: 500px;
+    float: left;
+    overflow: scroll;
+    cursor: ns-resize;
+}
+
+.vans {
+    background-color: rgb(250, 235, 215, 0.2);
+    width: 345px;
+    border: 1px solid rgba(0, 0, 0, .7);
+    text-align: left;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.message {
+    margin-top: 0%;
+    font-size: smaller;
+}
+
+.van-locator-title {
+    margin-bottom: 0%;
+}
+
 
 /**************************************************************************/
 
@@ -507,6 +543,9 @@ a#addToCart:hover {
     }
     .register-page-input {
         font-size: var(--text-small);
+    }
+    .float-left {
+        float: none;
     }
 }
 

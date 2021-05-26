@@ -74,7 +74,7 @@ customerRouter.post('/changeinfo', utilities.isLoggedInCustomer, (req, res) => c
 
 
 //handle the GET request to get the Shopping Cart by the customer id
-customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, customerController.findCart)
+customerRouter.get('/shopping-cart', utilities.isLoggedInCustomer, utilities.isSelectedVan, customerController.findCart)
 
 //handle the POST request to remove one food from Shopping Cart by the customer id
 // customerRouter.post('/shopping-cart', utilities.isLoggedInCustomer, (req, res) => customerController.removeOneFood(req, res))

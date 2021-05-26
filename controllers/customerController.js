@@ -222,8 +222,7 @@ const placeOrder = async(req, res) => {
 
 const getVans = async(req, res, next) => {
     try {
-        const vans = await Van.find();
-        console.log(vans)
+        const vans = await Van.find({ "status": "open" });
         return res.status(200).json({
             success: true,
             count: vans.length,
@@ -237,14 +236,11 @@ const getVans = async(req, res, next) => {
 
 const chooseVan = async(req, res) => {
     try {
-        //const customer = await Customer.findOne({ "email": req.session.email }).lean()
-
-        // await Customer.updateOne({ "email": req.session.email }, { vanId: req.body.van_id })
         req.session.vanId = req.body.van_id
-            // console.log(req.session.vanId)
-        return res.render('selectVanSuccess', { "vanId": req.session.vanId })
+        return res.render('selectVanSuccess', { "vanId": req.session.vanId, layout: thelayout })
     } catch (err) {
-
+        console.error(err)
+        res.status(500).json({ error: 'Server error' })
     }
 }
 

@@ -1,8 +1,42 @@
+var longitude = document.getElementById("user-longitude");
+var latitude = document.getElementById("user-latitude");
+var waiting = document.getElementById("please-wait");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        return true
+    }
+}
+
+function showPosition(position) {
+    waiting.innerHTML = "Get location Success"
+    getVans()
+    longitude.value = position.coords.longitude;
+    latitude.value = position.coords.latitude;
+
+}
+
+function distance(lon1, lat1, lon2, lat2) {
+    var radlat1 = Math.PI * lat1 / 180
+    var radlat2 = Math.PI * lat2 / 180
+    var radlon1 = Math.PI * lon1 / 180
+    var radlon2 = Math.PI * lon2 / 180
+    var theta = lon1 - lon2
+    var radtheta = Math.PI * theta / 180
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist)
+    dist = dist * 180 / Math.PI
+    dist = dist * 60 * 1.1515
+    dist = dist * 1.609344
+    return dist
+}
+
 mapboxgl.accessToken = 'pk.eyJ1IjoieWlmZWl3YW5nIiwiYSI6ImNrb3NoMHBvZDAxOWEydnBhcW5oNHhoMnYifQ.RTlQ7_gAcXxw800J7tE3GQ';
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v10',
-    zoom: 12,
+    zoom: 13,
     center: [144.96332, -37.814]
 });
 
@@ -10,6 +44,21 @@ const map = new mapboxgl.Map({
 async function getVans() {
     const res = await fetch('/customer/chooseVan')
     const data = await res.json()
+    var vanList = document.getElementById('van-list')
+
+    data.data.forEach(function(item) {
+        item.dis = distance(longitude.value, latitude.value, item.location.coordinates[0], item.location.coordinates[1])
+    })
+
+    data.data = data.data.sort((a, b) => a.dis < b.dis ? -1 : 1)
+
+    if (Object.keys(data.data).length > 5) {
+        data.data = data.data.slice(0, 5)
+    }
+
+    data.data.forEach(function(item) {
+        vanList.innerHTML += '<li class = "vans"><strong>' + item.vanId + '</strong><p class="message">Address: ' + item.address + '<p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit">Choose this van</button></form></li>'
+    })
 
     const vans = data.data.map(van => {
         return {
@@ -24,6 +73,7 @@ async function getVans() {
             }
         }
     })
+
     loadMap(vans)
 }
 
@@ -93,5 +143,4 @@ map.addControl(
     })
 );
 
-
-getVans()
+getLocation()
