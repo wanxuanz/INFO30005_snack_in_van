@@ -98,7 +98,7 @@ app.get('/', (req, res) => {
 //handler for GET home page
 app.get('/vender', (req, res) => {
     // res.send('<h1>Vender App</h1>')
-        res.render('venderHomepage', { layout: "vender_main.hbs" });
+        res.render('venderHomePage', { layout: "vender_main.hbs" });
 })
 
 /*customer home page*/
