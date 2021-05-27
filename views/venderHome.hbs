@@ -11,8 +11,7 @@
         } else {
             return Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
         }
-        // oneVan.save()
-        // return res.render('showVanStatus', { "oneVan": oneVan })
+
     }
     </script> 
     <section id = "register-page">
@@ -21,15 +20,18 @@
                 <h3>Van Name: {{oneVan.vanId}}</h3>
             </li>
             <li>
-                <h3>Address Message: {{oneVan.address}}</h2>
+                <h3>Address Message: {{oneVan.address}}</h3>
             </li>
             <li>
-                <h3>Location: [{{oneVan.location.coordinates}}]</h2>
+                <h3>Location: [{{oneVan.location.coordinates}}]</h3>
+            </li>
+            <li>
+                <h3>Status: {{oneVan.status}}</h3>
             </li>
             <li>
                 <form method="post" action="/vender/vans/home/updateVanStatus">
                     <input type="hidden" name = "status" value="{{this.status}}">
-                    <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{oneVan.status}}');">
+                    <button type="submit"  class="register-btn" style="padding: 1%;">
                     Change Status
                     </button>
                 </form>

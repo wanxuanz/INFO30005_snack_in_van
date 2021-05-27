@@ -8,19 +8,15 @@ const geocoder = require('../utils/geocoder')
 // change an van status(POST)
 const updateVanStatus = async(req, res) => {
     try {
-        if (req.session.email == null) {
-            thelayout = 'vender_main.hbs'
-        } else { thelayout = 'vender_main.hbs' }
-
         let oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
-        console.log(oneVan)
             // if the van is open, we change it to close
         if (oneVan.status === 'close') {
             await Van.updateOne({ vanId: req.session.van_name }, { status: "open" }).lean()
         } else {
             await Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
         }
-        return res.render('showVanStatus', { "oneVan": oneVan, layout: thelayout })
+        oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
+        return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vender_main.hbs' })
     } catch (error) {
         return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }

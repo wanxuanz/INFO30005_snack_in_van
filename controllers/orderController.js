@@ -34,6 +34,18 @@ const viewOrderHistory = async(req, res) => {
             thelayout = 'vender_main.hbs'
         } else { thelayout = 'vender_main.hbs' }
         const OrderHistory = await Order.find({ vanId: req.session.van_name, status: "Fulfilled" }).sort({ dateCompare: 'asc' }).lean()
+        for (var i = 0; i < OrderHistory.length; i++) {
+            var foodnames = []
+            for (var j = 0; j < OrderHistory[i].items.length; j++) {
+                var thisfood = await Food.findOne({ "_id": OrderHistory[i].items[j].foodId })
+                var foodname_quantity = {
+                    foodname: thisfood.name,
+                    quantity: OrderHistory[i].items[j].quantity
+                }
+                foodnames.push(foodname_quantity)
+            }
+            OrderHistory[i]["foodnames"] = foodnames
+        }
         return res.render('vanOrderHistory', { "OrderHistory": OrderHistory, layout: thelayout })
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
