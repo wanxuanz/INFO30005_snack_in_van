@@ -13,6 +13,7 @@
             <td>Password:</td>
             <td>
                 <input style="height:26px;font-size:14pt;"type="password" id="van_password" name="van_password" placeholder="Password" >
+                <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
             </td>
             <td>
                 <button type="submit" class="register-btn"> Confirm</button>
@@ -20,4 +21,19 @@
         </tr>
         </table>
     </form>
+    <script>
+        var eye = document.getElementById("eye");
+        var pwd = document.getElementById("van_password");
+
+        function showhide(){
+
+                if (pwd.type == "password") {
+                    pwd.type = "text";
+                        eye.className='fas fa-eye-slash'
+                }else {
+                    pwd.type = "password";
+                    eye.className='fas fa-eye'
+                }
+        }
+    </script>
 </section>

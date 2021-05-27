@@ -94,8 +94,12 @@ module.exports = function(passport) {
                     }
                     if (existingVan) {
                         console.log("existing");
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                    } else {
+                        return done(null, false, req.flash('signupMessage', 'That van name is already taken.'));
+                    }
+                    if (req.body.van_password!=req.body.van_password2) {
+                        return done(null, false, req.flash('signupMessage', 'please enter the same password twice'));
+                    }
+                     else {
                         // otherwise
                         // create a new van
                         var newVan = new Van();
