@@ -26,14 +26,14 @@ vanRouter.post('/login', passport.authenticate('local-van-login', {
 
 
 vanRouter.get("/register", (req, res) => {
-    res.render('venderRegister', { layout: "initial.hbs" });
+    res.render('venderRegister', { layout: "vender_main.hbs", "message":req.flash('signupMessage') });
 });
 
 // POST - user submits the signup form -- signup a new user
 // http:localhost:5000/user/signup
 vanRouter.post('/register', passport.authenticate('local-van-register', {
     successRedirect: '/vender/vans/send_location', // redirect to the homepage
-    failureRedirect: '/vender', // redirect to signup page
+    failureRedirect: '/vender/vans/register', // redirect to signup page
     failureFlash: true // allow flash messages
 }));
 //handle send locationsx

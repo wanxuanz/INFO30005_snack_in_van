@@ -41,8 +41,8 @@
                     <li>
                         <label for="password">Confirm your Password</label>
                         </br>
-                        <input type="password" id="pwd" name="password2" placeholder="********">
-                        <i class="fas fa-eye" onclick="showhide()" id="eye"></i>
+                        <input type="password" id="pwd2" name="password2" placeholder="********">
+                        <i class="fas fa-eye" onclick="showhide2()" id="eye2"></i>
                     
                     </li>
                     
@@ -67,6 +67,18 @@
                                 }else {
                                     pwd.type = "password";
                                     eye.className='fas fa-eye'
+                                }
+                        }
+                        var eye2 = document.getElementById("eye2");
+                        var pwd2 = document.getElementById("pwd2");
+                        function showhide2(){
+
+                                if (pwd2.type == "password") {
+                                    pwd2.type = "text";
+                                        eye2.className='fas fa-eye-slash'
+                                }else {
+                                    pwd2.type = "password";
+                                    eye2.className='fas fa-eye'
                                 }
                         }
             </script>
