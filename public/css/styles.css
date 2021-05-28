@@ -1,20 +1,26 @@
 /* central area to control type and colour */
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,700&display=swap');
 :root {
     --text-big: 36px;
     --text-medium: 22px;
     --text-small: 15px;
+    --text-header: 45px;
+    --text-footer: 25px;
     /* --font-body: 'Lexend Mega', sans-serif; */
     /* --font-body: 'Goudy Bookletter 1911', serif; */
-    --font-body: 'Roboto', sans-serif;
-    --font-heading: 'Rammetto One', cursive;
+    /* --font-body: 'Roboto', sans-serif; */
+    /* --font-body: 'Josefin Sans', sans-serif; */
+    --font-body: 'Josefin Sans', sans-serif;
+    /* --font-heading: 'Rammetto One', cursive; */
+    --font-heading: 'Josefin Sans', sans-serif;
+
     /* --font-heading:'Goudy Bookletter 1911', serif; */
-    --color-dark: #7A280A;
+    --color-dark: #493b2b;
     --color-medium: #F8B5A5;
     --color-light: #F8EDEC;
     --color-grey: #EEEEEE;
     --color-background: #F5F2ED;
-    --color-brown: #BF863F;
+    --color-brown: #493b2b;
     --color-median-yellow: #CC9E22;
     --color-darkgrey: #D97D14;
 }
@@ -29,15 +35,23 @@ body {
     color: var(--color-dark);
 }
 
-header,
-footer {
-    color: var(--color-dark);
+header{
+    color: var(--color-grey);
     background-color: var(--color-brown);
     text-align: center;
     font-family: var(--font-heading);
     margin: 0;
+    font-size: var(--text-header);
 }
-
+footer{
+    color: var(--color-grey);
+    background-color: var(--color-brown);
+    text-align: center;
+    font-family: var(--font-heading);
+    margin: 0;
+    padding: 5px;
+    font-size: var(--text-footer);
+}
 h1 {
     text-align: center;
     font-size: var(--text-big);
@@ -72,8 +86,11 @@ nav {
     font-size: 24px;
     position: sticky;
     top: 0;
+    padding-top: 13px;
 }
-
+i {
+    color: rgb(114, 85, 51);
+}
 header h1 a {
     color: var(--color-dark);
 }
@@ -551,6 +568,12 @@ a#updateOrderStatus:hover {
     /* for phone size */
     h1 {
         font-size: 28px;
+    }
+    header{
+        font-size: 36px ;
+    }
+    footer{
+        font-size: 12px;
     }
     nav {
         background-color: var(--color-grey);

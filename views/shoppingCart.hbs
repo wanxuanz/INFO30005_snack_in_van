@@ -1,6 +1,7 @@
 <section id = "shopping-cart">
     <h1 style="text-align: left; ">Shopping Cart</h1>
     <h1 style="text-align: left;"> {{thiscustomer.firstName}}'s order summary:</h1>
+    <p style="color: red"> Set quantity to 0 if you want to remove foods.</p>
     <ul>
         <li>  
             <p>Name</p>
@@ -64,7 +65,6 @@
             form_quantity.style.display = 'flex'
             food_quantity.style.display = 'none'
             edit.style.display = 'none'
-            
         }
 
         function confirm(number){

@@ -150,7 +150,7 @@ const placeOrder = async(req, res) => {
         customerId: String(customer._id),
         items: customer.cart,
         total: total_p,
-        status: "Outstanding"
+        status: "Outstanding",
     };
 
     var order = new Order(postData)
@@ -192,7 +192,7 @@ const chooseVan = async(req, res) => {
 const cancelOrder = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        console.log(customer._id)
+        // console.log(customer._id)
 
         //set the visibility to false
         await Order.updateOne({ "_id": req.body.orderId }, { "$set": { "visibility": false } });
@@ -211,7 +211,7 @@ const cancelOrder = async(req, res) => {
             }
             newOrders[i]["foodnames"] = foodnames
         }
-        console.log(newOrders)
+        // console.log(newOrders)
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', message: 'cannot cancel the order' })
@@ -224,7 +224,7 @@ const changeOrder = async(req, res) => {
             // var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
         const order = await Order.findOne({ "_id": req.body.orderId }).lean()
         const items = order.items
-        console.log(items)
+        // console.log(items)
         var newItems = []
         var cartFood = []
         total_price = 0;

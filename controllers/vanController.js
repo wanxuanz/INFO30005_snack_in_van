@@ -30,10 +30,10 @@ const updateLocation = async(req, res) => {
                 type: 'Point',
                 coordinates: [req.body.longitude, req.body.latitude]
             }
+            req.session.location = location
             await Van.updateOne({ vanId: req.session.van_name }, { address: req.body.van_location })
             await Van.updateOne({ vanId: req.session.van_name }, { location: location })
                 // mark status as open
-            await Van.updateOne({ vanId: req.session.van_name }, { status: "open" })
             return res.render('sendLocationSuccess', { layout: "vender_main" })
         } else {
             return res.send("login failed")
@@ -56,29 +56,26 @@ const getAllVans = async(req, res) => {
 // get one van
 const getOneVan = async(req, res) => {
     try {
-        if (req.session.email == null) {
-            thelayout = 'vender_main.hbs'
-        } else { thelayout = 'vender_main.hbs' }
         const oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
         if (oneVan === null) { // no van found in database
             res.status(404)
             return res.send("Van not found")
         }
-        return res.render('venderHome', { "oneVan": oneVan, layout: thelayout })
+        return res.render('venderHome', { "oneVan": oneVan, layout: 'vender_main.hbs' })
     } catch (err) { // error occurred
         return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
-const getVanFoods = async(req, res) => {
+const logout = async(req, res) => {
     try {
-        if (req.session.email == null) {
-            thelayout = 'vender_main.hbs'
-        } else { thelayout = 'vender_main.hbs' }
-        const foods = await Food.find().lean()
-            // return res.send(foods)
-        res.render('vanfoodlist', { "foods": foods, layout: thelayout })
-    } catch (err) {
+        req.logout();
+        req.flash('');
+         await Van.updateOne({ vanId: req.session.van_name }, { status: "close" })
+         req.session.destroy();
+        res.redirect('/vender');
+
+    } catch (err) { // error occurred
         return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
@@ -90,5 +87,5 @@ module.exports = {
     getOneVan,
     updateLocation,
     getOneVan,
-    getVanFoods
+    logout
 }

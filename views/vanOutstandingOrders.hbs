@@ -4,16 +4,11 @@
     <script>
     
     function update(status, orderId){
-        
         if(status === "Outstanding"){
             return Order.updateOne({ _id:  orderId}, { status: "Fulfilled" }).lean()
-            console.log("yesssssss!")
-        } //else {
-            //return Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
-        //}
+        } 
         return Order.updateOne({ _id:  orderId}, { status: "Fulfilled" }).lean()
-        // oneVan.save()
-        // return res.render('showVanStatus', { "oneVan": oneVan })
+
     }
     </script> 
 
@@ -42,20 +37,11 @@
                         <form method="post" action="/vender/vans/orders/outstanding/{{this._id}}/updateOrderStatus">
                             <input type="hidden" name = "_id" value="{{this._id}}">
                             <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this._id}}');">
-                            Change Status
+                            Complete
                             </button>
                         </form>
                     </td> 
                 </tr>
-                {{!-- <tr>
-                    <td colspan="2">
-                        <form method="post" action="outstandingOrders/completed" >
-                        <input type="hidden" name = "orderId" value="{{vanorder.orderId}}"
-                        <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
-                        Mark as Completed
-                        </button>
-                    </td>  
-                </tr> --}}
                        
 
                     </td>

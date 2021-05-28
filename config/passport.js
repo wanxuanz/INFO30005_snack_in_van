@@ -64,7 +64,7 @@ module.exports = function(passport) {
                         // server uses that identifier to identify different clients
                         // all this is handled by the session middleware that we are using 
                         req.session.van_name = van_name; // for demonstration of using express-session
-                        console.log(req.session)
+                        // console.log(req.session)
                             // done() is used by the strategy to set the authentication status with
                             // details of the user who was authenticated
                         return done(null, van, req.flash('loginMessage', 'Login successful'));
@@ -108,7 +108,7 @@ module.exports = function(passport) {
                         // put the user's email in the session so that it can now be used for all
                         // communications between the client (browser) and the FoodBuddy app
                         req.session.van_name = van_name;
-                        console.log(req.session)
+                        // console.log(req.session)
 
                         // and save the user
                         newVan.save(function(err) {

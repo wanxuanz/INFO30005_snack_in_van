@@ -26,7 +26,7 @@ vanRouter.post('/login', passport.authenticate('local-van-login', {
 
 
 vanRouter.get("/register", (req, res) => {
-    res.render('venderRegister', { layout: "vender_main.hbs" });
+    res.render('venderRegister', { layout: "initial.hbs" });
 });
 
 // POST - user submits the signup form -- signup a new user
@@ -43,24 +43,24 @@ vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
 vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanController.updateLocation(req, res))
 
 // go to home page
-vanRouter.get("/home", utilities.isLoggedIn, (req, res) => vanController.getOneVan(req, res))
+vanRouter.get("/home", utilities.isLoggedIn, utilities.isSendLocation,(req, res) => vanController.getOneVan(req, res))
 
-// get the vender menu
-vanRouter.get('/menu', utilities.isLoggedIn, (req, res) => vanController.getVanFoods(req, res))
 
 // update van status
-vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, (req, res) => vanController.updateVanStatus(req, res))
+vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, utilities.isSendLocation, (req, res) => vanController.updateVanStatus(req, res))
 
 vanRouter.use('/', orderRouter)
 
 // logout
-vanRouter.get('/logout', function(req, res) {
+vanRouter.get('/logout', (req, res) => vanController.logout(req, res))
 
-    req.logout();
-    req.flash('');
-    req.session.destroy();
-    res.redirect('/vender');
-});
+// vanRouter.get('/logout', function(req, res) {
+//     req.logout();
+//     req.flash('');
+//     req.session.destroy();
+
+//     res.redirect('/vender');
+// });
 
 // export the router
 module.exports = vanRouter

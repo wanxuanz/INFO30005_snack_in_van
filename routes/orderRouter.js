@@ -13,11 +13,11 @@ orderRouter.get('/:orderId/rating', utilities.isLoggedInCustomer, orderControlle
 
 orderRouter.post('/:orderId/rating', utilities.isLoggedInCustomer, orderController.finishRating)
 
-orderRouter.get('/orders/outstanding', utilities.isLoggedIn, (req, res) => orderController.viewOutstandingOrders(req, res))
+orderRouter.get('/orders/outstanding', utilities.isLoggedIn, utilities.isSendLocation, (req, res) => orderController.viewOutstandingOrders(req, res))
 
 orderRouter.get('/orders/history', utilities.isLoggedIn, (req, res) => orderController.viewOrderHistory(req, res))
 
-orderRouter.post('/orders/outstanding/:_id/updateOrderStatus', utilities.isLoggedIn, (req, res) => orderController.updateOrderStatus(req, res))
+orderRouter.post('/orders/outstanding/:_id/updateOrderStatus', utilities.isLoggedIn, utilities.isSendLocation, (req, res) => orderController.updateOrderStatus(req, res))
 
 // export the router
 module.exports = orderRouter

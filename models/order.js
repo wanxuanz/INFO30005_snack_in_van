@@ -17,8 +17,9 @@ const newOrderschema = new mongoose.Schema({
     total: { type: String, required: true },
     status: { type: String, required: true },
     visibility: { type: Boolean, default: true },
-    rating: { type: String, default: null },
-    notshowrating: { type: Boolean, default: true }
+    rating: { type: String, default: "0" },
+    notshowrating: { type: Boolean, default: true },
+    discount:{ type: Boolean, default: false }
 })
 
 
@@ -26,5 +27,3 @@ const Order = mongoose.model("newOrders", newOrderschema)
 const Item = mongoose.model("Item", itemSchema)
 
 module.exports = { Order, Item }
-    // module.exports = Order
-    // module.exports = Item

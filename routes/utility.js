@@ -23,11 +23,17 @@ function isSelectedVan(req, res, next) {
     }
     res.redirect('/customer');
 }
-
+function isSendLocation(req, res, next) {
+    if (req.session.location) {
+        return next();
+    }
+    res.redirect('/vender/vans/send_location');
+}
 
 // export the function
 module.exports = {
     isLoggedIn,
     isLoggedInCustomer,
-    isSelectedVan
+    isSelectedVan,
+    isSendLocation
 }

@@ -2,10 +2,6 @@ const mongoose = require("mongoose")
 
 const bcrypt = require('bcrypt-nodejs')
 
-const VenderOrderSchema = new mongoose.Schema({
-    orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order' }
-})
-
 const vanSchema = new mongoose.Schema({
     vanId: {
         type: String
@@ -29,10 +25,10 @@ const vanSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    orders: [VenderOrderSchema],
     // status: {type: String, default: "close"},
-    status: String,
-    password: { type: String, require: true }
+    status: { type: String, default: "close" },
+    password: { type: String, require: true },
+    vanRate:{ type: String, default: "0" }
 })
 
 // method for generating a hash; used for password hashing
@@ -46,9 +42,7 @@ vanSchema.methods.validPassword = function(password) {
 };
 
 const Van = mongoose.model("vans", vanSchema)
-const VanderOrder = mongoose.model("VanderOrder", VenderOrderSchema)
 
 module.exports = {
-    Van,
-    VanderOrder
+    Van
 }

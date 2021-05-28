@@ -12,6 +12,13 @@ var register = function(Handlebars) {
                 return true
             }
         },
+        rate: function(rating){
+            if(rating === "0"){
+                return false
+            }else{
+                return true
+            }
+        }
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

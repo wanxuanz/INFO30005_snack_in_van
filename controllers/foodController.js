@@ -81,7 +81,7 @@ const addFoodQuantity = async(req, res) => {
             }
             // cannot find the food
             if (flag) {
-                console.log("cannot find the food here")
+                // console.log("cannot find the food here")
                 orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity })
                 thisCustomer.cart.push(orderRecord)
             }
