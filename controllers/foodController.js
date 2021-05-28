@@ -11,7 +11,7 @@ const getAllFoods = async(req, res) => {
         const foods = await Food.find().lean()
         res.render('foodlist', { "foods": foods, "vanId": req.session.vanId, layout: thelayout })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -24,11 +24,11 @@ const getOneFood = async(req, res) => {
         //const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const oneFood = await Food.findOne({ "foodId": req.params.foodId }).lean()
         if (oneFood === null) { // no food found in database
-            return res.status(404).render('error', { errorCode: '400', message: 'Food not found.' })
+            return res.status(404).render('error', { errorCode: '404', layout: 'initial', message: 'Food not found.' })
         }
         res.render('showFood', { "thisfood": oneFood, layout: thelayout })
     } catch (err) { // error occurred
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -45,7 +45,7 @@ const addFood = async(req, res) => {
         result = await Customer.findOne({ "email": req.session.email }).populate('cart.foodId', 'name')
         res.render("addToCart", { "thisfood": addFood.toJSON(), "thiscustomer": thisCustomer.toJSON() })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 
 }
@@ -56,7 +56,7 @@ const selectQuantity = async(req, res) => {
         let addFood = await Food.findOne({ foodId: req.params.foodId })
         res.render("selectQuantity", { "thisfood": addFood.toJSON(), "thiscustomer": thisCustomer.toJSON() })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -93,7 +93,7 @@ const addFoodQuantity = async(req, res) => {
         await thisCustomer.save()
         return res.render("addToCart", { "thisfood": addFood.toJSON(), "quantity": req.body.quantity })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 

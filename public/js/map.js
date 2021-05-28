@@ -10,7 +10,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    waiting.innerHTML = "Get location Success"
+    waiting.innerHTML = "Got your location successfully!"
     getVans()
     longitude.value = position.coords.longitude;
     latitude.value = position.coords.latitude;
@@ -57,7 +57,11 @@ async function getVans() {
     }
 
     data.data.forEach(function(item) {
-        vanList.innerHTML += '<li class = "vans"><strong>' + item.vanId + '</strong><p class="message">Address: ' + item.address + '<p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit">Choose this van</button></form></li>'
+        if (item.vanRate === '0') {
+            vanList.innerHTML += '<li class = "vans"><p>' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating: No rating yet</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
+        } else {
+            vanList.innerHTML += '<li class = "vans"><p>' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating:' + Math.round((Number(item.vanRate) + Number.EPSILON) * 100) / 100 + '</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
+        }
     })
 
     const vans = data.data.map(van => {
@@ -69,7 +73,7 @@ async function getVans() {
             },
             properties: {
                 vanId: van.vanId,
-                description: '<p>' + van.address + '<p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit">Choose this van</button></form>'
+                description: '<p>' + van.address + '<p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form>'
             }
         }
     })

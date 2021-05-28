@@ -16,9 +16,9 @@ const updateVanStatus = async(req, res) => {
             await Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
         }
         oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
-        return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vender_main.hbs' })
+        return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vendor_main.hbs' })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -34,22 +34,12 @@ const updateLocation = async(req, res) => {
             await Van.updateOne({ vanId: req.session.van_name }, { address: req.body.van_location })
             await Van.updateOne({ vanId: req.session.van_name }, { location: location })
                 // mark status as open
-            return res.render('sendLocationSuccess', { layout: "vender_main" })
+            return res.render('sendLocationSuccess', { layout: "vendor_main" })
         } else {
             return res.send("login failed")
         }
     } catch (err) { // error occurred
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
-    }
-}
-
-// get all vans
-const getAllVans = async(req, res) => {
-    try {
-        const vans = await Van.find()
-        return res.send(vans)
-    } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -61,9 +51,9 @@ const getOneVan = async(req, res) => {
             res.status(404)
             return res.send("Van not found")
         }
-        return res.render('venderHome', { "oneVan": oneVan, layout: 'vender_main.hbs' })
+        return res.render('vendorHome', { "oneVan": oneVan, layout: 'vendor_main.hbs' })
     } catch (err) { // error occurred
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -71,19 +61,18 @@ const logout = async(req, res) => {
     try {
         req.logout();
         req.flash('');
-         await Van.updateOne({ vanId: req.session.van_name }, { status: "close" })
-         req.session.destroy();
-        res.redirect('/vender');
+        await Van.updateOne({ vanId: req.session.van_name }, { status: "close" })
+        req.session.destroy();
+        res.redirect('/vendor');
 
     } catch (err) { // error occurred
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
 // export the functionss
 module.exports = {
     updateVanStatus,
-    getAllVans,
     getOneVan,
     updateLocation,
     getOneVan,

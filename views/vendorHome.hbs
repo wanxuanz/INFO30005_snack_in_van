@@ -1,6 +1,6 @@
 <section id="vanDetials">
 
-    <h1> Vender Details </h1>
+    <h1> vendor Details </h1>
 
     <script>
     
@@ -29,7 +29,10 @@
                 <h3>Status: {{oneVan.status}}</h3>
             </li>
             <li>
-                <form method="post" action="/vender/vans/home/updateVanStatus">
+                <li>
+                <h3>Rating: {{oneVan.vanRate}}</h3>
+            </li>
+                <form method="post" action="/vendor/home/updateVanStatus">
                     <input type="hidden" name = "status" value="{{this.status}}">
                     <button type="submit"  class="register-btn" style="padding: 1%;">
                     Change Status

@@ -27,7 +27,7 @@ const findCart = async(req, res) => {
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
         console.log(err)
-        return res.status(400).render('error', { errorCode: '400', message: 'Cannot find the shopping cart.' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Cannot find the shopping cart.' })
     }
 }
 
@@ -62,7 +62,7 @@ const editQuantity = async(req, res) => {
         }
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Cannot edit this item' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Cannot edit this item' })
     }
 }
 
@@ -85,7 +85,7 @@ const changeInfo = async(req, res) => {
         return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
 
     } catch (err) { // error detected
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -95,7 +95,7 @@ const changeInfo1 = async(req, res) => {
         var oneCustomer = await Customer.findOne({ "email": req.session.email })
         return res.render('changeinfo', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -119,7 +119,7 @@ const getAllCustomernewOrders = async(req, res) => {
         }
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -160,7 +160,7 @@ const placeOrder = async(req, res) => {
         await order.save()
         return res.render('orderSuccess.hbs', { "thiscustomer": customer })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'placing order fails' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'placing order fails' })
     }
 }
 
@@ -174,7 +174,7 @@ const getVans = async(req, res, next) => {
         })
     } catch (err) {
         console.error(err)
-        res.status(500).json({ error: 'Server error' })
+        return res.status(500).render('error', { errorCode: '500', layout: 'initial', message: 'Server error' })
     }
 }
 
@@ -184,7 +184,7 @@ const chooseVan = async(req, res) => {
         return res.render('selectVanSuccess', { "vanId": req.session.vanId, layout: thelayout })
     } catch (err) {
         console.error(err)
-        res.status(500).json({ error: 'Server error' })
+        return res.status(500).render('error', { errorCode: '500', layout: 'initial', message: 'Server error' })
     }
 }
 
@@ -192,7 +192,7 @@ const chooseVan = async(req, res) => {
 const cancelOrder = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-        // console.log(customer._id)
+            // console.log(customer._id)
 
         //set the visibility to false
         await Order.updateOne({ "_id": req.body.orderId }, { "$set": { "visibility": false } });
@@ -214,7 +214,7 @@ const cancelOrder = async(req, res) => {
         // console.log(newOrders)
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'cannot cancel the order' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'cannot cancel the order' })
     }
 }
 
@@ -224,7 +224,7 @@ const changeOrder = async(req, res) => {
             // var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
         const order = await Order.findOne({ "_id": req.body.orderId }).lean()
         const items = order.items
-        // console.log(items)
+            // console.log(items)
         var newItems = []
         var cartFood = []
         total_price = 0;
@@ -249,7 +249,7 @@ const changeOrder = async(req, res) => {
         return res.render('shoppingCart', { "thiscustomer": newCustomer, "cartFood": cartFood, "total_price": total_price })
 
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'cannot change the order' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'cannot change the order' })
     }
 }
 
@@ -262,7 +262,7 @@ const getInfo = async(req, res) => {
         }
         return res.render('customerinfo', { "thiscustomer": oneCustomer.toJSON() })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 

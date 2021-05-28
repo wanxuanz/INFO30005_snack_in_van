@@ -20,8 +20,8 @@
                 <tr><td>Customer ID: </td><td>{{this.customerId}}</td></tr>
                 <tr><td>Order time: </td><td>{{this.time}}</td></tr>
                 <tr><td>Items: </td>
-                <td><table style="border: 5px solid #BF863F; width:85%;" align = "left">
-                    <tr style='background:#c0c0c0;'><td>Name</td><td>Quantity</td></tr>
+                <td><table style="border: 3px solid #BF863F; width:85%;" align = "left">
+                    <tr style='background:rgba(214, 200, 182, 0.2);'><td>Name</td><td>Quantity</td></tr>
                     {{#each foodnames}}
                     <tr>
                         <td>{{this.foodname}} </td><td>{{this.quantity}}</td>
@@ -34,7 +34,7 @@
                 
                 <tr>
                     <td colspan="2">
-                        <form method="post" action="/vender/vans/orders/outstanding/{{this._id}}/updateOrderStatus">
+                        <form method="post" action="/vendor/orders/outstanding/{{this._id}}/updateOrderStatus">
                             <input type="hidden" name = "_id" value="{{this._id}}">
                             <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this._id}}');">
                             Complete
@@ -46,7 +46,7 @@
 
                     </td>
                 </tr>
-                {{!-- <tr><td><center><button margin="0 auto"><a id="updateOrderStatus" href="/vender/vans/orders/outstanding/{{this.orderId}}/updateOrderStatus">{{this.status}}</a></button></center></td></tr> --}}
+                {{!-- <tr><td><center><button margin="0 auto"><a id="updateOrderStatus" href="/vendor/orders/outstanding/{{this.orderId}}/updateOrderStatus">{{this.status}}</a></button></center></td></tr> --}}
             </table> 
         </li>
         {{/each}}

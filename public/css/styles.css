@@ -1,26 +1,21 @@
 /* central area to control type and colour */
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,700&display=swap');
-:root {
-    --text-big: 36px;
-    --text-medium: 22px;
-    --text-small: 15px;
-    --text-header: 45px;
-    --text-footer: 25px;
-    /* --font-body: 'Lexend Mega', sans-serif; */
-    /* --font-body: 'Goudy Bookletter 1911', serif; */
-    /* --font-body: 'Roboto', sans-serif; */
-    /* --font-body: 'Josefin Sans', sans-serif; */
-    --font-body: 'Josefin Sans', sans-serif;
-    /* --font-heading: 'Rammetto One', cursive; */
-    --font-heading: 'Josefin Sans', sans-serif;
 
-    /* --font-heading:'Goudy Bookletter 1911', serif; */
-    --color-dark: #493b2b;
+@import url('https://fonts.googleapis.com/css2?family=Gayathri:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+:root {
+    --text-big: 28px;
+    --text-medium: 18px;
+    --text-small: 10px;
+    --text-header: 25px;
+    --text-footer: 10px;
+    --font-body: 'Secular One', sans-serif;
+    --font-heading: 'Gayathri', sans-serif;
+    --color-dark: #848b62;
     --color-medium: #F8B5A5;
     --color-light: #F8EDEC;
     --color-grey: #EEEEEE;
-    --color-background: #F5F2ED;
-    --color-brown: #493b2b;
+    --color-background: #f8f8f6;
+    --color-brown: #a39078;
     --color-median-yellow: #CC9E22;
     --color-darkgrey: #D97D14;
 }
@@ -35,23 +30,28 @@ body {
     color: var(--color-dark);
 }
 
-header{
+header {
     color: var(--color-grey);
     background-color: var(--color-brown);
     text-align: center;
     font-family: var(--font-heading);
     margin: 0;
     font-size: var(--text-header);
+    padding-top: 12px;
+    letter-spacing: 2px;
 }
-footer{
+
+footer {
     color: var(--color-grey);
     background-color: var(--color-brown);
     text-align: center;
     font-family: var(--font-heading);
     margin: 0;
-    padding: 5px;
+    margin-top: 10px;
+    padding-top: 5px;
     font-size: var(--text-footer);
 }
+
 h1 {
     text-align: center;
     font-size: var(--text-big);
@@ -83,14 +83,17 @@ a {
 nav {
     background-color: var(--color-background);
     font-weight: bold;
-    font-size: 24px;
+    font-size: 19px;
     position: sticky;
     top: 0;
     padding-top: 13px;
+    letter-spacing: 2px;
 }
+
 i {
-    color: rgb(114, 85, 51);
+    color: #848b62;
 }
+
 header h1 a {
     color: var(--color-dark);
 }
@@ -126,12 +129,14 @@ ul#van-list {
 }
 
 .vans {
-    background-color: rgb(250, 235, 215, 0.2);
+    background-color: rgba(214, 200, 182, 0.2);
     width: 345px;
-    border: 1px solid rgba(0, 0, 0, .7);
+    border: 1px solid rgb(255, 255, 255);
     text-align: left;
+    padding-left: 10px;
+    padding-right: 0;
     padding-bottom: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     margin-left: 0%;
     margin-right: 0%;
 }
@@ -143,6 +148,15 @@ ul#van-list {
 
 .van-locator-title {
     margin-bottom: 0%;
+}
+
+.nav-coloring {
+    color: #c1ac91;
+    font-family: var(--font-heading);
+}
+
+#please-wait {
+    color: chocolate;
 }
 
 
@@ -158,10 +172,11 @@ ul#van-list {
     box-sizing: border-box;
     border-width: 2px;
     border-style: outset;
-    background-color: var(--color-brown);
-    color: black;
+    background-color: #ffffff;
+    color: #3a752c;
     font-size: var(--text-medium);
     transition: background-color 0.3s;
+    border-radius: 12px;
 }
 
 .register-btn:hover {
@@ -173,7 +188,7 @@ ul#van-list {
 /* hyperlink is black */
 
 .a-register {
-    color: black;
+    color: rgb(114, 37, 37);
 }
 
 #login-page input[type$=submit] {
@@ -466,41 +481,46 @@ a#addToCart:hover {
     border: solid grey 1px;
 }
 
-/**************************************************************************/
-/* Vender */
 
-a#updateVanStatus {   /* the heart-shaped 'favourite' button */
+/**************************************************************************/
+
+
+/* vendor */
+
+a#updateVanStatus {
+    /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
     background-color: lightgrey;
     display: block;
-    text-align:center;
-}    
+    text-align: center;
+}
 
 a#updateVanStatus:hover {
     color: var(--color-dark);
 }
 
-
-a#availability {   /* the heart-shaped 'favourite' button */
+a#availability {
+    /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
     background-color: lightgrey;
     display: block;
-    text-align:center;
-}    
+    text-align: center;
+}
 
 a#availability:hover {
     color: var(--color-dark);
 }
 
-a#updateOrderStatus {   /* the heart-shaped 'favourite' button */
+a#updateOrderStatus {
+    /* the heart-shaped 'favourite' button */
     font-size: 25px;
     color: var(--color-brown);
     background-color: lightgrey;
     display: block;
-    text-align:center;
-}    
+    text-align: center;
+}
 
 a#updateOrderStatus:hover {
     color: var(--color-dark);
@@ -519,6 +539,7 @@ a#updateOrderStatus:hover {
     background-color: var(--color-grey);
     border: solid grey 1px;
 }
+
 
 /**************************************************************************/
 
@@ -569,10 +590,10 @@ a#updateOrderStatus:hover {
     h1 {
         font-size: 28px;
     }
-    header{
-        font-size: 36px ;
+    header {
+        font-size: 36px;
     }
-    footer{
+    footer {
         font-size: 12px;
     }
     nav {

@@ -86,19 +86,20 @@ require('./models');
 const customerRouter = require('./routes/customerRouter')
 
 // set up van routes
-const vanRouter = require('./routes/vanRouter')
+const vanRouter = require('./routes/vanRouter');
+const { initialize } = require('passport');
 
 // handler for GET home page
 app.get('/', (req, res) => {
-    if (req.session.email == null) {
-        thelayout = 'beforeLogin.hbs'
-    } else { thelayout = 'main.hbs' }
-    res.render('initialBody', { layout: 'initial' });
-})
-//handler for GET home page
-app.get('/vender', (req, res) => {
-    // res.send('<h1>Vender App</h1>')
-        res.render('venderHomePage', { layout: "initial" });
+        if (req.session.email == null) {
+            thelayout = 'beforeLogin.hbs'
+        } else { thelayout = 'main.hbs' }
+        res.render('initialBody', { layout: 'initial' });
+    })
+    //handler for GET home page
+app.get('/vendor', (req, res) => {
+    // res.send('<h1>vendor App</h1>')
+    res.render('vendorHomePage', { layout: "initial" });
 })
 
 /*customer home page*/
@@ -110,14 +111,14 @@ app.get('/customer', (req, res) => {
 })
 
 // handler for newOrders in van requests
-app.use('/vender/vans', vanRouter)
+app.use('/vendor', vanRouter)
 
 // here goes the customer server after the customer has login
 app.use('/customer', customerRouter)
 
 
 app.all('*', (req, res) => { // 'default' route to catch user errors
-    return res.status(404).render('error', { errorCode: '404', message: 'That route is invalid.' })
+    return res.status(404).render('error', { errorCode: '404', layout: 'initial', message: 'That route is invalid.' })
 })
 
 app.listen(process.env.PORT || 3000, () => {

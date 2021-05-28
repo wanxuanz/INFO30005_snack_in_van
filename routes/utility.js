@@ -5,7 +5,7 @@ function isLoggedIn(req, res, next) {
     }
 
     // if not logged in, redirect to login form
-    res.redirect('/vender');
+    res.redirect('/vendor');
 }
 
 function isLoggedInCustomer(req, res, next) {
@@ -23,11 +23,12 @@ function isSelectedVan(req, res, next) {
     }
     res.redirect('/customer');
 }
+
 function isSendLocation(req, res, next) {
     if (req.session.location) {
         return next();
     }
-    res.redirect('/vender/vans/send_location');
+    res.redirect('/vendor/send_location');
 }
 
 // export the function

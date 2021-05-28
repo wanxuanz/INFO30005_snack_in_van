@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 const Order = mongoose.model("newOrders")
 const Food = require("../models/food")
-// const van = require("../models/van")
-// const Van = van.Van
+    // const van = require("../models/van")
+    // const Van = van.Van
 const Van = mongoose.model("vans")
-// const Van = require("../models/van")
+    // const Van = require("../models/van")
 
 // find outstanding order
 const viewOutstandingOrders = async(req, res) => {
@@ -22,9 +22,9 @@ const viewOutstandingOrders = async(req, res) => {
             }
             outstandingOrders[i]["foodnames"] = foodnames
         }
-        return res.render('vanOutstandingOrders', { "outstandingOrders": outstandingOrders, layout: 'vender_main.hbs' })
+        return res.render('vanOutstandingOrders', { "outstandingOrders": outstandingOrders, layout: 'vendor_main.hbs' })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -44,9 +44,9 @@ const viewOrderHistory = async(req, res) => {
             }
             OrderHistory[i]["foodnames"] = foodnames
         }
-        return res.render('vanOrderHistory', { "OrderHistory": OrderHistory, layout: 'vender_main.hbs' })
+        return res.render('vanOrderHistory', { "OrderHistory": OrderHistory, layout: 'vendor_main.hbs' })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -56,7 +56,7 @@ const getAllnewOrders = async(req, res) => {
         let oneVanOrder = await Order.find({ vanId: req.params.vanId })
         return res.send(oneVanOrder)
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -70,7 +70,7 @@ const getOneOrder = async(req, res) => {
         }
         return res.send(oneOrder) // order was found
     } catch (err) { // error occurred
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -80,7 +80,7 @@ const getOutstandingnewOrders = async(req, res) => {
         const newOrders = await Order.find({ vanId: req.params.vanId, status: "outstanding" }, {});
         return res.send(newOrders)
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
@@ -91,36 +91,36 @@ const getRating = async(req, res) => {
             // return res.send(foods)
         res.render('rating', { "thisorder": order })
     } catch (err) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
 const finishRating = async(req, res) => {
     try {
-        
-        const order_previous = await Order.findOne({"_id": req.params.orderId}).lean()
-        await Order.updateOne({ "_id": req.params.orderId }, { rating: req.body.rating }).lean()
-        // updated order
-        const order = await Order.findOne({ "_id": req.params.orderId }).lean()
-        const currentVanAllOrders = await Order.find({ vanId: order_previous.vanId}).lean()
-        const currentVanUnRatedOrders = await Order.find({ vanId: order_previous.vanId, rating: '0'}).lean()
 
-        const currentVan = await Van.findOne({ vanId: order_previous.vanId}).lean()
-        // all ratings
+        const order_previous = await Order.findOne({ "_id": req.params.orderId }).lean()
+        await Order.updateOne({ "_id": req.params.orderId }, { rating: req.body.rating }).lean()
+            // updated order
+        const order = await Order.findOne({ "_id": req.params.orderId }).lean()
+        const currentVanAllOrders = await Order.find({ vanId: order_previous.vanId }).lean()
+        const currentVanUnRatedOrders = await Order.find({ vanId: order_previous.vanId, rating: '0' }).lean()
+
+        const currentVan = await Van.findOne({ vanId: order_previous.vanId }).lean()
+            // all ratings
         var current_rating = Number(order.rating);
         var length_diff = currentVanAllOrders.length - currentVanUnRatedOrders.length
-        //calcuate average
+            //calcuate average
         var average;
-        if(length_diff === 1){
+        if (length_diff === 1) {
             average = current_rating
-        }else{
-            average = (Number(currentVan.vanRate) * (length_diff - 1) + current_rating)/(length_diff)
+        } else {
+            average = (Number(currentVan.vanRate) * (length_diff - 1) + current_rating) / (length_diff)
         }
-        await Van.updateOne({ "vanId": order_previous.vanId }, { vanRate: String(average)}).lean()
+        await Van.updateOne({ "vanId": order_previous.vanId }, { vanRate: String(average) }).lean()
         return res.render('ratingsuccess', { "thisorder": order });
     } catch (err) {
         console.log(err)
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 
 }
@@ -133,18 +133,18 @@ const updateOrderStatus = async(req, res) => {
         var order_time = new Date(outstandingOrder.dateUTC)
         var diff = now - order_time
 
-        if(diff > DISCOUNT_TIME){// discount apply
+        if (diff > DISCOUNT_TIME) { // discount apply
             var new_total = Number(outstandingOrder.total) * 0.8
-            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, total: new_total, discount: true}).lean()
-        }else{  // no discount
+            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, total: new_total, discount: true }).lean()
+        } else { // no discount
             await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, }).lean()
         }
         outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
 
-        return res.render("updateOrderStatus", { "outstandingOrder": outstandingOrder, layout: 'vender_main.hbs'})
+        return res.render("updateOrderStatus", { "outstandingOrder": outstandingOrder, layout: 'vendor_main.hbs' })
     } catch (error) {
         console.log(error)
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 
 }
