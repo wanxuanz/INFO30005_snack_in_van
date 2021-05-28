@@ -18,6 +18,7 @@
     --color-brown: #a39078;
     --color-median-yellow: #CC9E22;
     --color-darkgrey: #D97D14;
+    --color-lightred:rgb(163, 63, 63);
 }
 
 
@@ -57,6 +58,7 @@ h1 {
     font-size: var(--text-big);
     color: var(--color-dark);
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 h2 {
@@ -73,6 +75,24 @@ h3 {
     text-align: center;
     color: var(--color-brown);
     margin-top: 0;
+    margin-bottom: 0;
+}
+h4 {
+    /* text-align: center; */
+    font-size: var(--text-median);
+    color: var(--color-dark);
+    margin-top: 0;
+    
+    text-align: center;
+    
+}
+h5{
+    /*error massage*/
+    font-size: var(--text-median);
+    color: var(--color-lightred);
+    margin-bottom: 0;
+    margin-top: 0;
+
 }
 
 a {
@@ -209,6 +229,7 @@ ul#van-list {
 
 #register-page ul {
     padding: 0;
+    margin-bottom: 0;
 }
 
 #register-fail input[type$=submit] {
@@ -325,6 +346,7 @@ ul#van-list {
     /* the food names */
     color: var(--color-dark);
 }
+
 
 
 /**************************************************************************/
@@ -590,6 +612,7 @@ a#updateOrderStatus:hover {
     h1 {
         font-size: 20px;
     }
+    
     header {
         font-size: 20px;
     }
@@ -681,6 +704,7 @@ a#updateOrderStatus:hover {
         /* spell out abbreviated words in full */
         display: inline;
     }
+    
 }
 
 @media screen and (min-width: 1200px) {
