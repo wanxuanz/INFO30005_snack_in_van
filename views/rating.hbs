@@ -1,34 +1,29 @@
+<ul style="list-style-type:none; padding-left: 0;">
 
-<ul style="list-style-type:none">
-
-                <li><h3>Van ID: </h3><h1>{{thisorder.vanId}}</h1></li>
-                <li><h3>Order time: </h3><h1>{{thisorder.time}}</h1></li>
-    
-                
-  
-<li>
-<h3>Click the star below to rate this order</h3>
-<form action="rating" method="post" >
-<ul style="list-style-type:none">
+    <li><h3>Van ID: </h3><h1>{{thisorder.vanId}}</h1></li>
+    <li><h3>Order time: </h3><h1>{{thisorder.time}}</h1></li>
+    <li><h3>Click the star below to rate this order</h3></li>
 
 	
-	<center><li><i class="fas fa-star" onclick="one()" id="star1"></i>
+		
+	<li style="height: 1%;"><center><i class="fas fa-star" onclick="one()" id="star1"></i>
 	<i class="fas fa-star" onclick="two()" id="star2"></i>
 	<i class="fas fa-star" onclick="three()" id="star3" ></i>
 	<i class="fas fa-star" onclick="four()" id="star4"></i>
-	<i class="far fa-star" onclick="five()" id="star5"></i></li></center>
-	</br>
+	<i class="far fa-star" onclick="five()" id="star5"></i></center></li>
 	<li>
+		<br>
+		<center>
+		<form action="rating" method="post" >
 		<button class="register-btn"><a href="/customer" class="a-register">Cancel</a></button>
 		&nbsp;&nbsp;
-	<input type="hidden" name="rating" id="rating" value="4">
-	<button type="submit" class="register-btn"> Confirm</button>
-                    
+		<input type="hidden" name="rating" id="rating" value="4">
+		<button type="submit" class="register-btn"> Confirm</button></center>
+		</form>
     </li>
+	
 </ul>
-</li>
-</ul>
-</form>
+
 <script>
 	var star1 = document.getElementById("star1");
 	var star2 = document.getElementById("star2");

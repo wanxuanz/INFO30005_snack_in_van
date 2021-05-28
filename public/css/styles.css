@@ -588,10 +588,10 @@ a#updateOrderStatus:hover {
 @media screen and (max-width: 620px) {
     /* for phone size */
     h1 {
-        font-size: 28px;
+        font-size: 20px;
     }
     header {
-        font-size: 36px;
+        font-size: 20px;
     }
     footer {
         font-size: 12px;
