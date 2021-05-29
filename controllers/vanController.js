@@ -1,10 +1,11 @@
-const mongoose = require("mongoose")
+// const mongoose = require("mongoose")
 
 // import van model
-const Van = require("../models/van")
+const van = require("../models/van")
+const Van = van.Van
 
 
-//const Van = mongoose.model("vans")
+// const Van = mongoose.model("vans")
 
 const geocoder = require('../utils/geocoder')
 
@@ -19,9 +20,10 @@ const updateVanStatus = async(req, res) => {
             await Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
         }
         oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
-        return res.render('showVanStatus', { "oneVan": oneVan, "loggedin": true, layout: 'vendor_main.hbs' })
+        return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vendor_main.hbs' })
     } catch (error) {
-        return res.status(400).render('error', {"errorCode": 404, "message":"Error: Food not found!"})
+
+        return res.render('error', {"errorCode": 404, "message":"Error: Van not found!"})
     }
 }
 
@@ -42,6 +44,7 @@ const updateLocation = async(req, res) => {
             return res.send("login failed")
         }
     } catch (err) { // error occurred
+        console.log(err)
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
