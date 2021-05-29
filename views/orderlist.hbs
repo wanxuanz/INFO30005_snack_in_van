@@ -65,7 +65,7 @@
                         {{/if}}
                 </td>
                 </tr>
-            {{#if this.notshowrating}}
+            {{#if (showrate this.status)}}
                 {{#if (checkTime this.dateUTC) }}
                     <tr>
                         <td colspan="2">
