@@ -4,8 +4,8 @@ const Food = require("../models/food")
     // const van = require("../models/van")
     // const Van = van.Van
 const Van = mongoose.model("vans")
+const constants = require("../public/constant")
     // const Van = require("../models/van")
-
 // find outstanding order
 const viewOutstandingOrders = async(req, res) => {
     try {
@@ -127,13 +127,13 @@ const finishRating = async(req, res) => {
 
 const updateOrderStatus = async(req, res) => {
     try {
-        const DISCOUNT_TIME = 900000
+        const discount_time = constants.DISCOUNT_TIME
         var outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
         var now = new Date()
         var order_time = new Date(outstandingOrder.dateUTC)
         var diff = now - order_time
 
-        if (diff > DISCOUNT_TIME) { // discount apply
+        if (diff > discount_time) { // discount apply
             var new_total = Number(outstandingOrder.total) * 0.8
             await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, total: new_total, discount: true }).lean()
         } else { // no discount

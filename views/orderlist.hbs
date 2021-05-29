@@ -1,7 +1,6 @@
 <section id="orderList">
     <script>
-    const ten_mintues = 600000
-    function cancel(status, dateUTC) {
+    function cancel(status, dateUTC, ten_mintues) {
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
@@ -17,7 +16,7 @@
             return false
         }   
     }  
-    function update(status, dateUTC){
+    function update(status, dateUTC, ten_mintues){
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
@@ -36,6 +35,7 @@
     </script>
     <h1 style="margin-bottom: 1%;">Orders List</h1>
     <p style="color: black">You can change or remove the order within <span style="color:red;">10 minutes</span> if the order has not been fulfilled.</p>
+    <p style="color: black">You will be granted <span style="color:red;">20%</span> if the order has not been completed within 15 minutes.</p>
     <ul>
         {{#each newOrders}}
         {{#if this.visibility}}
@@ -69,7 +69,7 @@
                         <td colspan="2">
                             <form method="post" action="newOrders/cancel_order">
                             <input type="hidden" name = "orderId" value="{{this._id}}">
-                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}');">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}', '{{../cancel_time}}');">
                             Cancel Order
                             </button>
                         </td>  
@@ -81,7 +81,7 @@
                             <form method="post" action="newOrders/change_order">
                             <input type="hidden" name = "orderId" value="{{this._id}}">
                             <input type="hidden" name = "items" value="{{this.items}}">
-                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}');">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return update('{{this.status}}', '{{this.dateUTC}}', '{{../cancel_time}}');">
                             Change Order
                             </button>
                             </form>
@@ -91,7 +91,6 @@
                 {{/if}}    
             {{else}}
                     {{#if (rate this.rating)}}
-                    {{!-- {{#if this.rating}} --}}
                              <tr><td>Rating:</td><td>{{this.rating}} stars out of 5</td></tr>  
                     {{else}}
                         <tr>

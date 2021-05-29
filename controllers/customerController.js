@@ -5,6 +5,7 @@ const order = require("../models/order")
 const Order = order.Order
 const van = require("../models/van")
 const Van = van.Van
+const constants = require("../public/constant")
 
 // this function will find the shopping cart of a given customer id
 const findCart = async(req, res) => {
@@ -117,7 +118,7 @@ const getAllCustomernewOrders = async(req, res) => {
             }
             newOrders[i]["foodnames"] = foodnames
         }
-        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
+        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders, "cancel_time": constants.CHANGE_TIME})
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
@@ -212,7 +213,7 @@ const cancelOrder = async(req, res) => {
             newOrders[i]["foodnames"] = foodnames
         }
         // console.log(newOrders)
-        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders })
+        return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders, "cancel_time": constants.CHANGE_TIME })
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'cannot cancel the order' })
     }
