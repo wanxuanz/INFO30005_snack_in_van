@@ -34,29 +34,29 @@
     }
     </script>
     <h1 style="margin-bottom: 1%;">Orders List</h1>
-    <p style="color: black">You can change or remove the order within <span style="color:red;">10 minutes</span> if the order has not been fulfilled.</p>
-    <p style="color: black">You will be granted <span style="color:red;">20%</span> if the order has not been completed within 15 minutes.</p>
+    <p style="color: rgb(80, 52, 11)">You can change or remove the order within <span style="color:rgb(199, 41, 41);">10 minutes</span> if the order has not been fulfilled.</p>
+    <p style="color: rgb(80, 52, 11)">You will be granted <span style="color:rgb(199, 41, 41);">20%</span> if the order has not been completed within 15 minutes.</p>
     <ul>
         {{#each newOrders}}
         {{#if this.visibility}}
         <li>
             <table>
-                <tr style="row"><td>Order ID: </td><td>{{this._id}}</td></tr>
-                <tr><td>Van ID: </td><td>{{this.vanId}}</td></tr>
-                <tr><td>Order time: </td><td>{{this.time}}</td></tr>
-                <tr><td>Status: </td><td>{{this.status}}</td></tr>
+                <tr style="row"><td>Order ID: </td><td  style="color:#8a775e;">{{this._id}}</td></tr>
+                <tr><td>Van ID: </td><td style="color:#8a775e;">{{this.vanId}}</td></tr>
+                <tr><td>Order time: </td><td style="color:#8a775e;">{{this.time}}</td></tr>
+                <tr><td>Status: </td><td style="color:#8a775e;">{{this.status}}</td></tr>
                 <tr><td>Items: </td>
-                <td><table style="border: 5px solid #BF863F; width:85%;" align = "left">
+                <td><table style="border: 3px solid #8a775e; width:85%;" align = "left">
                     <tr style='background:rgba(214, 200, 182, 0.2);'><td>Name</td><td>Quantity</td></tr>
                     {{#each foodnames}}
                     <tr>
-                        <td>{{this.foodname}} </td><td>{{this.quantity}}</td>
+                        <td style="color:#8a775e;">{{this.foodname}} </td><td style="color:#8a775e;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </table></td>
                 </tr>
                 <tr><td>Total Price: </td>
-                <td>
+                <td  style="color:#8a775e;">
                     ${{this.total}}
                         {{#if this.discount }}
                             (20% discount)
@@ -65,16 +65,6 @@
                 </tr>
             {{#if this.notshowrating}}
                 {{#if (checkTime this.dateUTC) }}
-                    <tr>
-                        <td colspan="2">
-                            <form method="post" action="newOrders/cancel_order">
-                            <input type="hidden" name = "orderId" value="{{this._id}}">
-                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}', '{{../cancel_time}}');">
-                            Cancel Order
-                            </button>
-                        </td>  
-                    </tr>
-                    <tr><td>&nbsp;</td></tr>
                     <tr>
                         <td colspan="2">
                             </form>
@@ -88,6 +78,18 @@
                         </td> 
                     </tr>
                     <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <form method="post" action="newOrders/cancel_order">
+                            <input type="hidden" name = "orderId" value="{{this._id}}">
+                            <button type="submit"  class="register-btn" style="padding: 1%;" onclick="return cancel('{{this.status}}', '{{this.dateUTC}}', '{{../cancel_time}}');">
+                            Cancel Order
+                            </button>
+                            </form>
+                        </td>  
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    
                 {{/if}}    
             {{else}}
                     {{#if (rate this.rating)}}

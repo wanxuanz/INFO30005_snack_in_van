@@ -67,7 +67,7 @@ module.exports = function(passport) {
                         // console.log(req.session)
                             // done() is used by the strategy to set the authentication status with
                             // details of the user who was authenticated
-                        return done(null, van, req.flash('loginMessage', 'Login successful'));
+                        return done(null, van);
                     }
                 });
             });
@@ -183,7 +183,7 @@ module.exports = function(passport) {
 
                         // done() is used by the strategy to set the authentication status with
                         // details of the user who was authenticatedreturn done(null, user, req.flash('loginMessage', 'Login successful'));
-                        return done(null, customer, req.flash('loginMessage', 'Login successful'));
+                        return done(null, customer);
                     }
                 });
             });
@@ -198,6 +198,9 @@ module.exports = function(passport) {
 
         function(req, email, password, done) {
             process.nextTick(function() {
+                if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
+                    return done(null, false, req.flash('signupMessage', 'please input all information below'));
+                }
                 Customer.findOne({ 'email': email }, function(err, existingCustomer) {
                     // search a user by the username (email in our case)
                     // if user is not found or exists, exit with false indicating
@@ -216,9 +219,7 @@ module.exports = function(passport) {
                     if (!req.body.passowrd==req.body.passowrd2){
                         return done(null, false, req.flash('signupMessage', 'Please input the same passowrd twice.'));
                     }
-                    if (req.body.email === "" || req.body.password === "" || req.body.first_name === "" || req.body.last_name === "") {
-                        return done(null, false, req.flash('signupMessage', 'please input all information below'));
-                    }
+                    
                      else {
                         // otherwise
                         // create a new user
