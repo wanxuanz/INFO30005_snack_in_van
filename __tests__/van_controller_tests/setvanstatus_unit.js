@@ -23,7 +23,6 @@ describe("Unit testing for  updateVanStatus from vanController.js", () => {
             {
             VanId: 'Niceday',
             status: 'close',
-            __v: 0
             }
         ]);
         
@@ -39,18 +38,15 @@ describe("Unit testing for  updateVanStatus from vanController.js", () => {
         Van.updateOne = jest.fn().mockResolvedValue([
             {
             VanId: 'Niceday',
-            status: 'open',
-            __v: 0
             }
         ], );
         
         Van.updateOne.mockImplementationOnce(() => ({
             lean: jest.fn().mockReturnValue({
                 VanId: 'Niceday',
-                status: 'open'
             }),
         }));
-
+        
         // mock find one again
         Van.findOne.mockImplementationOnce(() => ({
             lean: jest.fn().mockReturnValue({
