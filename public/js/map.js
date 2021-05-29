@@ -58,9 +58,9 @@ async function getVans() {
 
     data.data.forEach(function(item) {
         if (item.vanRate === '0') {
-            vanList.innerHTML += '<li class = "vans"><p>' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating: No rating yet</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
+            vanList.innerHTML += '<li class = "vans"><p style="color:#8a775e;">' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating: No rating yet</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
         } else {
-            vanList.innerHTML += '<li class = "vans"><p>' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating:' + Math.round((Number(item.vanRate) + Number.EPSILON) * 100) / 100 + '</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
+            vanList.innerHTML += '<li class = "vans"><p style="color:#8a775e;">' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating:' + Math.round((Number(item.vanRate) + Number.EPSILON) * 100) / 100 + '</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
         }
     })
 
