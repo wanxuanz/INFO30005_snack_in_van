@@ -136,3 +136,5 @@ app.all('*', (req, res) => { // 'default' route to catch user errors
 app.listen(process.env.PORT || 3000, () => {
     console.log('The snack app is running')
 })
+
+module.exports = app;

@@ -25,10 +25,24 @@
                 <button class="register-btn" onclick="return edit('{{@index}}')">Edit</button>
             </p>
             <form  method="post" action="/customer/shopping-cart"  class="form_quantity">
-                <input type="hidden" name = "item_id" value="{{this._id}}">
+                <input type="hidden" name = 0"item_id" value="{{this._id}}">
                 <input  style="width: 25%;" id = "input_quantity" value="{{this.quantity}}" type="number" name="quantity" min="0" oninput="validity.valid||(value='');">
                 <button class="register-btn" type="submit" onclick="return confirm('{{@index}}')">Confirm</button>
             </form>
+
+
+
+            {{!-- <p class="confirm" style="display: none;">
+                <button class="register-btn" type = "submit" form="form_quantity" onclick="confirm('{{@index}}')">Confirm</button>
+            </p> --}}
+
+
+
+            
+            {{!-- <form method="post" action="/customer/shopping-cart" id="shopping-cart-form">
+                <input type="hidden" name = "item_id" value="{{this._id}}">
+                <input type="submit" value="Edit"> 
+            </form>  --}}
         </li>
         {{/each}}
     </ul>

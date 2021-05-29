@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
 
 // import van model
-const Van = mongoose.model("vans")
+const van = require("../models/van")
+const Van = van.Van
+
+//const Van = mongoose.model("vans")
 
 const geocoder = require('../utils/geocoder')
 
@@ -16,9 +19,10 @@ const updateVanStatus = async(req, res) => {
             await Van.updateOne({ vanId: req.session.van_name }, { status: "close" }).lean()
         }
         oneVan = await Van.findOne({ vanId: req.session.van_name }).lean()
-        return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vender_main.hbs' })
+        res.render('showVanStatus', { "oneVan": oneVan, "loggedin":req.isLoggedIn(), layout: 'vender_main.hbs' })
     } catch (error) {
-        return res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
+        console.log(error)
+        res.status(400).render('error', { errorCode: '400', message: 'Database query failed' })
     }
 }
 
