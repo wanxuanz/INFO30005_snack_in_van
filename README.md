@@ -188,9 +188,7 @@ Besides, in your **Profile** (on the navbar), you are able to change your person
 
 ### Vendor App
 
-The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here is the sample vendor account: <br />
-**`VanId= `**<br />
-**`PASSWORD=123456`**<br />
+The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here are some sample vendors account: <br />
 | VanId | Password|
 | :---  |    ---: |
 | Niceday |12345|
@@ -202,7 +200,10 @@ The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor .
 | Wonder Coffee |12345|
 | MM |12345|
 
-You will need to send your location every time you log in. You need to enter the location name and the system will also automatically detect your position and set it on the map on the customer end. If you did not enter your address, you will not be able to perform further actions. <br />
+You will need to send your location every time you log in. When you are all set and ready to sell, you then can set your location and the system will also  detect your current geo-location and set it on the map on the customer end. After send the location and confirm your rough location, your van status will mark as open automatically. <br/>
+**NB: If you did not enter your address, you will not be able to perform further actions.** <br />
+
+
 In the vendor app, the **Home** contains the details of the van and you can open or close the business for the van here. The **Outstanding Orders** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **Complete**. Such that this order will disappear from the **Outstanding Order** list and it will go into **Order History**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking “Log Out” (on the navbar), at the same time, the van will be set to close spontaneously. <br />
 
 ### Unit test and integration test
