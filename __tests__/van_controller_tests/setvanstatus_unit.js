@@ -62,14 +62,13 @@ describe("Unit testing for  updateVanStatus from vanController.js", () => {
         expect(Van.findOne).toHaveBeenCalledTimes(2); 
         expect(Van.updateOne).toHaveBeenCalledTimes(1); 
         expect(res.render).toHaveBeenCalledTimes(1);
-        // as the van's status is updated, we expect Van.findOne to be error 
-        // because the the status of van is no longer close( has been updated by Van.updateOne)
+        // as the van's status is updated, we expect Van.findOne to be correct
+        // (has been updated by Van.updateOne)
         expect(res.render).toHaveBeenCalledWith('showVanStatus', {"oneVan": {
             "VanId": "Niceday",
             "status": "open"}, 
             "layout": 'vendor_main.hbs'
         });
-
         });
       
   });
@@ -92,6 +91,7 @@ describe("Unit testing updateVanStatus from vanController.js with invalid van", 
         res.render.mockClear();
 
         Van.findOne = jest.fn().mockResolvedValue();
+        // find an error, throw new error
         Van.findOne.mockImplementationOnce(() => {
             throw new Error();
           });
@@ -100,9 +100,8 @@ describe("Unit testing updateVanStatus from vanController.js with invalid van", 
         vanController.updateVanStatus(req, res);
       });
 
-    // This demo has only one test with a valid van ID 
     test("Test case 2: testing with invalid van id \
-        Fake Van, expecting error message", () => {      
+        , expecting error message", () => {      
         expect(res.render).toHaveBeenCalledTimes(1);
         expect(res.render).toHaveBeenCalledWith('error', {"errorCode": 404,
         "message": "Error: Van not found!"});
