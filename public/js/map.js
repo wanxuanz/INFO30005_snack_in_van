@@ -65,6 +65,12 @@ async function getVans() {
     })
 
     const vans = data.data.map(van => {
+        var rating = van.vanRate
+        if (rating === '0') {
+            rating = 'No rating yet'
+        } else {
+            rating += '/5'
+        }
         return {
             type: 'Feature',
             geometry: {
@@ -73,7 +79,7 @@ async function getVans() {
             },
             properties: {
                 vanId: van.vanId,
-                description: '<p>' + van.address + '</p><p>Rating: ' + van.vanRate + '/5</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form>'
+                description: '<p>' + van.address + '</p><p>Rating: ' + rating + '</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form>'
             }
         }
     })
@@ -81,7 +87,7 @@ async function getVans() {
     loadMap(vans)
 }
 
-// Load map with stores
+// Load map with vans
 function loadMap(vans) {
 
     // Add a data source containing one point feature.
