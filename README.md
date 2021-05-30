@@ -165,7 +165,7 @@ After login, click on the “Orders” in the navbar to view all order details o
 
 
 ## Web Application (Deliverable 4)
-######**Customer App:**
+###### Customer App
 **Customer App:**<br />
 Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer. Then you can see a list of vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), the big map visualises the location of each van, you might like to use the map positioning function (by clicking the top-right icon on the map, do not forget to authorize the browser to access your location!) to find the van that is nearest to your position. <br />
 After choosing a van you like by either clicking **choose the van** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functions such as add to cart or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). Here is an example account you might use: <br />
