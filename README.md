@@ -25,8 +25,8 @@
 | Yu-Wen Michael Zhang  |1089117| README Format manage the customer app     |  Done |
 | Ming Zhang   |1068302| README Format and manage the customer app      |  Done |
 | Yifei Wang    |1001686| manage Postman testing and the customer app    |  Done |
-| Claire    |1080915| manage the vender app    |  Done |
-| Chloe    |1079686| manage the vender app    |  Done |
+| Wanting Zhang    |1080915| manage the vender app    |  Done |
+| Wanxuan Zhang    |1079686| manage the vender app    |  Done |
 
 ## General info
 This is project is about creating an vendor app and customer app from scratch. 
@@ -35,6 +35,14 @@ This is project is about creating an vendor app and customer app from scratch.
 * The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
 
 ## Detailed info
+The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com . You can either choose to enter the customer/vendor app by click the **Customer App** or **Vendor App** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. 
+Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4)).
+
+Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. 
+Additionally, we did not implement live page in Deliverable 4.</br></br>
+
+
+
 In detailed info, we will explain the usage of all the links in our server.
 
 Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be found here [App server mockup instruction](#app-server-mockup-instruction). 
