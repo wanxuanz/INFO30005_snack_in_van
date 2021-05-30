@@ -4,6 +4,7 @@
 # Group Project Repository
 
 **Welcome to webg100 Group Repository !**
+**(Notice: some functions or links present in deliverable 2&3 might not applied to current app version, please refer to the deliverable 4 instruction to get all functions work properly.)**
 
 
 ## Table of contents
@@ -14,35 +15,38 @@
 * [Handling images](#handling-images)
 * [How to access our database](#how-to-access-our-database)
 * [Technologies](#technologies)
-* [App server mockup instruction](#app-server-mockup-instruction)
-* [Front end and back end (deliverable 3)](#Front-end-and-back-end-deliverable-3)
-* [Deliverable 4](#Deliverable-4)
+* [App server mockup(Deliverable 2)](#app-server-mockup-Deliverable-2)
+* [Front end and back end (Deliverable 3)](#Front-end-and-back-end-Deliverable-3)
+* [Web Application(Deliverable 4)](#Web-Application-Deliverable-4))
+
+
 
 ## Team Members
 
 | Name | Student ID| Task | State |
 | :---         |     :---:      |     :---:      |          ---: |
-| Yu-Wen Michael Zhang  |1089117| README Format manage the customer app     |  Done |
-| Ming Zhang   |1068302| README Format and manage the customer app      |  Done |
-| Yifei Wang    |1001686| manage Postman testing and the customer app    |  Done |
-| Wanting Zhang    |1080915| manage the vender app    |  Done |
-| Wanxuan Zhang    |1079686| manage the vender app    |  Done |
+| Yu-Wen Michael Zhang  |1089117| shopping cart related tasks, order discount   |  Done |
+| Ming Zhang   |1068302| login and authentication, rating      |  Done |
+| Yifei Wang    |1001686| vendor location and map functions   |  Done |
+| Claire    |1080915| vendor app UI and README    |  Done |
+| Chloe    |1079686| vendor app UI and testing    |  Done |
 
 ## General info
 This is project is about creating an vendor app and customer app from scratch. 
 * The home page of our website is https://snacks-in-a-van-webg100.herokuapp.com. 
 * The customer side application can be accessed by https://snacks-in-a-van-webg100.herokuapp.com/customer.
-* The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vender.
+* The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vendor.
 
 ## Detailed info
 The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com . You can either choose to enter the customer/vendor app by click the **Customer App** or **Vendor App** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. 
 Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4)).
 
-Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. </br>
-Additionally, we did not implement live page in Deliverable 4. </br>
+Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. 
+Additionally, we did not implement live page in Deliverable 4.
+
 
 ## Instructions of Using code
-clone this repository and install all the dependencies in **package.json** and type **npm start** in terminal to run the code. However, you may not be able to run these codes because you cannot access our database. If you intend to do so, we have provide one of our username and password. Please refer to here: [How to access our database](#how-to-access-our-database).
+clone this repository and install all the dependencies in **package.json** and type **npm start** in terminal to run the code. However, you may not be able to run these codes because you cannot access our database. If you intend to do so, we have provide one of our username and password. And you will need to set a passport key, which could be anything you want. Please refer to here: [How to access our database](#how-to-access-our-database).
 
 ## Handling images
 the photos for each food are stored as **String** in database (in **Collections: foods**). The photo is retrieved from https://unsplash.com/photos/. If you want to see the photo, simply append the string found in database to this URL: https://unsplash.com/photos. <br />
@@ -52,9 +56,7 @@ For example, Cappuccino has photo String: **6o2Dk5Op8VI**, if you want to view t
 ## How to access our database
 Here is one of the username and password that allow you to access our database:<br />
 **`MONGO_USERNAME=Michael`**<br />
-**`MONGO_PASSWORD=1234`**<br />
-And this is what should always be included in the .env file 
-**`PASSPORT_KEY=info30005secretkey`**
+**`MONGO_PASSWORD=1234`**
 
 ## Technologies
 Project is created with:
@@ -73,7 +75,7 @@ Project is created with:
 - [x] Report on your work(+ test1 feature)
 
 
-## App server mockup instruction:
+## App server mockup (Deliverable 2):
 
 **customer features:**
 
@@ -115,7 +117,7 @@ type orderid which is shown at previous feature(Show list of all outstanding ord
 eg: https://snacks-in-a-van-webg100.herokuapp.com/vender/vans/0001/orders/10005/update_status <br />
 This will change the status from outstanding to fullfilled of order 10005 in vans 0001.
 
-## Front end and back end (deliverable 3)
+## Front end and back end (Deliverable 3)
 * (1) **`Customer Login`**<br />
 This is the main website of our customer app <br />
 https://snacks-in-a-van-webg100.herokuapp.com<br />
@@ -159,29 +161,8 @@ Next, your new order will go to the database and you can find it in collection n
 After login, click on the “Orders” in the navbar to view all order details of this customer which includes order id, time, order status, items and total price. <br />
 
 
-
-
-## Deliverable 4
-| Email | Password|
-| :---  |    ---: |
-| tom@outlook.com |12345|
-| michael@gmail.com |12345|
-| claire@gmail.com |12345|
-| chloe@gmail.com |12345|
-| andy@gmail.com |12345|
-| angela@gmail.com |12345|
-
-| VanId | Password|
-| :---  |    ---: |
-| Niceday |12345|
-| LittleSeed |12345|
-| Happyday |12345|
-| JM |12345|
-| Morning |12345|
-| Mayday |12345|
-| Wonder Coffee |12345|
-| MM |12345|
-**Customer App:**<br />
+## Web Application (Deliverable 4)
+**Customer App:**
 Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer. Then you can see a list of vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), the big map visualises the location of each van, you might like to use the map positioning function (by clicking the top-right icon on the map, do not forget to authorize the browser to access your location!) to find the van that is nearest to your position. <br />
 After choosing a van you like by either clicking **choose the van** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functions such as add to cart or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). Here is an example account you might use: <br />
 **`EMAIL= `**<br />
@@ -191,10 +172,9 @@ Now let’s go to the shopping cart (on the navbar). Oops, you might think there
 While you are waiting for your order to be complete, you can go to your order list, you are able to change or cancel your order within ten minutes. And there will be corresponding actions in the vendor end. Elsewise, you do not change the order and the vendor has marked this order as finished, there should be a **rating** button appear on your order detail and you can rate this order from 1 to 5 star. Each order’s rating will contribute to the van rating. 
 Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
 
-**Vendor App:** <br />
+**Vendor App:**
 The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here is the sample vendor account: <br />
 **`VanId= `**<br />
 **`PASSWORD=123456`**<br />
 You will need to send your location every time you log in. You need to enter the location name and the system will also automatically detect your position and set it on the map on the customer end. If you did not enter your address, you will not be able to perform further actions. <br />
 In the vendor app, the **Home** contains the details of the van and you can open or close the business for the van here. The **Outstanding Orders** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **Complete**. Such that this order will disappear from the **Outstanding Order** list and it will go into **Order History**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking “Log Out” (on the navbar), at the same time, the van will be set to close spontaneously. <br />
-
