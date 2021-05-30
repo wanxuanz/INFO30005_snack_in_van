@@ -4,7 +4,6 @@
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        alert(ten_mintues)
         if(diff < ten_mintues && status !== "Fulfilled"){
             return confirm('Are you sure you want to cancel your order?');
         }
@@ -21,7 +20,6 @@
         var orderDate = new Date(dateUTC)
         var now = new Date()
         var diff = now - orderDate;
-        alert(ten_mintues)
         if(diff < ten_mintues && status !== "Fulfilled"){
             return confirm('Are you sure you want to change your order?');
         }

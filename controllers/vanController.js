@@ -61,10 +61,9 @@ const getOneVan = async(req, res) => {
 // logout of the current van account
 const logout = async(req, res) => {
     try {
-        req.logout();
-        req.flash('');
         await Van.updateOne({ vanId: req.session.van_name }, { status: "close" })
-        req.session.destroy();
+        delete req.session.van_name;
+        delete req.session.location;
         res.redirect('/vendor');
 
     } catch (err) { // error occurred

@@ -79,9 +79,8 @@ customerRouter.use('/orders', orderRouter)
 
 //logout
 customerRouter.get('/logout', function(req, res) {
-    req.logout();
-    req.flash('');
-    req.session.destroy();
+    delete req.session.email;
+    delete req.session.vanId;
     res.redirect('/customer');
 })
 

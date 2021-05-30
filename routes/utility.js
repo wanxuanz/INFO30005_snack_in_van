@@ -1,6 +1,6 @@
 // middleware to ensure vendor is logged in
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.session.van_name) {
         return next();
     }
     // if not logged in, redirect to login form
