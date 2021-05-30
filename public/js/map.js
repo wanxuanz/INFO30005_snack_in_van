@@ -60,7 +60,7 @@ async function getVans() {
         if (item.vanRate === '0') {
             vanList.innerHTML += '<li class = "vans"><p style="color:#8a775e;">' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating: No rating yet</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
         } else {
-            vanList.innerHTML += '<li class = "vans"><p style="color:#8a775e;">' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating:' + Math.round((Number(item.vanRate) + Number.EPSILON) * 100) / 100 + '</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
+            vanList.innerHTML += '<li class = "vans"><p style="color:#8a775e;">' + item.vanId + '</p><p class="message">Address: ' + item.address + '<p><p class="message">Rating: ' + Math.round((Number(item.vanRate) + Number.EPSILON) * 100) / 100 + '/5</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + item.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form></li>'
         }
     })
 
@@ -73,7 +73,7 @@ async function getVans() {
             },
             properties: {
                 vanId: van.vanId,
-                description: '<p>' + van.address + '<p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form>'
+                description: '<p>' + van.address + '</p><p>Rating: ' + van.vanRate + '/5</p><form action="/customer/chooseVan" method="post" ><input type="hidden" name = "van_id" value="' + van.vanId + '" ><button type="submit" class="register-btn">Choose this van</button></form>'
             }
         }
     })
