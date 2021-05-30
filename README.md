@@ -38,19 +38,8 @@ This is project is about creating an vendor app and customer app from scratch.
 The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com . You can either choose to enter the customer/vendor app by click the **Customer App** or **Vendor App** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. 
 Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4)).
 
-Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. 
-Additionally, we did not implement live page in Deliverable 4.</br></br>
-
-
-
-In detailed info, we will explain the usage of all the links in our server.
-
-Features needs to be delivered in **Deliverable 2 - Mockup App Server** can be found here [App server mockup instruction](#app-server-mockup-instruction). 
-
-_The following inclues other features which are not part of the **Deliverable 2 - Mockup App Server**_
-
-* When you are at page https://snacks-in-a-van-webg100.herokuapp.com/customer/, you will be able to view all the customers' details who are currently stored in our database (the Collection name that the customers details stored is **`customers`**). You can add a new customer in postman by typing this URL https://snacks-in-a-van-webg100.herokuapp.com/customer/ and set the request as POST. Then you can type `{"firstName":xxxx,"lastName":xxxx,"customerId":xxxx}` in the text box and set the input format as `raw` and `JSON(application/javascript)` above the text box. After that you can see new customer detail at page https://snacks-in-a-van-webg100.herokuapp.com/customer/.
-
+Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. </br>
+Additionally, we did not implement live page in Deliverable 4. </br>
 
 ## Instructions of Using code
 clone this repository and install all the dependencies in **package.json** and type **npm start** in terminal to run the code. However, you may not be able to run these codes because you cannot access our database. If you intend to do so, we have provide one of our username and password. Please refer to here: [How to access our database](#how-to-access-our-database).
