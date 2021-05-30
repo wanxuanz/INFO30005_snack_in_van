@@ -70,8 +70,6 @@ describe("Unit testing for  updateVanStatus from vanController.js", () => {
             "layout": 'vendor_main.hbs'
         });
 
-        // expect(res.render).toHaveBeenCalledWith('error', {"errorCode": 404,
-        // "message": "Error: Van not found!"});
         });
       
   });
@@ -104,12 +102,8 @@ describe("Unit testing updateVanStatus from vanController.js with invalid van", 
 
     // This demo has only one test with a valid van ID 
     test("Test case 2: testing with invalid van id \
-        Fake Van, expecting error message", () => {
-        // when I run the controller, I expect that the render method will
-        // be called exactly once        
+        Fake Van, expecting error message", () => {      
         expect(res.render).toHaveBeenCalledTimes(1);
-        // and because I'm looking up a food that is not in my
-        // database, the controller should render the error message!
         expect(res.render).toHaveBeenCalledWith('error', {"errorCode": 404,
         "message": "Error: Van not found!"});
     });
