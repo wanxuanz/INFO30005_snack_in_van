@@ -39,7 +39,7 @@ This is project is about creating an vendor app and customer app from scratch.
 
 ## Detailed info
 The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com.</br> 
-You can either choose to enter the customer/vendor app by click the `**Customer App**` or `**Vendor App**` on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. </br> 
+You can either choose to enter the customer/vendor app by click the **`Customer App`** or **`Vendor App`** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. </br> 
 Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4).
 Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. 
 Additionally, we did not implement live page in Deliverable 4.
@@ -56,7 +56,10 @@ For example, Cappuccino has photo String: **6o2Dk5Op8VI**, if you want to view t
 ## How to access our database
 Here is one of the username and password that allow you to access our database:<br />
 **`MONGO_USERNAME=Michael`**<br />
-**`MONGO_PASSWORD=1234`**
+**`MONGO_PASSWORD=1234`**<br />
+Also, ther is an additional thing that you may need to add in .env file: </br>
+**`PASSPORT_KEY=info30005secretkey`**</br>
+This PASSPORT_KEY will allow you to use passport.js while you try to run our code.
 
 ## Technologies
 Project is created with:
