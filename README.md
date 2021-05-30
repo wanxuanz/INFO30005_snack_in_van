@@ -207,5 +207,5 @@ In the vendor app, the **`Home`** contains the details of the van and you can op
 **NB: If you did not log out, the van will still be opening and customer can still placing order for your van. An alternative way to mark your van as close is to go to `Home` page and mark it as close. It is the vendor's responsibility to mark their van as close while they are not selling any more. ** <br />
 
 ### Unit test and integration test
-To perform a unit test for the updateVanStatus function, first **`cd cd __tests__\van_controller_tests`** and then run the test using **`npm test -- setvanstatus_unit.js --forceExit`**<br />
-For the integration test, go to the folder **`cd cd __tests__\integration_tests`** and then **`npm test -- setvanstatus_integration.js --forceExit`**<br />
+To perform a unit test for the updateVanStatus function, first **`cd __tests__\van_controller_tests`** and then run the test using **`npm test -- setvanstatus_unit.js --forceExit`**<br />
+For the integration test, go to the folder **`cd __tests__\integration_tests`** and then **`npm test -- setvanstatus_integration.js --forceExit`**<br />
