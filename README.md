@@ -166,8 +166,9 @@ After login, click on the “Orders” in the navbar to view all order details o
 
 ## Web Application (Deliverable 4)
 ### Customer App
-**Customer App:**<br />
-Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer. Then you can see a list of vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), the big map visualises the location of each van, you might like to use the map positioning function (by clicking the top-right icon on the map, do not forget to authorize the browser to access your location!) to find the van that is nearest to your position. <br />
+#### Map
+Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer. Then you can see a list of vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), the big map visualises the location of each van, you might like to use the map positioning function (by clicking the top-right icon on the map, **do not forget to authorize the browser to access your location!**) to find the van that is nearest to your position. <br />
+
 After choosing a van you like by either clicking **choose the van** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functions such as add to cart or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). Here is an example account you might use: <br />
 **`EMAIL= `**<br />
 **`PASSWORD=123456`**<br />
@@ -176,11 +177,12 @@ Now let’s go to the shopping cart (on the navbar). Oops, you might think there
 While you are waiting for your order to be complete, you can go to your order list, you are able to change or cancel your order within ten minutes. And there will be corresponding actions in the vendor end. Elsewise, you do not change the order and the vendor has marked this order as finished, there should be a **rating** button appear on your order detail and you can rate this order from 1 to 5 star. Each order’s rating will contribute to the van rating. 
 Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
 
-**Vendor App:**<br />
+### Vendor App
+
 The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here is the sample vendor account: <br />
 **`VanId= `**<br />
 **`PASSWORD=123456`**<br />
 You will need to send your location every time you log in. You need to enter the location name and the system will also automatically detect your position and set it on the map on the customer end. If you did not enter your address, you will not be able to perform further actions. <br />
 In the vendor app, the **Home** contains the details of the van and you can open or close the business for the van here. The **Outstanding Orders** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **Complete**. Such that this order will disappear from the **Outstanding Order** list and it will go into **Order History**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking “Log Out” (on the navbar), at the same time, the van will be set to close spontaneously. <br />
 
-**Unit test and integration test**
+### Unit test and integration test
