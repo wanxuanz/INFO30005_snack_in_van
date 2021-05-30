@@ -16,7 +16,7 @@
 * [Technologies](#technologies)
 * [App server mockup instruction](#app-server-mockup-instruction)
 * [Front end and back end (deliverable 3)](#Front-end-and-back-end-deliverable-3)
-
+* [Deliverable 4](#Deliverable-4)
 
 ## Team Members
 
@@ -55,7 +55,9 @@ For example, Cappuccino has photo String: **6o2Dk5Op8VI**, if you want to view t
 ## How to access our database
 Here is one of the username and password that allow you to access our database:<br />
 **`MONGO_USERNAME=Michael`**<br />
-**`MONGO_PASSWORD=1234`**
+**`MONGO_PASSWORD=1234`**<br />
+And this is what should always be included in the .env file 
+**`PASSPORT_KEY=info30005secretkey`**
 
 ## Technologies
 Project is created with:
@@ -69,9 +71,9 @@ Project is created with:
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
 - [x] App server mockup
-- [ ] Front-end + back-end (one feature)
-- [ ] Complete system + source code
-- [ ] Report on your work(+ test1 feature)
+- [x] Front-end + back-end (one feature)
+- [x] Complete system + source code
+- [x] Report on your work(+ test1 feature)
 
 
 ## App server mockup instruction:
@@ -158,3 +160,44 @@ Next, your new order will go to the database and you can find it in collection n
 
 * (4) **`View order details`**<br />
 After login, click on the “Orders” in the navbar to view all order details of this customer which includes order id, time, order status, items and total price. <br />
+
+
+
+
+## Deliverable 4
+| Email | Password|
+| :---  |    ---: |
+| tom@outlook.com |12345|
+| michael@gmail.com |12345|
+| claire@gmail.com |12345|
+| chloe@gmail.com |12345|
+| andy@gmail.com |12345|
+| angela@gmail.com |12345|
+
+| VanId | Password|
+| :---  |    ---: |
+| Niceday |12345|
+| LittleSeed |12345|
+| Happyday |12345|
+| JM |12345|
+| Morning |12345|
+| Mayday |12345|
+| Wonder Coffee |12345|
+| MM |12345|
+**Customer App:**<br />
+Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer. Then you can see a list of vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), the big map visualises the location of each van, you might like to use the map positioning function (by clicking the top-right icon on the map, do not forget to authorize the browser to access your location!) to find the van that is nearest to your position. <br />
+After choosing a van you like by either clicking **choose the van** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functions such as add to cart or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). Here is an example account you might use: <br />
+**`EMAIL= `**<br />
+**`PASSWORD=123456`**<br />
+Now you can access all our functions! You might like to go to the menu page, select the food you want, and you can see the details of this food. If you would like to add this food to your cart, you can choose the quantity by clicking **choose quantity**, enter the amount you want, it is now in your cart! You can repeat this process a few times until you have added everything that you want. <br />
+Now let’s go to the shopping cart (on the navbar). Oops, you might think there is something you do not want anymore, or you want to add more. You can also change the quantity of each food by clicking **Edit**. After confirming your order, you can **Place Order**, now this order should appear on the vendor outstanding orders. <br />
+While you are waiting for your order to be complete, you can go to your order list, you are able to change or cancel your order within ten minutes. And there will be corresponding actions in the vendor end. Elsewise, you do not change the order and the vendor has marked this order as finished, there should be a **rating** button appear on your order detail and you can rate this order from 1 to 5 star. Each order’s rating will contribute to the van rating. 
+Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
+
+**Vendor App:** <br />
+The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here is the sample vendor account: <br />
+**`VanId= `**<br />
+**`PASSWORD=123456`**<br />
+You will need to send your location every time you log in. You need to enter the location name and the system will also automatically detect your position and set it on the map on the customer end. If you did not enter your address, you will not be able to perform further actions. <br />
+In the vendor app, the **Home** contains the details of the van and you can open or close the business for the van here. The **Outstanding Orders** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **Complete**. Such that this order will disappear from the **Outstanding Order** list and it will go into **Order History**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking “Log Out” (on the navbar), at the same time, the van will be set to close spontaneously. <br />
+
