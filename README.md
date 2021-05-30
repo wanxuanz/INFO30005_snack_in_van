@@ -205,7 +205,7 @@ You will need to send your location every time you log in. When you are all set 
 
 In the vendor app, the **`Home`** contains the details of the van and you can open or close the business for the van here. The **`Outstanding Orders`** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **`Complete`**. Such that this order will disappear from the **`Outstanding Order`** list and it will go into **`Order History`**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking **`Log Out`** (on the navbar), at the same time, the van will be set to close spontaneously. <br />
 **NB: 1. If you did not log out, the van will still be opening and customer can still placing order for your van. An alternative way to mark your van as close is to go to `Home` page and mark it as close. It is the vendor's responsibility to mark their van as close while they are not selling any more. ** <br />
-**2. you can still completing your current unfinished order when you change your van status to 'close'.** 
+ **2. you can still completing your current unfinished order when you change your van status to 'close'.
 
 ### Unit test and integration test
 To perform a unit test for the updateVanStatus function, first **`cd __tests__\van_controller_tests`** and then run the test using **`npm test -- setvanstatus_unit.js --forceExit`**<br />
