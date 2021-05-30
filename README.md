@@ -71,9 +71,9 @@ Project is created with:
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
 - [x] App server mockup
-- [ ] Front-end + back-end (one feature)
-- [ ] Complete system + source code
-- [ ] Report on your work(+ test1 feature)
+- [x] Front-end + back-end (one feature)
+- [x] Complete system + source code
+- [x] Report on your work(+ test1 feature)
 
 
 ## App server mockup instruction:
