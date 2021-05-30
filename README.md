@@ -28,8 +28,8 @@
 | Yu-Wen Michael Zhang  |1089117| shopping cart related tasks, order discount   |  Done |
 | Ming Zhang   |1068302| login and authentication, rating      |  Done |
 | Yifei Wang    |1001686| vendor location and map functions   |  Done |
-| Claire    |1080915| vendor app UI and README    |  Done |
-| Chloe    |1079686| vendor app UI and testing    |  Done |
+| Wanting Zhang    |1080915| vendor app UI and README    |  Done |
+| Wanxuan Zhang    |1079686| vendor app UI and testing    |  Done |
 
 ## General info
 This is project is about creating an vendor app and customer app from scratch. 
@@ -38,8 +38,9 @@ This is project is about creating an vendor app and customer app from scratch.
 * The vendor side application can be accessed through https://snacks-in-a-van-webg100.herokuapp.com/vendor.
 
 ## Detailed info
-The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com . You can either choose to enter the customer/vendor app by click the **Customer App** or **Vendor App** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. 
-Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4)).
+The main website entry for the **snacks in a van** app is: https://snacks-in-a-van-webg100.herokuapp.com.</br> 
+You can either choose to enter the customer/vendor app by click the **Customer App** or **Vendor App** on the main web page. Otherwise, you can also directly type the urls https://snacks-in-a-van-webg100.herokuapp.com/customer and https://snacks-in-a-van-webg100.herokuapp.com/vendor to go to the customer/vendor app respectively. </br> 
+Features needs to be delivered in **Deliverable 4 – Web Application** can be found here [Web Application(Deliverable 4)](#Web-Application-Deliverable-4).
 
 Just to note that the instructions for **Deliverable 2** and **Deliverable 3** is just there for showing the progress of how we develop the web app step by step. It is not necessary for you to view these at this stage. 
 Additionally, we did not implement live page in Deliverable 4.
