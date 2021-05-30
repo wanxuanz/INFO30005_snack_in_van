@@ -26,7 +26,7 @@
 | Name | Student ID| Task | State |
 | :---         |     :---:      |     :---:      |          ---: |
 | Yu-Wen Michael Zhang  |1089117| shopping cart related tasks, order discount   |  Done |
-| Ming Zhang   |1068302| login and authentication, rating      |  Done |
+| Ming Zhang   |1068302| login and register, rating      |  Done |
 | Yifei Wang    |1001686| vendor location and map functions   |  Done |
 | Wanting Zhang    |1080915| vendor app UI and README    |  Done |
 | Wanxuan Zhang    |1079686| vendor app UI and testing    |  Done |
@@ -181,7 +181,7 @@ Here is a list of account you can use:
 
 Now you can access all our functionalities! You might like to go to the menu page, select the food you want, and you can see the details of this food. If you would like to add this food to your cart, you can choose the quantity by clicking **`choose quantity`**, enter the amount you want, it is now in your cart! You can repeat this process a few times until you have added everything that you want. <br />
 Now let’s go to the `shopping cart` (on the navbar). Oops, you might think there is something you do not want anymore, or you want to add more. You can also change the quantity of each food by clicking **`Edit`**. After confirming your order, you can **`Place Order`**, now this order should appear on the vendor's  outstanding orders list. <br />
-While you are waiting for your order to be complete, you will see a list of orders including the current order and all other orders you previously have. You will be able to change and cancel your order within 10 minutes if the order status is not fulfilled yet. If you cancel or change your order, the order will not be displayed in your list of orders and this order will not be displayed on vender's screen. However, this order is still exist on the database as we need to keep track of this behaviour. <br />
+While you are waiting for your order to be completed, by clicking the **`check your order`** botton or click **`Orders`**, you will see a list of orders including the current order and all other orders you previously have. You will be able to change and cancel your order within 10 minutes if the order status is not fulfilled yet. If you cancel or change your order, the order will not be displayed in your list of orders and this order will not be displayed on vender's screen. However, this order is still exist on the database as we need to keep track of this behaviour. <br />
 After your order is filfilled,  there should be a **`rating`** button appear on your order detail and you can rate this order from 1 to 5 stars. Each order’s rating will contribute to the van rating. Also, if the order is completed after 15 minutes while you placing it, you will automatically granted a 20% discount. 
 The time limit is set under **`public`** folder and you will find a file call **`constant.js`**. <br />
 Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
@@ -204,7 +204,8 @@ You will need to send your location every time you log in. When you are all set 
 **NB: If you did not enter your address, you will not be able to perform further actions.** <br />
 
 In the vendor app, the **`Home`** contains the details of the van and you can open or close the business for the van here. The **`Outstanding Orders`** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **`Complete`**. Such that this order will disappear from the **`Outstanding Order`** list and it will go into **`Order History`**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking **`Log Out`** (on the navbar), at the same time, the van will be set to close spontaneously. <br />
-**NB: If you did not log out, the van will still be opening and customer can still placing order for your van. An alternative way to mark your van as close is to go to `Home` page and mark it as close. It is the vendor's responsibility to mark their van as close while they are not selling any more. ** <br />
+**NB: 1. If you did not log out, the van will still be opening and customer can still placing order for your van. An alternative way to mark your van as close is to go to `Home` page and mark it as close. It is the vendor's responsibility to mark their van as close while they are not selling any more. ** <br />
+**2. you can still completing your current unfinished order when you change your van status to 'close'.** 
 
 ### Unit test and integration test
 To perform a unit test for the updateVanStatus function, first **`cd __tests__\van_controller_tests`** and then run the test using **`npm test -- setvanstatus_unit.js --forceExit`**<br />
