@@ -65,9 +65,8 @@ This PASSPORT_KEY will allow you to use passport.js while you try to run our cod
 ## Technologies
 Project is created with:
 * NodeJs 14.16.X
-* Ipsum version: 2.33
-* Ament library version: 999
-
+* MongoDB Atlas
+* Heroku 
 
 **Now Get ready to complete all the tasks:**
 
