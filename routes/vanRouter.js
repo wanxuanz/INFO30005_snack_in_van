@@ -39,10 +39,10 @@ vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
 vanRouter.post('/send_location', utilities.isLoggedIn, (req, res) => vanController.updateLocation(req, res))
 
 // go to home page
-vanRouter.get("/home", utilities.isLoggedIn, utilities.isSendLocation, (req, res) => vanController.getOneVan(req, res))
+vanRouter.get("/home", utilities.isLoggedIn, (req, res) => vanController.getOneVan(req, res))
 
 // update van status
-vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, utilities.isSendLocation, (req, res) => vanController.updateVanStatus(req, res))
+vanRouter.post('/home/updateVanStatus', utilities.isLoggedIn, (req, res) => vanController.updateVanStatus(req, res))
 
 // logout
 vanRouter.get('/logout', (req, res) => vanController.logout(req, res))
