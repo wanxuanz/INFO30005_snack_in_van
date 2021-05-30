@@ -32,7 +32,7 @@ vanRouter.post('/register', passport.authenticate('local-van-register', {
 
 // handle the GET request to send locations
 vanRouter.get("/send_location", utilities.isLoggedIn, (req, res) => {
-    res.render('setLocation', { layout: "vendor_main.hbs" });
+    res.render('setLocation', { layout: "vendorNoLocation.hbs" });
 });
 
 // handle the POST request to send locations

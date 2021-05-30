@@ -17,7 +17,7 @@ const updateVanStatus = async(req, res) => {
         return res.render('showVanStatus', { "oneVan": oneVan, layout: 'vendor_main.hbs' })
     } catch (error) {
 
-        return res.render('error', {"errorCode": 404, "message":"Error: Van not found!"})
+        return res.render('error', { "errorCode": 404, "message": "Error: Van not found!" })
     }
 }
 
@@ -33,7 +33,7 @@ const updateLocation = async(req, res) => {
             req.session.location = location
             await Van.updateOne({ vanId: req.session.van_name }, { address: req.body.van_location })
             await Van.updateOne({ vanId: req.session.van_name }, { location: location })
-            // mark status as open
+            await Van.updateOne({ vanId: req.session.van_name }, { status: "open" })
             return res.render('sendLocationSuccess', { layout: "vendor_main" })
         } else {
             return res.send("login failed")

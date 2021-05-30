@@ -13,40 +13,34 @@ describe('Integration test: set van status', () => {
     // store the token
     let cookie = null;
 
-
-    // These types of functions are called to 'setup' or
-    // 'tear down' functions. In this example, we are
-    // using the beforeAll function to create a request
-    // agent that is authenticated and can be used by all
-    // tests within  this suite. 
     beforeAll(() => agent
         // send a POST request to login
-        .post('/vendor/login') 
+        .post('/vendor/login')
         .set('Content-Type', 'application/json')
         // send the username and password
         .send({
-          van_name: 'Niceday',
-          van_password: '12345',
+            van_name: 'Niceday',
+            van_password: '12345',
         })
-        
+
         .then((res) => {
             cookie = res
-               .headers['set-cookie'][0]
-               .split(',')
-               .map(item => item.split(';')[0])
-               .join(';')
-         })
-        );
-  
+                .headers['set-cookie'][0]
+                .split(',')
+                .map(item => item.split(';')[0])
+                .join(';')
+        })
+    );
+
     // Test Case 1 with valid van
     test('Test 1 (lookup valid van): Niceday', () => {
-      return agent
-        .post('/vendor/home/updateVanStatus')
-        .set('Cookie', cookie)
-        .then((response) => {
-          expect(response.statusCode).toBe(200);
-          expect(response.text).toContain('<h1>The status of van is now changed!</h1>');
-        });
+        return agent
+            .post('/vendor/home/updateVanStatus')
+            .set('Cookie', cookie)
+            .then((response) => {
+                expect(response.statusCode).toBe(200);
+                expect(response.text).toContain('<h1>The status of van is now changed!</h1>');
+            });
     });
-    
+
 });

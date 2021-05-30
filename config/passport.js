@@ -1,5 +1,5 @@
 // import required dependencies
-require('dotenv').config() 
+require('dotenv').config()
 const validator = require("email-validator");
 // used to create our local strategy for authenticating using username and password
 const LocalStrategy = require('passport-local').Strategy;
@@ -44,7 +44,7 @@ module.exports = function(passport) {
                     }
                     // otherwise, we put the user's vanId in the session
                     else {
-                        req.session.van_name = van_name; 
+                        req.session.van_name = van_name;
                         return done(null, van);
                     }
                 });
@@ -74,10 +74,9 @@ module.exports = function(passport) {
                         console.log("existing");
                         return done(null, false, req.flash('signupMessage', 'That van name is already taken.'));
                     }
-                    if (req.body.van_password!=req.body.van_password2) {
+                    if (req.body.van_password != req.body.van_password2) {
                         return done(null, false, req.flash('signupMessage', 'please enter the same password twice'));
-                    }
-                     else {
+                    } else {
                         // otherwise create a new van
                         var newVan = new Van();
                         newVan.vanId = van_name;
@@ -170,11 +169,9 @@ module.exports = function(passport) {
                     if (!validator.validate(email)) {
                         return done(null, false, req.flash('signupMessage', 'Please input your email correctly'));
                     }
-                    if (!req.body.passowrd==req.body.passowrd2){
+                    if (!req.body.passowrd == req.body.passowrd2) {
                         return done(null, false, req.flash('signupMessage', 'Please input the same passowrd twice.'));
-                    }
-                    
-                     else {
+                    } else {
                         // otherwise create a new user
                         var newCustomer = new Customer();
                         newCustomer.email = email;
