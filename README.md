@@ -179,12 +179,11 @@ Here is a list of account you can use:
 | andy@gmail.com |12345|
 | angela@gmail.com |12345|
 
-Here is an example account you might use: <br />
-**`EMAIL= `**<br />
-**`PASSWORD=123456`**<br />
-Now you can access all our functions! You might like to go to the menu page, select the food you want, and you can see the details of this food. If you would like to add this food to your cart, you can choose the quantity by clicking **choose quantity**, enter the amount you want, it is now in your cart! You can repeat this process a few times until you have added everything that you want. <br />
-Now let’s go to the shopping cart (on the navbar). Oops, you might think there is something you do not want anymore, or you want to add more. You can also change the quantity of each food by clicking **Edit**. After confirming your order, you can **Place Order**, now this order should appear on the vendor outstanding orders. <br />
-While you are waiting for your order to be complete, you can go to your order list, you are able to change or cancel your order within ten minutes. And there will be corresponding actions in the vendor end. Elsewise, you do not change the order and the vendor has marked this order as finished, there should be a **rating** button appear on your order detail and you can rate this order from 1 to 5 star. Each order’s rating will contribute to the van rating. 
+Now you can access all our functionalities! You might like to go to the menu page, select the food you want, and you can see the details of this food. If you would like to add this food to your cart, you can choose the quantity by clicking **`choose quantity`**, enter the amount you want, it is now in your cart! You can repeat this process a few times until you have added everything that you want. <br />
+Now let’s go to the `shopping cart` (on the navbar). Oops, you might think there is something you do not want anymore, or you want to add more. You can also change the quantity of each food by clicking **`Edit`**. After confirming your order, you can **`Place Order`**, now this order should appear on the vendor's  outstanding orders list. <br />
+While you are waiting for your order to be complete, you will see a list of orders including the current order and all other orders you previously have. You will be able to change and cancel your order within 10 minutes if the order status is not fulfilled yet. If you cancel or change your order, the order will not be displayed in your list of orders and this order will not be displayed on vender's screen. However, this order is still exist on the database as we need to keep track of this behaviour. <br />
+After your order is filfilled,  there should be a **`rating`** button appear on your order detail and you can rate this order from 1 to 5 stars. Each order’s rating will contribute to the van rating. Also, if the order is completed after 15 minutes while you placing it, you will automatically granted a 20% discount. 
+The time limit is set under **`public`** folder and you will find a file call **`constant.js`**.
 Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
 
 ### Vendor App
