@@ -168,7 +168,18 @@ After login, click on the “Orders” in the navbar to view all order details o
 ### Customer App
 Enter the Customer App from this website: https://snacks-in-a-van-webg100.herokuapp.com/customer, then you can see 5 nearest vans with their name, addresses and rating appear on the left of the screen(you can scroll up and down), and the big map visualises the location of each van. Also, if you click on any van which is on the map, you will be able to see some descriptions(rate and their rough location) of each van. Furthermore, you can search for your current location by clicking the top-right icon on the map, and also, **do not forget to authorize the browser to access your location!**<br />
 
-After choosing a van you like by either clicking **`choose the van`** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functions such as add to cart or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). Here is an example account you might use: <br />
+After choosing a van you like by either clicking **`choose the van`** on the van list or just simply click a van on the map, you will be direct to a page that allows you to take a look at the menu, but one thing to notice is that you have to be login to uses the full functionalities, such as clicking the **`add to cart`** or place an order. Therefore, you might like to log in at this stage, or otherwise, we will direct you to the login page when you try to add something to the cart. You can try login by using the account we provided below, but you are also encouraged to register your own account to experience its functions (hint: if you enter something that has invalid formats, it will return an error message). 
+Here is a list of account you can use:
+| Email | Password|
+| :---  |    ---: |
+| tom@outlook.com |12345|
+| michael@gmail.com |12345|
+| claire@gmail.com |12345|
+| chloe@gmail.com |12345|
+| andy@gmail.com |12345|
+| angela@gmail.com |12345|
+
+Here is an example account you might use: <br />
 **`EMAIL= `**<br />
 **`PASSWORD=123456`**<br />
 Now you can access all our functions! You might like to go to the menu page, select the food you want, and you can see the details of this food. If you would like to add this food to your cart, you can choose the quantity by clicking **choose quantity**, enter the amount you want, it is now in your cart! You can repeat this process a few times until you have added everything that you want. <br />
