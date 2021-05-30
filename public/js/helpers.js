@@ -17,6 +17,14 @@ var register = function(Handlebars) {
             }else{
                 return true
             }
+        },
+        showrate: function(status){
+            if (status==="Fulfilled"){
+                return false
+            }
+            else{
+                return true
+            }
         }
     };
 

@@ -138,9 +138,9 @@ const updateOrderStatus = async(req, res) => {
         if (diff > discount_time) { // discount apply
             var new_total = Number(outstandingOrder.total) * 0.8
             new_total = Math.round((Number(new_total) + Number.EPSILON) * 100) / 100
-            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, total: new_total, discount: true }).lean()
+            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", total: new_total, discount: true }).lean()
         } else { // no discount
-            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", "notshowrating": false, }).lean()
+            await Order.updateOne({ "_id": outstandingOrder._id }, { status: "Fulfilled", }).lean()
         }
         outstandingOrder = await Order.findOne({ vanId: req.session.van_name, "_id": req.params._id }).lean()
 

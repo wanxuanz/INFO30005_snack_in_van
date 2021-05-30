@@ -1,9 +1,8 @@
 // import required dependencies 
 require('dotenv').config()
 const mongoose = require("mongoose")
-
-// Connect to MongoDB - database login is retrieved from environment variables - YOU SHOULD USE YOUR OWN ATLAS CLUSTER
-CONNECTION_STRING = "mongodb+srv://<username>:<password>@cluster0.30bnt.mongodb.net/michael_try?retryWrites=true&w=majority"
+    // Connect to MongoDB - database login is retrieved from environment variables - YOU SHOULD USE YOUR OWN ATLAS CLUSTER
+CONNECTION_STRING = "mongodb+srv://<username>:<password>@cluster0.30bnt.mongodb.net/INFO30005?retryWrites=true&w=majority"
 MONGO_URL = CONNECTION_STRING.replace("<username>", process.env.MONGO_USERNAME).replace("<password>", process.env.MONGO_PASSWORD)
 
 mongoose.connect(MONGO_URL || "mongodb://localhost", {
@@ -11,7 +10,7 @@ mongoose.connect(MONGO_URL || "mongodb://localhost", {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    dbName: "michael_try"
+    dbName: "INFO30005"
 })
 
 const db = mongoose.connection
