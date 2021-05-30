@@ -1,3 +1,4 @@
+// import required dependencies and models
 const Food = require("../models/food")
 const customer = require("../models/customer")
 const Customer = customer.Customer
@@ -14,7 +15,7 @@ const findCart = async(req, res) => {
         const cart = customer.cart
         const cartFood = []
         var total_price = 0
-            // find the detail of foods
+        // find the detail of foods
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["quantity"] = cart[i].quantity
@@ -32,12 +33,14 @@ const findCart = async(req, res) => {
     }
 }
 
+// function that change the quanlity of food in the shopping cart
 const editQuantity = async(req, res) => {
     try {
         // if the quantity is 0, remove the food
         if (req.body.quantity == 0) {
             await Customer.updateOne({ "email": req.session.email }, { $pull: { cart: { "foodId": req.body.item_id } } }).lean()
-        } else { // update the quantity
+        // update the quantity
+        } else { 
             await Food.updateOne({ name: 'Beer' }, { description: 'changed the beer' })
             await Customer.updateOne({ "email": req.session.email, "cart.foodId": req.body.item_id }, {
                 $set: {
@@ -49,7 +52,7 @@ const editQuantity = async(req, res) => {
         const cart = customer.cart
         const cartFood = []
         var total_price = 0
-            // find the detail of foods
+        // find the detail of foods and calculate the total price
         for (var i = 0; i < cart.length; i++) {
             var oneFood = await Food.findOne({ "_id": cart[i].foodId }).lean()
             oneFood["cartId"] = cart[i]._id
@@ -62,6 +65,7 @@ const editQuantity = async(req, res) => {
             return res.send('Food not found')
         }
         res.render('shoppingCart', { "thiscustomer": customer, "cartFood": cartFood, "total_price": total_price })
+    // return error message if error has been catched
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Cannot edit this item' })
     }
@@ -78,19 +82,20 @@ const changeInfo = async(req, res) => {
         res.status(404)
         return res.render('changeinfofail', { "message": "Please input the same passowrd twice." })
     }
+    // find the customer in database
     try {
         var oneCustomer = new Customer();
         var passw = oneCustomer.generateHash(req.body.password)
         await Customer.findOneAndUpdate({ "email": req.session.email }, { "password": passw, "lastName": req.body.last_name, "firstName": req.body.first_name }).lean()
         var oneCustomer = await Customer.findOne({ "email": req.session.email })
         return res.render('successchange', { "thiscustomer": oneCustomer.toJSON() }) // return saved object to sender
-
-    } catch (err) { // error detected
+    // error detected
+    } catch (err) { 
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
-
+// function that handle the get request to change the customer profile
 const changeInfo1 = async(req, res) => {
     try {
         var oneCustomer = await Customer.findOne({ "email": req.session.email })
@@ -104,7 +109,7 @@ const changeInfo1 = async(req, res) => {
 const getAllCustomernewOrders = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-            //display the name of each order from newest to oldest
+        //display the name of each order from newest to oldest
         const newOrders = await Order.find({ "customerId": customer._id }).sort({ dateCompare: 'desc' }).lean()
         for (var i = 0; i < newOrders.length; i++) {
             var foodnames = []
@@ -119,6 +124,7 @@ const getAllCustomernewOrders = async(req, res) => {
             newOrders[i]["foodnames"] = foodnames
         }
         return res.render('orderlist', { "thiscustomer": customer, "newOrders": newOrders, "cancel_time": constants.CHANGE_TIME})
+    // error detected
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
@@ -131,7 +137,7 @@ const placeOrder = async(req, res) => {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes();
     var year_month_day = today.toISOString().split('T')[0];
     var time = today.toISOString().split('T')[1].split('.')[0]
-        // shopping cart of current customer
+    // shopping cart of current customer
     const cart = customer.cart
     if (cart.length == 0) {
         return res.render('shoppingCart', { "thiscustomer": customer })
@@ -155,16 +161,18 @@ const placeOrder = async(req, res) => {
     };
 
     var order = new Order(postData)
-        // handle when nothing is in the shopping cart
+    // handle when nothing is in the shopping cart
     try {
         await Customer.updateOne({ "email": req.session.email }, { "cart": [] }).lean()
         await order.save()
         return res.render('orderSuccess.hbs', { "thiscustomer": customer })
+    // error detected
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'placing order fails' })
     }
 }
 
+// function that get the chosen van
 const getVans = async(req, res, next) => {
     try {
         const vans = await Van.find({ "status": "open" });
@@ -173,16 +181,19 @@ const getVans = async(req, res, next) => {
             count: vans.length,
             data: vans
         })
+    // error detected
     } catch (err) {
         console.error(err)
         return res.status(500).render('error', { errorCode: '500', layout: 'initial', message: 'Server error' })
     }
 }
 
+// function handle the post request to the chosen van
 const chooseVan = async(req, res) => {
     try {
         req.session.vanId = req.body.van_id
         return res.render('selectVanSuccess', { "vanId": req.session.vanId, layout: thelayout })
+    // error detected
     } catch (err) {
         console.error(err)
         return res.status(500).render('error', { errorCode: '500', layout: 'initial', message: 'Server error' })
@@ -193,11 +204,8 @@ const chooseVan = async(req, res) => {
 const cancelOrder = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
-            // console.log(customer._id)
-
         //set the visibility to false
         await Order.updateOne({ "_id": req.body.orderId }, { "$set": { "visibility": false } });
-
         // display from newest to olderest
         const newOrders = await Order.find({ "customerId": customer._id }).sort({ dateCompare: 'desc' }).lean()
         for (var i = 0; i < newOrders.length; i++) {
@@ -219,6 +227,7 @@ const cancelOrder = async(req, res) => {
     }
 }
 
+// function that change the order detail
 const changeOrder = async(req, res) => {
     try {
         const customer = await Customer.findOne({ "email": req.session.email }).lean()
@@ -240,20 +249,19 @@ const changeOrder = async(req, res) => {
             cartFood.push(oneFood)
             newItems.push(oneItem)
         }
-        // console.log(newItems)
         await Customer.updateOne({ "email": req.session.email }, { "$set": { "cart": newItems } }).lean();
         const newCustomer = await Customer.findOne({ "email": req.session.email }).lean()
-            // console.log(newCustomer)
-            //set the visibility to false
+        //set the visibility to false
         await Order.updateOne({ "_id": req.body.orderId }, { "$set": { "visibility": false } });
         //put back this order to the shopping cart of this customer
         return res.render('shoppingCart', { "thiscustomer": newCustomer, "cartFood": cartFood, "total_price": total_price })
-
+    // error detected
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'cannot change the order' })
     }
 }
 
+// function that get the customer info
 const getInfo = async(req, res) => {
     try {
         const oneCustomer = await Customer.findOne({ "email": req.session.email })

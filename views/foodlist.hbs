@@ -2,7 +2,6 @@
 <section id="foodList">
     <ul>
         {{#each foods}}
-{{!-- this authors will be the data-name --}}
         <li>
             <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
             <a href="/customer/menu/{{this.foodId}}">{{this.name}}: ${{this.price}}</a>

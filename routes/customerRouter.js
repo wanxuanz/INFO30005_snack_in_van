@@ -1,8 +1,6 @@
+// import required dependencies 
 const express = require('express')
 const utilities = require("./utility");
-// we will use the passport strategies we defined in 
-// passport.js file in config folder to signup and login 
-// a user.
 const passport = require('passport');
 require('../config/passport')(passport);
 
@@ -37,17 +35,21 @@ customerRouter.post('/register', passport.authenticate('local-signup', {
     failureFlash: true // allow flash messages
 }));
 
+//handle the GET request to get the chosen van
 customerRouter.get('/chooseVan', customerController.getVans)
 
+//handle the POST request to get the chosen van
 customerRouter.post('/chooseVan', customerController.chooseVan)
-    //handle the GET request to get the customer profile
+
+//handle the GET request to get the customer profile
 customerRouter.get('/getinfo', utilities.isLoggedInCustomer, customerController.getInfo)
 
-//handle the get request to change the customer profile
+//handle the GET request to change the customer profile
 customerRouter.get('/changeinfo', utilities.isLoggedInCustomer, (req, res) =>
     customerController.changeInfo1(req, res)
 );
 
+//handle the POST request to change the customer profile
 customerRouter.post('/changeinfo', utilities.isLoggedInCustomer, (req, res) => customerController.changeInfo(req, res))
 
 //handle the GET request to get the Shopping Cart by the customer id
@@ -66,12 +68,12 @@ customerRouter.post('/newOrders', utilities.isLoggedInCustomer, (req, res) => cu
 customerRouter.post('/newOrders/cancel_order', utilities.isLoggedInCustomer, (req, res) => customerController.cancelOrder(req, res))
 
 // handle the POST request to change the neworder in orders
-
 customerRouter.post('/newOrders/change_order', utilities.isLoggedInCustomer, (req, res) => customerController.changeOrder(req, res))
 
 // use the foodRouter to handle food detail
 customerRouter.use('/', foodRouter)
 
+// use the orderRouter to handle order detail
 customerRouter.use('/orders', orderRouter)
 
 

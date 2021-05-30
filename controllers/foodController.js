@@ -1,8 +1,10 @@
+// import required dependencies and models
 const mongoose = require("mongoose")
 const Food = mongoose.model("Food")
 const Customer = mongoose.model("Customer")
 const Cart = mongoose.model("Cart")
 
+// function that get all food in the database
 const getAllFoods = async(req, res) => {
     try {
         if (req.session.email == null) {
@@ -27,12 +29,13 @@ const getOneFood = async(req, res) => {
             return res.status(404).render('error', { errorCode: '404', layout: 'initial', message: 'Food not found.' })
         }
         res.render('showFood', { "thisfood": oneFood, layout: thelayout })
-    } catch (err) { // error occurred
+    // error occurred
+    } catch (err) { 
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
-//add food to customer cart
+// add food to customer cart
 const addFood = async(req, res) => {
     try {
         const thisCustomer = await Customer.findOne({ email: req.session.email })
@@ -50,6 +53,7 @@ const addFood = async(req, res) => {
 
 }
 
+// select the quantity of food
 const selectQuantity = async(req, res) => {
     try {
         const thisCustomer = await Customer.findOne({ email: req.session.email })
@@ -60,18 +64,18 @@ const selectQuantity = async(req, res) => {
     }
 }
 
-//add food to customer cart
+// add food to customer cart
 const addFoodQuantity = async(req, res) => {
     try {
         // find the customer
         const thisCustomer = await Customer.findOne({ email: req.session.email })
         var shopping_cart = thisCustomer.cart
-            // find the foodId
+        // find the foodId
         let addFood = await Food.findOne({ foodId: req.params.foodId })
-            // if there are food in shopping cart
+        // if there are food in shopping cart
         if (shopping_cart.length) {
             var flag = 1
-                // if the food is already exist in the shopping cart, we add up the quantity
+            // if the food is already exist in the shopping cart, we add up the quantity
             for (var i = 0; i < shopping_cart.length; i++) {
                 // compare object id using equals
                 if (shopping_cart[i].foodId.equals(addFood._id)) {
@@ -85,7 +89,8 @@ const addFoodQuantity = async(req, res) => {
                 orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity })
                 thisCustomer.cart.push(orderRecord)
             }
-        } else { // first time insertion
+        // first time insertion
+        } else { 
             orderRecord = new Cart({ foodId: addFood._id, quantity: req.body.quantity })
             thisCustomer.cart.push(orderRecord)
         }
@@ -96,8 +101,6 @@ const addFoodQuantity = async(req, res) => {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
-
-
 
 // remember to export the functions
 module.exports = {

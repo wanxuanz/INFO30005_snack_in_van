@@ -1,11 +1,10 @@
+// import required dependencies and models
 const mongoose = require("mongoose")
 const Order = mongoose.model("newOrders")
 const Food = require("../models/food")
-    // const van = require("../models/van")
-    // const Van = van.Van
 const Van = mongoose.model("vans")
 const constants = require("../public/constant")
-    // const Van = require("../models/van")
+
 // find outstanding order
 const viewOutstandingOrders = async(req, res) => {
     try {
@@ -84,32 +83,33 @@ const getOutstandingnewOrders = async(req, res) => {
     }
 }
 
+// get the rating for a order
 const getRating = async(req, res) => {
     try {
-        //const customer = await Customer.findOne({ "_id": req.params._id }).lean()
         const order = await Order.findOne({ "_id": req.params.orderId }).lean()
-            // return res.send(foods)
         res.render('rating', { "thisorder": order })
     } catch (err) {
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
     }
 }
 
+// set the rating for a order
 const finishRating = async(req, res) => {
     try {
 
         const order_previous = await Order.findOne({ "_id": req.params.orderId }).lean()
         await Order.updateOne({ "_id": req.params.orderId }, { rating: req.body.rating }).lean()
-            // updated order
+        // updated order
         const order = await Order.findOne({ "_id": req.params.orderId }).lean()
         const currentVanAllOrders = await Order.find({ vanId: order_previous.vanId }).lean()
         const currentVanUnRatedOrders = await Order.find({ vanId: order_previous.vanId, rating: '0' }).lean()
-
         const currentVan = await Van.findOne({ vanId: order_previous.vanId }).lean()
-            // all ratings
+
+        // all ratings
         var current_rating = Number(order.rating);
         var length_diff = currentVanAllOrders.length - currentVanUnRatedOrders.length
-            //calcuate average
+
+        //calcuate average
         var average;
         if (length_diff === 1) {
             average = current_rating
@@ -118,6 +118,7 @@ const finishRating = async(req, res) => {
         }
         await Van.updateOne({ "vanId": order_previous.vanId }, { vanRate: String(Math.round((Number(average) + Number.EPSILON) * 100) / 100) }).lean()
         return res.render('ratingsuccess', { "thisorder": order });
+    // error detected
     } catch (err) {
         console.log(err)
         return res.status(400).render('error', { errorCode: '400', layout: 'initial', message: 'Database query failed' })
@@ -125,6 +126,7 @@ const finishRating = async(req, res) => {
 
 }
 
+// update the order status and decide if discount apply
 const updateOrderStatus = async(req, res) => {
     try {
         const discount_time = constants.DISCOUNT_TIME

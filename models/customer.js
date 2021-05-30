@@ -1,11 +1,14 @@
+// import required dependencies 
 const mongoose = require("mongoose")
 const bcrypt = require('bcrypt-nodejs')
 
+// schema of shopping cart of each customer
 const cartSchema = new mongoose.Schema({
     foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
     quantity: Number
 })
 
+// schema of customer
 const customerSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -32,6 +35,5 @@ customerSchema.methods.validPassword = function(password) {
 const Customer = mongoose.model("Customer", customerSchema)
 const Cart = mongoose.model("Cart", cartSchema)
 
-
-// export  schema
+// export schema
 module.exports = { Customer, Cart }

@@ -34,7 +34,6 @@ describe("Unit testing for  updateVanStatus from vanController.js", () => {
         }));
 
         // mock update one
-
         Van.updateOne = jest.fn().mockResolvedValue([
             {
             VanId: 'Niceday',

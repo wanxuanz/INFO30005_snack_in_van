@@ -1,6 +1,7 @@
+// import required dependencies 
 const mongoose = require("mongoose")
 
-// define item schema
+// define item schema for items in each order
 const itemSchema = new mongoose.Schema({
     foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
     quantity: Number
@@ -22,8 +23,7 @@ const newOrderschema = new mongoose.Schema({
     discount:{ type: Boolean, default: false }
 })
 
-
+// export schema
 const Order = mongoose.model("newOrders", newOrderschema)
 const Item = mongoose.model("Item", itemSchema)
-
 module.exports = { Order, Item }

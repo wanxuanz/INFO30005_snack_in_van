@@ -1,15 +1,13 @@
+// import required dependencies 
 const mongoose = require("mongoose")
-
 const bcrypt = require('bcrypt-nodejs')
 
 const vanSchema = new mongoose.Schema({
     vanId: {
         type: String
-            // required: true
     },
     address: {
         type: String,
-        // required: true
     },
     location: {
         type: {
@@ -25,7 +23,6 @@ const vanSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    // status: {type: String, default: "close"},
     status: { type: String, default: "close" },
     password: { type: String, require: true },
     vanRate:{ type: String, default: "0" }
@@ -43,6 +40,7 @@ vanSchema.methods.validPassword = function(password) {
 
 const Van = mongoose.model("vans", vanSchema)
 
+// export schema
 module.exports = {
     Van
 }

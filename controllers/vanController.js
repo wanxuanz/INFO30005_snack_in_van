@@ -1,12 +1,6 @@
-// const mongoose = require("mongoose")
-
-// import van model
+// import required dependencies and models
 const van = require("../models/van")
 const Van = van.Van
-
-
-// const Van = mongoose.model("vans")
-
 const geocoder = require('../utils/geocoder')
 
 // change an van status(POST)
@@ -27,6 +21,7 @@ const updateVanStatus = async(req, res) => {
     }
 }
 
+// update the location of the van
 const updateLocation = async(req, res) => {
     try {
         //get the van whose van_name is stored in the session -- van is logged in
@@ -38,7 +33,7 @@ const updateLocation = async(req, res) => {
             req.session.location = location
             await Van.updateOne({ vanId: req.session.van_name }, { address: req.body.van_location })
             await Van.updateOne({ vanId: req.session.van_name }, { location: location })
-                // mark status as open
+            // mark status as open
             return res.render('sendLocationSuccess', { layout: "vendor_main" })
         } else {
             return res.send("login failed")
@@ -63,6 +58,7 @@ const getOneVan = async(req, res) => {
     }
 }
 
+// logout of the current van account
 const logout = async(req, res) => {
     try {
         req.logout();

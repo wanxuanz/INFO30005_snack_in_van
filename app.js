@@ -1,22 +1,11 @@
+// import required libraries
 const cors = require('cors')
-
 const express = require('express');
 const app = express();
-
-// we will use passport.js, so include it
 const passport = require('passport');
-
-// we need to use session
 const session = require('express-session');
-
-// we can pass messages between app and callbacks
-// we will not use it for this app
 const flash = require('connect-flash-plus');
-
-// for using JSON Web Tokens (JWT)
 const jwt = require('jsonwebtoken');
-
-// we use a few enviornment variables
 const dotenv = require('dotenv').config()
 
 // configure passport authenticator
@@ -33,10 +22,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//middleware that's required for passport to operate
+// start to operate passport 
 app.use(passport.initialize());
 
-// middleware to store user object
+// use session to store user object
 app.use(passport.session());
 
 // use flash to store messages
@@ -45,27 +34,13 @@ app.use(flash());
 // we need to add the following line so that we can access the 
 // body of a POST request as  using JSON like syntax
 app.use(express.urlencoded({ extended: true }))
-
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
 
-//middleware that's required for passport to operate
-app.use(passport.initialize());
-
-// middleware to store user object
-app.use(passport.session());
-
-// use flash to store messages
-app.use(flash());
-
-// we need to add the following line so that we can access the 
-// body of a POST request as  using JSON like syntax
-app.use(express.urlencoded({ extended: true }))
-
-// handle bar
-app.use(express.static('public')) // define where static assets live
+// import handle bar and define where static assets live
+app.use(express.static('public')) 
 const exphbs = require("express-handlebars")
 
 // configure passport authenticator
@@ -82,7 +57,6 @@ app.set('view engine', 'hbs')
 require('./models');
 
 // set up food routes
-//const beforeFoodRouter = require('./routes/beforeFoodRouter')
 const customerRouter = require('./routes/customerRouter')
 
 // set up van routes
@@ -95,14 +69,14 @@ app.get('/', (req, res) => {
             thelayout = 'beforeLogin.hbs'
         } else { thelayout = 'main.hbs' }
         res.render('initialBody', { layout: 'initial' });
-    })
-    //handler for GET home page
+})
+
+//handler for GET home page
 app.get('/vendor', (req, res) => {
-    // res.send('<h1>vendor App</h1>')
     res.render('vendorHomePage', { layout: "initial" });
 })
 
-/*customer home page*/
+// customer home page
 app.get('/customer', (req, res) => {
     if (req.session.email == null) {
         thelayout = 'beforeLogin.hbs'
@@ -116,8 +90,8 @@ app.use('/vendor', vanRouter)
 // here goes the customer server after the customer has login
 app.use('/customer', customerRouter)
 
-
-app.all('*', (req, res) => { // 'default' route to catch user errors
+// 'default' route to catch user errors
+app.all('*', (req, res) => { 
     return res.status(404).render('error', { errorCode: '404', layout: 'initial', message: 'That route is invalid.' })
 })
 

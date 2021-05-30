@@ -62,7 +62,6 @@ h1 {
 }
 
 h2 {
-    /* text-align: center; */
     font-size: var(--text-small);
     color: var(--color-brown);
     margin-top: 0;
@@ -70,7 +69,6 @@ h2 {
 }
 
 h3 {
-    /* text-align: center; */
     font-size: var(--text-median);
     text-align: center;
     color: var(--color-brown);
@@ -78,7 +76,6 @@ h3 {
     margin-bottom: 0;
 }
 h4 {
-    /* text-align: center; */
     font-size: var(--text-median);
     color: var(--color-dark);
     margin-top: 0;
@@ -355,12 +352,8 @@ ul#van-list {
 /*shopping cart*/
 
 #shopping-cart img {
-    /* width:  200px;
-    height: 100px;*/
     height: 100px;
-    /* padding: 10px 20px 10px 20px; */
     padding-top: 1%;
-    /* width: 21.8%; */
     width: 25%;
     object-fit: scale-down;
 }
@@ -397,11 +390,6 @@ ul#van-list {
     transition: background-color 0.3s;
 }
 
-
-/* #input_quantity{
-    flex-basis: 25%;
-} */
-
 .form_quantity {
     display: none;
     flex-basis: 50%;
@@ -427,11 +415,6 @@ form input[type$=submit] {
     /* submit button - note use of attribute selector */
     background-color: var(--color-brown);
 }
-
-
-/* input[type=submit]:hover {
-    background-color: #45a049;
-  } */
 
 form span.bigScreen {
     /* on small screens, hide some of the wording */
