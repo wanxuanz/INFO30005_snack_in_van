@@ -183,7 +183,7 @@ Now you can access all our functionalities! You might like to go to the menu pag
 Now let’s go to the `shopping cart` (on the navbar). Oops, you might think there is something you do not want anymore, or you want to add more. You can also change the quantity of each food by clicking **`Edit`**. After confirming your order, you can **`Place Order`**, now this order should appear on the vendor's  outstanding orders list. <br />
 While you are waiting for your order to be complete, you will see a list of orders including the current order and all other orders you previously have. You will be able to change and cancel your order within 10 minutes if the order status is not fulfilled yet. If you cancel or change your order, the order will not be displayed in your list of orders and this order will not be displayed on vender's screen. However, this order is still exist on the database as we need to keep track of this behaviour. <br />
 After your order is filfilled,  there should be a **`rating`** button appear on your order detail and you can rate this order from 1 to 5 stars. Each order’s rating will contribute to the van rating. Also, if the order is completed after 15 minutes while you placing it, you will automatically granted a 20% discount. 
-The time limit is set under **`public`** folder and you will find a file call **`constant.js`**.
+The time limit is set under **`public`** folder and you will find a file call **`constant.js`**. <br />
 Besides, in your **Profile** (on the navbar), you are able to change your personal detail or log out. <br />
 
 ### Vendor App
@@ -191,6 +191,17 @@ Besides, in your **Profile** (on the navbar), you are able to change your person
 The website for vendor is https://snacks-in-a-van-webg100.herokuapp.com/vendor . On the vendor login page, you can either use the example van we provided or register your own account. Here is the sample vendor account: <br />
 **`VanId= `**<br />
 **`PASSWORD=123456`**<br />
+| VanId | Password|
+| :---  |    ---: |
+| Niceday |12345|
+| LittleSeed |12345|
+| Happyday |12345|
+| JM |12345|
+| Morning |12345|
+| Mayday |12345|
+| Wonder Coffee |12345|
+| MM |12345|
+
 You will need to send your location every time you log in. You need to enter the location name and the system will also automatically detect your position and set it on the map on the customer end. If you did not enter your address, you will not be able to perform further actions. <br />
 In the vendor app, the **Home** contains the details of the van and you can open or close the business for the van here. The **Outstanding Orders** displays all outstanding orders (if there are customer placed order in your van). For example, if there is an outstanding order and the vendor has finished this order, he can click on **Complete**. Such that this order will disappear from the **Outstanding Order** list and it will go into **Order History**. If the order has passed 15 minutes and still outstanding, the total price of this order will be deducted and there will be a “20% discount” text appear along with the total price. Besides, the customer will be able to rate this order once the order has been marked as “Fulfilled”. In addition, you can log out by clicking “Log Out” (on the navbar), at the same time, the van will be set to close spontaneously. <br />
 
