@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
 
 //handler for GET home page
 app.get('/vendor', (req, res) => {
-    res.render('vendorHomePage', { layout: "initial" });
+    res.render('vendorHomePage', { layout: "initial",message: req.flash('loginMessage') });
 })
 
 // customer home page

@@ -81,6 +81,7 @@ customerRouter.use('/orders', orderRouter)
 customerRouter.get('/logout', function(req, res) {
     delete req.session.email;
     delete req.session.vanId;
+    req.logout();
     res.redirect('/customer');
 })
 
